@@ -100,6 +100,9 @@
             <mxPoint x="300" y="40" as="targetPoint" />
           </mxGeometry>
         </mxCell>
+        <mxCell id="MI_7GpYJVSB2RbWmhLfg-1" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="InitialConnections" vertex="1">
+          <mxGeometry height="40" width="120" x="40" y="40" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
@@ -250,6 +253,9 @@
             <mxPoint x="300" y="140" as="sourcePoint" />
             <mxPoint x="330" y="40" as="targetPoint" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="KFELvTdyK8-cPI4vE31L-0" parent="KbvBzEUHwBSbwdqUDSe_-1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="InitialConnections+Admin control" vertex="1">
+          <mxGeometry height="40" width="200" x="40" y="40" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

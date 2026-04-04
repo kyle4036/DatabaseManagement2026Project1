@@ -1,4 +1,4 @@
-#Naming Conventions 
+# Naming Conventions 
 
 'Tables' are to be named in Camel Case, such that The first letter of every word, including the first, is capitalized
 

@@ -695,7 +695,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="LnF-2c_hXoIOSuvEJRT2" name="ServiceLayer">
-    <mxGraphModel dx="1373" dy="757" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+    <mxGraphModel dx="806" dy="749" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -719,6 +719,30 @@
         </mxCell>
         <mxCell id="YnP-jTsNYPnfZzqVWmUK-2" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;ServiceLayer&lt;/font&gt;" vertex="1">
           <mxGeometry height="40" width="120" x="40" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="3Jj8l41EcB5JqxDQoiz4-1" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="Customer" vertex="1">
+          <mxGeometry height="80" width="120" x="40" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="3Jj8l41EcB5JqxDQoiz4-13" edge="1" parent="1" source="3Jj8l41EcB5JqxDQoiz4-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="3Jj8l41EcB5JqxDQoiz4-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="3Jj8l41EcB5JqxDQoiz4-2" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="Employee" vertex="1">
+          <mxGeometry height="80" width="120" x="320" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="3Jj8l41EcB5JqxDQoiz4-15" edge="1" parent="1" source="3Jj8l41EcB5JqxDQoiz4-11" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="3Jj8l41EcB5JqxDQoiz4-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="3Jj8l41EcB5JqxDQoiz4-17" edge="1" parent="1" source="3Jj8l41EcB5JqxDQoiz4-11" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="3Jj8l41EcB5JqxDQoiz4-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="3Jj8l41EcB5JqxDQoiz4-11" parent="1" style="verticalLabelPosition=middle;verticalAlign=middle;html=1;shape=mxgraph.basic.acute_triangle;dx=0.5;labelPosition=center;align=center;textShadow=0;labelBorderColor=none;labelBackgroundColor=none;" value="ISA" vertex="1">
+          <mxGeometry height="70" width="100" x="330" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="3Jj8l41EcB5JqxDQoiz4-14" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="CustomerRepresentative" vertex="1">
+          <mxGeometry height="80" width="160" x="240" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="3Jj8l41EcB5JqxDQoiz4-16" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="SiteAdmin" vertex="1">
+          <mxGeometry height="80" width="120" x="480" y="520" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

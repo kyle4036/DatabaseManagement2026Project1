@@ -436,14 +436,14 @@
         <mxCell id="rD022-UEnz_YDnqPDpai-1" parent="1" style="rhombus;whiteSpace=wrap;html=1;" value="FlightOperatesOn" vertex="1">
           <mxGeometry height="120" width="120" x="840" y="800" as="geometry" />
         </mxCell>
-        <mxCell id="67A7-DvQ_A-IwrlW-1Ey-3" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;PhysicalLayer&lt;/font&gt;" vertex="1">
-          <mxGeometry height="80" width="120" x="40" y="480" as="geometry" />
+        <mxCell id="67A7-DvQ_A-IwrlW-1Ey-3" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;Physical Layer&lt;/font&gt;" vertex="1">
+          <mxGeometry height="80" width="160" x="40" y="480" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
   <diagram id="g_2ESxqR2Qj4tznv-bwt" name="SchedulingLayer">
-    <mxGraphModel dx="1385" dy="757" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+    <mxGraphModel dx="1373" dy="757" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -467,6 +467,9 @@
             <mxPoint x="840" y="240" as="sourcePoint" />
             <mxPoint x="80" y="240" as="targetPoint" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="u6CWesmFlO6XLjyfKqNY-1" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font style=&quot;font-size: 20px;&quot;&gt;Scheduling Layer&lt;/font&gt;" vertex="1">
+          <mxGeometry height="80" width="160" x="40" y="280" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

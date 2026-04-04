@@ -303,6 +303,14 @@
         <mxCell id="C24NG5wP3tE4NJdiu53f-35" edge="1" parent="1" source="C24NG5wP3tE4NJdiu53f-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;curved=1;" target="C24NG5wP3tE4NJdiu53f-33">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
+        <mxCell id="rD022-UEnz_YDnqPDpai-4" edge="1" parent="1" source="C24NG5wP3tE4NJdiu53f-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="JoOJiwy5mC7cdUbJaJ9M-23">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="50" y="640" />
+              <mxPoint x="50" y="860" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
         <mxCell id="C24NG5wP3tE4NJdiu53f-10" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="Airlines" vertex="1">
           <mxGeometry height="80" width="120" x="80" y="600" as="geometry" />
         </mxCell>
@@ -323,6 +331,15 @@
         </mxCell>
         <mxCell id="01j8vBStIe8qVv3nqKh5-2" edge="1" parent="1" source="C24NG5wP3tE4NJdiu53f-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="01j8vBStIe8qVv3nqKh5-1">
           <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rD022-UEnz_YDnqPDpai-6" edge="1" parent="1" source="C24NG5wP3tE4NJdiu53f-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="rD022-UEnz_YDnqPDpai-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1040" y="640" />
+              <mxPoint x="1040" y="860" />
+            </Array>
+            <mxPoint x="1040" y="850" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
         <mxCell id="C24NG5wP3tE4NJdiu53f-12" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="Aircrafts" vertex="1">
           <mxGeometry height="80" width="120" x="880" y="600" as="geometry" />
@@ -351,7 +368,7 @@
         <mxCell id="C24NG5wP3tE4NJdiu53f-31" edge="1" parent="1" source="C24NG5wP3tE4NJdiu53f-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;" target="C24NG5wP3tE4NJdiu53f-11">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="C24NG5wP3tE4NJdiu53f-27" parent="1" style="rhombus;whiteSpace=wrap;html=1;" value="OperatesIn" vertex="1">
+        <mxCell id="C24NG5wP3tE4NJdiu53f-27" parent="1" style="rhombus;whiteSpace=wrap;html=1;" value="AirlineOperatesIn" vertex="1">
           <mxGeometry height="120" width="120" x="280" y="580" as="geometry" />
         </mxCell>
         <mxCell id="C24NG5wP3tE4NJdiu53f-36" edge="1" parent="1" source="C24NG5wP3tE4NJdiu53f-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="C24NG5wP3tE4NJdiu53f-12">
@@ -378,6 +395,12 @@
         <mxCell id="JoOJiwy5mC7cdUbJaJ9M-19" edge="1" parent="1" source="JoOJiwy5mC7cdUbJaJ9M-5" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="JoOJiwy5mC7cdUbJaJ9M-16">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
+        <mxCell id="JoOJiwy5mC7cdUbJaJ9M-24" edge="1" parent="1" source="JoOJiwy5mC7cdUbJaJ9M-5" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="JoOJiwy5mC7cdUbJaJ9M-23">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rD022-UEnz_YDnqPDpai-2" edge="1" parent="1" source="JoOJiwy5mC7cdUbJaJ9M-5" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="rD022-UEnz_YDnqPDpai-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="JoOJiwy5mC7cdUbJaJ9M-5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;" value="Fights" vertex="1">
           <mxGeometry height="100" width="880" x="80" y="1000" as="geometry" />
         </mxCell>
@@ -402,8 +425,11 @@
         <mxCell id="JoOJiwy5mC7cdUbJaJ9M-20" edge="1" parent="1" source="JoOJiwy5mC7cdUbJaJ9M-17" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.083;entryY=0.713;entryDx=0;entryDy=0;entryPerimeter=0;" target="C24NG5wP3tE4NJdiu53f-11">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="JoOJiwy5mC7cdUbJaJ9M-23" parent="1" style="rhombus;whiteSpace=wrap;html=1;" value="Operate" vertex="1">
+        <mxCell id="JoOJiwy5mC7cdUbJaJ9M-23" parent="1" style="rhombus;whiteSpace=wrap;html=1;" value="FlightOperatesFrom" vertex="1">
           <mxGeometry height="120" width="120" x="80" y="800" as="geometry" />
+        </mxCell>
+        <mxCell id="rD022-UEnz_YDnqPDpai-1" parent="1" style="rhombus;whiteSpace=wrap;html=1;" value="FlightOperatesOn" vertex="1">
+          <mxGeometry height="120" width="120" x="840" y="800" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

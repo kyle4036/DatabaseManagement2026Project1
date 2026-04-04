@@ -1,0 +1,23 @@
+PHYSICAL LAYER
+
+Airlines(lineID: char(1), name: varchar(20), Primary key(lineID))
+
+Airports(portID: char(2), name: varchar(20), Primary key(portID))
+
+Aircrafts(craftID: int, lineID: char(1), portID: char(2), Foreign key(lineID) references Airlines, Foreign key(portID) references Airports, Primary key (craftID))
+
+AirlineOperatesIn(lineID: char(1), portID:char(2), Foreign key(lineID) references Airlines, Foreign key(portID) references Airports, Primary key(lineID,portID))
+
+
+
+SCHEDULING LAYER
+
+Flights(flightNumber: char(5), departureTime: Time, arrivalTime: Time, flightType: varchar(20), daysRunning:int, seatsTaken: int, lineID: char(1), 
+depature_portID: char (2), desination_portID: char(2) craftID: int, Foreign key(lineID) references Airlines, 
+Foreign key(departure_portID) references Airports, Foreign key(destination_portID) references Airports, 
+Foreign key (craftID) references Aircrafts, Primary key(flight number)
+
+
+Tickets();
+
+FlightTicket();

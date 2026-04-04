@@ -375,7 +375,7 @@
         <mxCell id="fKn4BxSdccGfp_ml2a-A-1" parent="1" style="whiteSpace=wrap;html=1;" value="Flights" vertex="1">
           <mxGeometry height="80" width="120" x="320" y="240" as="geometry" />
         </mxCell>
-        <mxCell id="JoOJiwy5mC7cdUbJaJ9M-19" edge="1" parent="1" source="JoOJiwy5mC7cdUbJaJ9M-5" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.332;exitY=-0.01;exitDx=0;exitDy=0;exitPerimeter=0;" target="JoOJiwy5mC7cdUbJaJ9M-16">
+        <mxCell id="JoOJiwy5mC7cdUbJaJ9M-19" edge="1" parent="1" source="JoOJiwy5mC7cdUbJaJ9M-5" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="JoOJiwy5mC7cdUbJaJ9M-16">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="JoOJiwy5mC7cdUbJaJ9M-5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;" value="Fights" vertex="1">
@@ -390,17 +390,20 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="JoOJiwy5mC7cdUbJaJ9M-16" parent="1" style="rhombus;whiteSpace=wrap;html=1;" value="InBoundPort" vertex="1">
+        <mxCell id="JoOJiwy5mC7cdUbJaJ9M-16" parent="1" style="rhombus;whiteSpace=wrap;html=1;" value="DestinationPort" vertex="1">
           <mxGeometry height="120" width="120" x="440" y="800" as="geometry" />
         </mxCell>
-        <mxCell id="JoOJiwy5mC7cdUbJaJ9M-17" parent="1" style="rhombus;whiteSpace=wrap;html=1;" value="OutBoundPort" vertex="1">
+        <mxCell id="JoOJiwy5mC7cdUbJaJ9M-17" parent="1" style="rhombus;whiteSpace=wrap;html=1;" value="DeparturePort" vertex="1">
           <mxGeometry height="120" width="120" x="280" y="800" as="geometry" />
         </mxCell>
-        <mxCell id="JoOJiwy5mC7cdUbJaJ9M-18" edge="1" parent="1" source="JoOJiwy5mC7cdUbJaJ9M-5" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.165;exitY=0.02;exitDx=0;exitDy=0;exitPerimeter=0;" target="JoOJiwy5mC7cdUbJaJ9M-17">
+        <mxCell id="JoOJiwy5mC7cdUbJaJ9M-18" edge="1" parent="1" source="JoOJiwy5mC7cdUbJaJ9M-5" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="JoOJiwy5mC7cdUbJaJ9M-17">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="JoOJiwy5mC7cdUbJaJ9M-20" edge="1" parent="1" source="JoOJiwy5mC7cdUbJaJ9M-17" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.083;entryY=0.713;entryDx=0;entryDy=0;entryPerimeter=0;" target="C24NG5wP3tE4NJdiu53f-11">
           <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="JoOJiwy5mC7cdUbJaJ9M-23" parent="1" style="rhombus;whiteSpace=wrap;html=1;" value="Operate" vertex="1">
+          <mxGeometry height="120" width="120" x="80" y="800" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

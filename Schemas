@@ -15,9 +15,21 @@ SCHEDULING LAYER
 Flights(flightNumber: char(5), departureTime: Time, arrivalTime: Time, flightType: varchar(20), daysRunning:int, seatsTaken: int, lineID: char(1), 
 depature_portID: char (2), desination_portID: char(2) craftID: int, Foreign key(lineID) references Airlines, 
 Foreign key(departure_portID) references Airports, Foreign key(destination_portID) references Airports, 
-Foreign key (craftID) references Aircrafts, Primary key(flight number)
+Foreign key (craftID) references Aircrafts, Primary key(flightNumber))
 
 
 Tickets();
 
-FlightTicket();
+FlightTickets();
+
+SERVICE LAYER
+
+Customers(customerID: int, firstName: varchar(20), lastName: varchar(20), email: varchar(50), phoneNumber: char(12), Primary key(customerID))
+
+Employees(employeeID: int, firstName: varchar(20), lastName: varchar(20), email: varchar(50), phoneNumber: char(12), Primary key(employeeID))
+
+CustomerRepresentative(employeeID: int, Foreign key(employeeID) references Employees, Primary key(employeeID))
+
+SiteAdmins(employeeID: int, Foreign key(employeeID) references Employees, Primary key(employeeID))
+
+WaitingList(customerID: int, flightNumber: char(5), queuePosition: int, Foreign key(customerID) references Customers, Foreign key(flightNumber) references Flights)

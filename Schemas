@@ -2,13 +2,13 @@ PHYSICAL LAYER
 
 Airlines(
     lineID: char(2),
-    name: varchar(20),
+    name: char(20),
     Primary key(lineID)
 )
 
 Airports(
     portID: char(3),
-    name: varchar(20),
+    name: char(20),
     Primary key(portID)
 )
 
@@ -16,9 +16,10 @@ Aircrafts(
     craftID: int,
     lineID: char(2),
     portID: char(3),
+    capacity: int,
     Foreign key(lineID) references Airlines,
     Foreign key(portID) references Airports,
-    Primary key(craftID)
+    Primary key (craftID)
 )
 
 AirlineOperatesIn(
@@ -31,73 +32,79 @@ AirlineOperatesIn(
 
 SCHEDULING LAYER
 
-<<<<<<< HEAD
-Flights(flightNumber: char(5), departureTime: Time, arrivalTime: Time, flightType: varchar(20), daysRunning:int, seatsTaken: int, lineID: char(1), 
-depature_portID: char (2), desination_portID: char(2) craftID: int, Foreign key(lineID) references Airlines, 
-Foreign key(departure_portID) references Airports, Foreign key(destination_portID) references Airports, 
-Foreign key (craftID) references Aircrafts, Primary key(flightNumber))
-=======
 Flights(
     flightNumber: char(5),
-    departureTime: Time,
-    arrivalTime: Time,
-    flightType: varchar(20),
-    daysRunning: int,
-    seatsTaken: int,
     lineID: char(2),
     departure_portID: char(3),
     destination_portID: char(3),
+    departureTime: time,
+    arrivalTime: time,
+    flightType: char(20),
+    daysRunning: char(7),
+    seatsTaken: int,
     craftID: int,
     Foreign key(lineID) references Airlines,
     Foreign key(departure_portID) references Airports,
     Foreign key(destination_portID) references Airports,
     Foreign key(craftID) references Aircrafts,
-    Primary key(flightNumber)
+    Primary key(flightNumber, lineID)
 )
->>>>>>> 7acf9e1 (fix: formatting)
 
 Tickets(
     ticketNumber: int,
     customerID: int,
-    tripType: varchar(10),
-    totalFare: decimal(10,2),
-    bookingFee: decimal(10,2),
     purchaseTime: datetime,
-    status: varchar(10),
+    bookingfee: decimal(10, 2),
+    fareCost: decimal(10, 2),
+    tripType: char(10),
+    status: char(10),
     Foreign key(customerID) references Customers,
     Primary key(ticketNumber)
 )
 
-<<<<<<< HEAD
-FlightTickets();
+FlightTicket(
+    ticketNumber: int,
+    flightNumber: char(5),
+    lineID: char(2),
+    legOrder: int,
+    departureDate: date,
+    seatNumber: char(5),
+    ticketClass: char(10),
+    mealOrder: char(50),
+    Foreign key(ticketNumber) references Tickets,
+    Foreign key(flightNumber, lineID) references Flights,
+    Primary key(ticketNumber, legOrder)
+)
 
 SERVICE LAYER
 
-Customers(customerID: int, firstName: varchar(20), lastName: varchar(20), email: varchar(50), phoneNumber: char(12), Primary key(customerID))
-
-Employees(employeeID: int, firstName: varchar(20), lastName: varchar(20), email: varchar(50), phoneNumber: char(12), Primary key(employeeID))
-
-CustomerRepresentative(employeeID: int, Foreign key(employeeID) references Employees, Primary key(employeeID))
-
-SiteAdmins(employeeID: int, Foreign key(employeeID) references Employees, Primary key(employeeID))
-
-WaitingList(customerID: int, flightNumber: char(5), queuePosition: int, Foreign key(customerID) references Customers, Foreign key(flightNumber) references Flights)
-=======
-FlightTicket(
-
-)
-
-SERVICING LAYER
-
 Customers(
-
+    customerID: int,
+    firstName: char(20),
+    lastName: char(20),
+    email: char(50),
+    phoneNumber: char(12),
+    Primary key(customerID)
 )
 
 Employees(
+    employeeID: int,
+    firstName: char(20),
+    lastName: char(20),
+    role: char(20),
+    Primary key(employeeID)
+)
 
+CustomerRepresentative(
+    employeeID: int,
+    Foreign key(employeeID) references Employees,
+    Primary key(employeeID)
 )
 
 WaitingList(
-
+    customerID: int,
+    flightNumber: char(5),
+    requestTime datetime,
+    Foreign key(customerID) references Customers,
+    Foreign key(flightNumber) references Flights
 )
->>>>>>> 7acf9e1 (fix: formatting)

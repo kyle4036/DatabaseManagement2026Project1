@@ -95,12 +95,6 @@ Employees(
     Primary key(employeeID)
 )
 
-CustomerRepresentative(
-    employeeID: int,
-    Foreign key(employeeID) references Employees,
-    Primary key(employeeID)
-)
-
 WaitingList(
     customerID: int,
     flightNumber: char(5),

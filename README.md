@@ -11,6 +11,7 @@ This is our project for our Database Management Class With Professor Antonio Mir
 ## Coding Readability
 
 `Nesting` should never be more than 3 layers deep
+
 If you have a function that requires more than three layers of nesting, consider breaking the function into
 additional functions
 

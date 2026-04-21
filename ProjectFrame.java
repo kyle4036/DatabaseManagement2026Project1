@@ -1,6 +1,6 @@
-import java.sql.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.*;
 import javax.swing.*;
 public class ProjectFrame extends JFrame {
     // GUI related-variables:
@@ -23,8 +23,8 @@ public class ProjectFrame extends JFrame {
         lbpasswd.setFont(mainFont);
         tfpasswd=new JTextField();
         tfpasswd.setFont(mainFont);
-        //-- create inputPanel and add its components
 
+        //-- create inputPanel and add its components
         JPanel inputPanel=new JPanel();
         inputPanel.setLayout(new GridLayout(2,2,5,5));
         inputPanel.setOpaque(false); // so that form color is seen as background
@@ -75,7 +75,7 @@ public class ProjectFrame extends JFrame {
                     user=tfuser.getText();
                     String passwd=tfpasswd.getText();
                     String query="select * from users where ";
-                    // check to see if they are in the database
+                    // check to see if they are in the database 
                     query+="user='"+user+"' and password='"+passwd+"'";
                     ResultSet rset=null;
                     try{
@@ -148,13 +148,13 @@ public class ProjectFrame extends JFrame {
         String user = "testuser";
         String password = "abc123";
         try {
-        con = DriverManager.getConnection(url, user, password);
-        stmt = con.createStatement();
+            con = DriverManager.getConnection(url, user, password);
+            stmt = con.createStatement();
         }
         catch (SQLException e) {
-        System.out.println("Unable to create a connection to the database");
-        e.printStackTrace();
-        System.exit(0);
+            System.out.println("Unable to create a connection to the database");
+            e.printStackTrace();
+            System.exit(0);
         }
         ProjectFrame myFrame=new ProjectFrame();
         myFrame.initialize();

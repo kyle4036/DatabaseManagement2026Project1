@@ -156,7 +156,47 @@ public class ProjectFrame extends JFrame {
             e.printStackTrace();
             System.exit(0);
         }
+
         ProjectFrame myFrame=new ProjectFrame();
-        myFrame.initialize();
+        myFrame.initialize2();
     }
+
+    public void initialize2() throws Exception {
+        JPanel mainPanel = this.createFlightPanel() ;
+
+        this.add(mainPanel);
+        this.setTitle("Flight Selection Page");
+        this.setSize(500,300);
+        this.setMinimumSize(new Dimension(300,200));
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.setVisible(true);
+    }
+
+    public JPanel createFlightPanel(){
+
+        // inputPanel: ------------------------------------
+        // -- inputPanel components
+        JLabel lbflightSelection = new JLabel("Flight");
+        lbflightSelection.setFont(mainFont);
+        JTextField tfFlightSelection = new JTextField();
+
+        //-- create inputPanel and add its components
+        JPanel inputPanel=new JPanel();
+        inputPanel.setLayout(new GridLayout(2,2,5,5));
+        inputPanel.setOpaque(false); // so that form color is seen as background
+        inputPanel.add(flightSelection);
+
+        JPanel mainPanel=new JPanel();
+        mainPanel.setLayout(new BorderLayout());
+        mainPanel.setBackground(new Color(230,140,140));
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+
+        // -- add mainPanel's components
+        mainPanel.add(inputPanel,BorderLayout.NORTH);
+        //mainPanel.add(msg,BorderLayout.CENTER);
+        //mainPanel.add(buttonPanel,BorderLayout.SOUTH);
+
+        return mainPanel;
+    }
+
 }

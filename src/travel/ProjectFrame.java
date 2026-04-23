@@ -12,7 +12,29 @@ public class ProjectFrame extends JFrame {
     public static Statement stmt=null;
     public static boolean userLoggedin=false;
     public static String user="";
-    public void initialize() throws Exception {
+
+    public static void main(String[] args) throws Exception {
+        
+        connectToDB();
+
+        ProjectFrame myFrame=new ProjectFrame();
+        JPanel loginPanel = myFrame.createLoginPanel();
+        JPanel flightPanel = myFrame.createFlightPanel();
+        myFrame.initializeCurrentPanel(flightPanel);
+
+    }
+
+    public void initializeCurrentPanel(JPanel CurrentPanel) throws Exception {
+
+        this.add(CurrentPanel);
+        this.setTitle("TravelAgencyTM");
+        this.setSize(500,300);
+        this.setMinimumSize(new Dimension(300,200));
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.setVisible(true);
+    }
+
+    public JPanel createLoginPanel() throws Exception {
         // inputPanel: ------------------------------------
         // -- inputPanel components
         JLabel lbuser=new JLabel("Username");
@@ -133,17 +155,23 @@ public class ProjectFrame extends JFrame {
         mainPanel.add(inputPanel,BorderLayout.NORTH);
         mainPanel.add(msg,BorderLayout.CENTER);
         mainPanel.add(buttonPanel,BorderLayout.SOUTH);
+
+        return mainPanel;
         
         // -- Add the mainPanel to our JForm and set up basic attributes
+        /*
         this.add(mainPanel);
         this.setTitle("Login Page");
         this.setSize(500,300);
         this.setMinimumSize(new Dimension(300,200));
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setVisible(true);
+        */
     }
     
-    public static void main(String[] args) throws Exception {
+    
+
+    public static void connectToDB(){
         //Initialize the connection to the database
         String url = "jdbc:mysql://localhost:3306/testproject";
         String user = "testuser";
@@ -157,21 +185,9 @@ public class ProjectFrame extends JFrame {
             e.printStackTrace();
             System.exit(0);
         }
-
-        ProjectFrame myFrame=new ProjectFrame();
-        myFrame.initialize2();
     }
 
-    public void initialize2() throws Exception {
-        JPanel mainPanel = this.createFlightPanel() ;
-
-        this.add(mainPanel);
-        this.setTitle("Flight Selection Page");
-        this.setSize(500,300);
-        this.setMinimumSize(new Dimension(300,200));
-        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.setVisible(true);
-    }
+    
 
     public JPanel createFlightPanel(){
 

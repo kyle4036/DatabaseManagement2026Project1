@@ -36,6 +36,7 @@ public class ProjectFrame extends JFrame {
         // msg : ------------------------------------
         msg=new JLabel(); // text will be added later (it is global variable)
         msg.setFont(mainFont);
+
         // buttonPanel: ------------------------------------
         // -- buttonPanel components
         JButton btnAdd=new JButton("Add User");
@@ -176,15 +177,19 @@ public class ProjectFrame extends JFrame {
 
         // inputPanel: ------------------------------------
         // -- inputPanel components
-        JLabel lbflightSelection = new JLabel("Flight");
-        lbflightSelection.setFont(mainFont);
+        JLabel lbFlightSelection = new JLabel("Flight");
+        lbFlightSelection.setFont(mainFont);
         JTextField tfFlightSelection = new JTextField();
 
         //-- create inputPanel and add its components
         JPanel inputPanel=new JPanel();
         inputPanel.setLayout(new GridLayout(2,2,5,5));
         inputPanel.setOpaque(false); // so that form color is seen as background
-        inputPanel.add(flightSelection);
+        inputPanel.add(lbFlightSelection);
+        inputPanel.add(tfFlightSelection);
+
+        JButton btnReserveFlight=new JButton("Reserve Flight");
+        btnReserveFlight.setFont(mainFont);
 
         JPanel mainPanel=new JPanel();
         mainPanel.setLayout(new BorderLayout());
@@ -197,6 +202,22 @@ public class ProjectFrame extends JFrame {
         //mainPanel.add(buttonPanel,BorderLayout.SOUTH);
 
         return mainPanel;
+    }
+
+    public JPanel getFlightList(){
+        String query = "select * from Flights";
+        ResultSet rset = null;
+        try {
+            rset=stmt.executeQuery(query);
+        }catch (SQLException e) {
+            msg.setText("Unable to display Flight List");
+        }
+        
+        JTextField tfFlightList = new JTextField();
+
+        JPanel jpFlightList = new JPanel();
+
+        return jpFlightList;
     }
 
 }

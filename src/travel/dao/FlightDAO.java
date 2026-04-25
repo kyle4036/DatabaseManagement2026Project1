@@ -11,7 +11,8 @@ import java.util.ArrayList;
 
 public class FlightDAO {
 
-    // Invisible Helper Metho
+    // Invisible Helper method that converts JDBC output from type ResultSet to
+    // types our `Flight`
     private Flight mapRow(ResultSet rs) throws SQLException {
         Flight f = new Flight();
         f.setFlightNumber(rs.getString("flightNumber"));
@@ -41,9 +42,6 @@ public class FlightDAO {
             throw new RuntimeException(e);
         }
         return results;
-    }
-
-    public List<Flight> findAll() {
     }
 
     public Flight findByKey(String flightNumber, String lineID) {

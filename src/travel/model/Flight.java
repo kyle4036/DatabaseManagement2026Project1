@@ -4,21 +4,22 @@ import java.time.LocalTime;
 
 class Flight {
 
-    private String flightNumber;
+    private int flightNumber;
     private String lineID;
     private String departurePortID;
     private String destinationPortID;
-    private LocalTime departureTime;
-    private LocalTime arrivalTime;
+    private LocalTime departureTime; // Question: Should this be LocalTime or ZonedDateTime? Also, would we have to modify this for Java Swing?
+    private LocalTime arrivalTime; // Question: Should this be LocalTime or ZonedDateTime? Also, would we have to modify this for Java Swing?
     private String flightType; // this will be domestic or international NOT round trip
     private String daysRunning; // this will be a "bit" mask for a string in the format of 0s and 1s (SMTWTFS)
     private int seatsTaken;
     private int craftID;
 
     public Flight() {
+
     }
 
-    public Flight(String flightNumber, String lineID, String departurePortID,
+    public Flight(int flightNumber, String lineID, String departurePortID,
             String destinationPortID, LocalTime departureTime,
             LocalTime arrivalTime, String flightType, String daysRunning,
             int seatsTaken, int craftID) {
@@ -35,11 +36,11 @@ class Flight {
         this.craftID = craftID;
     }
 
-    public String getFlightNumber() {
+    public int getFlightNumber() {
         return flightNumber;
     }
 
-    public void setFlightNumber(String v) {
+    public void setFlightNumber(int v) {
         this.flightNumber = v;
     }
 

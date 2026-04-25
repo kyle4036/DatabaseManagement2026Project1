@@ -33,7 +33,7 @@ AirlineOperatesIn(
 SCHEDULING LAYER
 
 Flights(
-    flightNumber: char(5),
+    flightNumber: int,
     lineID: char(2),
     departure_portID: char(3),
     destination_portID: char(3),
@@ -54,7 +54,7 @@ Tickets(
     ticketNumber: int,
     customerID: int,
     purchaseTime: datetime,
-    bookingfee: decimal(10, 2),
+    bookingFee: decimal(10, 2),
     fareCost: decimal(10, 2),
     tripType: char(10),
     status: char(10),
@@ -64,7 +64,7 @@ Tickets(
 
 FlightTicket(
     ticketNumber: int,
-    flightNumber: char(5),
+    flightNumber: int,
     lineID: char(2),
     legOrder: int,
     departureDate: date,
@@ -99,7 +99,7 @@ Employees(
 
 WaitingList(
     customerID: int,
-    flightNumber: char(5),
+    flightNumber: int,
     lineID: char(2),
     requestTime: datetime,
     Foreign key(customerID) references Customers,

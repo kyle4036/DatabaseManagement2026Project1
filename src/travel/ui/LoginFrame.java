@@ -3,15 +3,39 @@ import java.awt.event.*;
 import java.sql.*;
 import javax.swing.*;
 
+//clear; javac ./src/travel/ui/LoginFrame.java; java -cp "./mysql-connector-j-8.3.0.jar" ./src/travel/ui/LoginFrame.java
+
 public class LoginFrame extends JFrame{
 
     JLabel msg;
     public static Connection con = null;
     public static Statement stmt = null;
+    public static boolean userLoggedin = false;
+    JTextField tfuser, tfpasswd;
+    public static String user = "";
+
+    public static void main(String[] args) {
+        public static void main(String[] args) throws Exception {
+        // Initialize the connection to the database
+        String url = "jdbc:mysql://localhost:3306/testproject";
+        String user = "testuser";
+        String password = "abc123";
+        try {
+            con = DriverManager.getConnection(url, user, password);
+            stmt = con.createStatement();
+        } catch (SQLException e) {
+            System.out.println("Unable to create a connection to the database");
+            e.printStackTrace();
+            System.exit(0);
+        }
+        LoginFrame myFrame = new LoginFrame();
+        myFrame.initialize();
+    }
+    }
 
     public LoginFrame(){
         Jframe lframe = this.createLoginPanel();
-        this.add(mainPanel);
+        this.add(lframe);
         this.setTitle("Login Page");
         this.setSize(500, 300);
         this.setMinimumSize(new Dimension(300, 200));

@@ -93,6 +93,8 @@ Employees(
     employeeID: int,
     firstName: char(20),
     lastName: char(20),
+    username: char(30),
+    password: char(100),
     role: char(20),
     Primary key(employeeID)
 )

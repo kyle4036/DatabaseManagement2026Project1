@@ -30,12 +30,4 @@ class Airline {
         this.name = v;
     }
 
-    public String airlineOpreatesIn(){
-        Airport airport = new Airport();
-        
-        Airline airline = new Airline(); //Question: Do we need this as well?
-        
-        return airport.getPortID();
-    }
-
 }

@@ -8,7 +8,7 @@ class FlightTicket {
     private int flightNumber;
     private String lineID;
     private int legOrder;
-    private LocalDate departureDate; // Question: Is this the right DataType for the date? Also, would we have to modify this for Java Swing? 
+    private LocalDate departureDate; // Question: Would we have to modify this for Java Swing? 
     private String seatNumber;
     private String ticketClass;
     private String mealOrder;

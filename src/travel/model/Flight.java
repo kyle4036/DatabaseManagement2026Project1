@@ -8,8 +8,8 @@ class Flight {
     private String lineID;
     private String departurePortID;
     private String destinationPortID;
-    private LocalTime departureTime; // Question: Should this be LocalTime or ZonedDateTime? Also, would we have to modify this for Java Swing?
-    private LocalTime arrivalTime; // Question: Should this be LocalTime or ZonedDateTime? Also, would we have to modify this for Java Swing?
+    private LocalTime departureTime; // Question: Would we have to modify this for Java Swing?
+    private LocalTime arrivalTime; // Question: Would we have to modify this for Java Swing?
     private String flightType; // this will be domestic or international NOT round trip
     private String daysRunning; // this will be a "bit" mask for a string in the format of 0s and 1s (SMTWTFS)
     private int seatsTaken;

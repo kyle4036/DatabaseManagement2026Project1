@@ -35,8 +35,8 @@ SCHEDULING LAYER
 Flights(
     flightNumber: char(3),
     lineID: char(2),
-    departure_portID: char(3),
-    destination_portID: char(3),
+    departurePortID: char(3),
+    destinationPortID: char(3),
     departureTime: time,
     arrivalTime: time,
     flightType: char(20),
@@ -44,8 +44,8 @@ Flights(
     seatsTaken: int,
     craftID: int,
     Foreign key(lineID) references Airlines,
-    Foreign key(departure_portID) references Airports,
-    Foreign key(destination_portID) references Airports,
+    Foreign key(departurePortID) references Airports,
+    Foreign key(destinationPortID) references Airports,
     Foreign key(craftID) references Aircrafts,
     Primary key(flightNumber, lineID)
 )
@@ -62,7 +62,7 @@ Tickets(
     Primary key(ticketNumber)
 )
 
-FlightTicket(
+FlightTickets(
     ticketNumber: int,
     flightNumber: char(3),
     lineID: char(2),

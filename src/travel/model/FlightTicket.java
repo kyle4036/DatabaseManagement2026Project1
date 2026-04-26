@@ -2,7 +2,7 @@ package travel.model;
 
 import java.time.LocalDate;
 
-class FlightTicket {
+public class FlightTicket {
 
     private int ticketNumber;
     private int flightNumber;

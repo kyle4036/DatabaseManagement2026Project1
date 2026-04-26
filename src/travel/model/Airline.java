@@ -1,6 +1,6 @@
 package travel.model;
 
-class Airline {
+public class Airline {
 
     private String lineID;
     private String name;

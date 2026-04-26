@@ -1,6 +1,6 @@
 package travel.model;
 
-class Airport {
+public class Airport {
 
     private String portID;
     private String name;

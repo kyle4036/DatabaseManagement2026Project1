@@ -1,6 +1,6 @@
 package travel.model;
 
-class Aircraft {
+public class Aircraft {
 
     private int craftID;
     private String lineID;

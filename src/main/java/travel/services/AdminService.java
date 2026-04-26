@@ -1,4 +1,4 @@
-package main.java.travel.services;
+package travel.services;
 
 public class AdminService {
     

@@ -1,12 +1,12 @@
-package main.java.travel.dao;
+package travel.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
-import main.java.travel.DBConnection;
-import main.java.travel.model.Flight;
+import travel.DBConnection;
+import travel.model.Flight;
 
 public class FlightDAO {
 

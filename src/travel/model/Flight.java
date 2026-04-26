@@ -2,7 +2,7 @@ package travel.model;
 
 import java.time.LocalTime;
 
-class Flight {
+public class Flight {
 
     private int flightNumber;
     private String lineID;

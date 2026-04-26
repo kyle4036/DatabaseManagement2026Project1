@@ -33,7 +33,7 @@ AirlineOperatesIn(
 SCHEDULING LAYER
 
 Flights(
-    flightNumber: int,
+    flightNumber: char(3),
     lineID: char(2),
     departure_portID: char(3),
     destination_portID: char(3),
@@ -64,7 +64,7 @@ Tickets(
 
 FlightTicket(
     ticketNumber: int,
-    flightNumber: int,
+    flightNumber: char(3),
     lineID: char(2),
     legOrder: int,
     departureDate: date,

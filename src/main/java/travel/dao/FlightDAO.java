@@ -45,9 +45,11 @@ public class FlightDAO {
     }
 
     public Flight findByKey(String flightNumber, String lineID) {
+        return null;
     }
 
     public List<Flight> findByRoute(String from, String to) {
+       return null;
     }
 
     public void insert(Flight f) {

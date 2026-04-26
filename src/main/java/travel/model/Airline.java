@@ -1,4 +1,4 @@
-package main.java.travel.model;
+package travel.model;
 
 public class Airline {
 

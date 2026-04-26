@@ -1,7 +1,7 @@
-package main.java.travel.dao;
+package travel.dao;
 
-import main.java.travel.DBConnection;
-import main.java.travel.model.Employee;
+import travel.DBConnection;
+import travel.model.Employee;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

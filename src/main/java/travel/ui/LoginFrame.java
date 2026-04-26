@@ -1,4 +1,4 @@
-package main.java.travel.ui;
+package travel.ui;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -16,8 +16,8 @@ public class LoginFrame extends JFrame{
     private JTextField tfuser, tfpasswd;
     private static String user = "";
 
-    public static void main(String[] args) {
-        public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {
+        
         // Initialize the connection to the database
         String url = "jdbc:mysql://localhost:3306/testproject";
         String user = "testuser";
@@ -32,7 +32,7 @@ public class LoginFrame extends JFrame{
         }
         LoginFrame myFrame = new LoginFrame();
         myFrame.initialize();
-    }
+    
     }
 
     public LoginFrame(){

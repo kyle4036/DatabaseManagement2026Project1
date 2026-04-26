@@ -1,4 +1,4 @@
-package main.java.travel.dao;
+package travel.dao;
 
 public class FlightTicketDAO {
     

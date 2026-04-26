@@ -1,6 +1,6 @@
 
-package main.java.travel.services;
-import main.java.travel.model.Airport;
+package travel.services;
+import travel.model.Airport;
 
 
 

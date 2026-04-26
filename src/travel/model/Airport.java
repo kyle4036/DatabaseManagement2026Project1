@@ -1,10 +1,6 @@
 package travel.model;
 
-<<<<<<< Updated upstream
 public class Airport {
-=======
-class public Airport {
->>>>>>> Stashed changes
 
     private String portID;
     private String name;

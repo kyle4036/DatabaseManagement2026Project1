@@ -1,5 +1,6 @@
 package travel.model;
 
+import java.time.LocalTime;
 import java.time.ZonedDateTime;
 
 public class WaitingList {
@@ -7,13 +8,13 @@ public class WaitingList {
     private int customerID;
     private int flightNumber;
     private String lineID;
-    private ZonedDateTime requestTime;
+    private LocalTime requestTime;
 
     public WaitingList() {
 
     }
 
-    public WaitingList(int customerID, int flightNumber, String lineID, ZonedDateTime requestTime) {
+    public WaitingList(int customerID, int flightNumber, String lineID, LocalTime requestTime) {
         this.customerID = customerID;
         this.flightNumber = flightNumber;
         this.lineID = lineID;
@@ -44,11 +45,11 @@ public class WaitingList {
         this.lineID = v;
     }
 
-    public ZonedDateTime getRequestTime(){
+    public LocalTime getRequestTime(){
         return requestTime;
     }
 
-    public void setRequestTime(ZonedDateTime v){
+    public void setRequestTime(LocalTime v){
         this.requestTime = v;
     }
 }

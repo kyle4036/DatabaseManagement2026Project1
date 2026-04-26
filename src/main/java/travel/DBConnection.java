@@ -1,4 +1,4 @@
-package travel;
+package main.java.travel;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

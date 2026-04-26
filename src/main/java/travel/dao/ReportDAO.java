@@ -1,4 +1,4 @@
-package travel.dao;
+package main.java.travel.dao;
 import java.util.*;
 
 public class ReportDAO {

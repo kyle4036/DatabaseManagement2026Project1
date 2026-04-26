@@ -1,4 +1,4 @@
-package travel.model;
+package main.java.travel.model;
 
 import java.time.LocalTime;
 

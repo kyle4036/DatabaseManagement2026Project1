@@ -1,4 +1,4 @@
-package travel.ui;
+package main.java.travel.ui;
 
 import java.awt.*;
 import java.awt.event.*;

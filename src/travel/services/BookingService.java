@@ -7,6 +7,6 @@ public class BookingService {
 
     }
     public static void main(String[] args) {
-        
+        FlightDAO fd = new FlightDAO();
     }
 }

@@ -1,19 +1,19 @@
 package travel.model;
 
-import java.time.ZonedDateTime;
+import java.time.LocalTime;
 
-class WaitingList {
+public class WaitingList {
 
     private int customerID;
     private int flightNumber;
     private String lineID;
-    private ZonedDateTime requestTime;
+    private LocalTime requestTime; // Question: Would we have to modify this for Java Swing?
 
     public WaitingList() {
 
     }
 
-    public WaitingList(int customerID, int flightNumber, String lineID, ZonedDateTime requestTime) {
+    public WaitingList(int customerID, int flightNumber, String lineID, LocalTime requestTime) {
         this.customerID = customerID;
         this.flightNumber = flightNumber;
         this.lineID = lineID;
@@ -44,11 +44,11 @@ class WaitingList {
         this.lineID = v;
     }
 
-    public ZonedDateTime getRequestTime(){
+    public LocalTime getRequestTime(){
         return requestTime;
     }
 
-    public void setRequestTime(ZonedDateTime v){
+    public void setRequestTime(LocalTime v){
         this.requestTime = v;
     }
 }

@@ -1,6 +1,6 @@
 package travel.model;
 
-class Airline {
+public class Airline {
 
     private String lineID;
     private String name;
@@ -28,14 +28,6 @@ class Airline {
 
     public void setName(String v){
         this.name = v;
-    }
-
-    public String airlineOpreatesIn(){
-        Airport airport = new Airport();
-        
-        Airline airline = new Airline(); //Question: Do we need this as well?
-        
-        return airport.getPortID();
     }
 
 }

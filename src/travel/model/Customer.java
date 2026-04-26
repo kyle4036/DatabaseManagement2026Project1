@@ -1,6 +1,6 @@
 package travel.model;
 
-class Customer {
+public class Customer {
 
     private int customerID;
     private String firstName;

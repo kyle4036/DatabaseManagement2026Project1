@@ -4,3 +4,4 @@
 .classpath
 *.log
 *.jar
+.vscode

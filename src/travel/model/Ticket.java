@@ -1,12 +1,12 @@
 package travel.model;
 
-import java.time.ZonedDateTime;
+import java.time.LocalTime;
 
-class Ticket {
+public class Ticket {
 
     private int ticketNumber;
     private int customerID;
-    private ZonedDateTime purchaseTime; // Question: Is this the right DataType for timezones? Also, would we have to modify this for Java Swing?
+    private LocalTime purchaseTime; // Question: Would we have to modify this for Java Swing?
     private float bookingFee;
     private float fareCost;
     private String tripType;
@@ -16,7 +16,7 @@ class Ticket {
 
     }
 
-    public Ticket(int ticketNumber, int customerID, ZonedDateTime purchaseTime, float bookingFee, float fareCost, String tripType, String status){
+    public Ticket(int ticketNumber, int customerID, LocalTime purchaseTime, float bookingFee, float fareCost, String tripType, String status){
         this.ticketNumber = ticketNumber;
         this.customerID = customerID;
         this.purchaseTime = purchaseTime;
@@ -42,11 +42,11 @@ class Ticket {
         this.customerID = v;
     }
 
-    public ZonedDateTime getPurchaseTime(){
+    public LocalTime getPurchaseTime(){
         return purchaseTime;
     }
 
-    public void setPurchaseTime(ZonedDateTime v){
+    public void setPurchaseTime(LocalTime v){
         this.purchaseTime = v;
     }
 

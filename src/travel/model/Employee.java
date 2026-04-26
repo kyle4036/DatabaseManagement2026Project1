@@ -1,20 +1,24 @@
 package travel.model;
 
-class Employee {
+public class Employee {
 
     private int employeeID;
     private String firstName;
     private String lastName;
+    private String username;
+    private String password;    
     private String role;
 
     public Employee() {
 
     }
 
-    public Employee(int employeeID, String firstName, String lastName, String role) {
+    public Employee(int employeeID, String firstName, String lastName, String username, String password, String role) {
         this.employeeID = employeeID;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.username = username;
+        this.password = password;
         this.role = role;
     }
 
@@ -40,6 +44,22 @@ class Employee {
 
     public void setLastName(String v){
         this.lastName = v;
+    }
+
+    public String getUsername(){
+        return username;
+    }
+
+    public void setUsername(String v){
+        this.username = v;
+    }
+
+    public String getPassword(){
+        return password;
+    }
+
+    public void setPassword(String v){
+        this.password = v;
     }
 
     public String getRole(){

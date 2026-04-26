@@ -1,6 +1,6 @@
-package travel.dao;
-import travel.model.Customer;
-import travel.DBConnection;
+package main.java.travel.dao;
+import main.java.travel.model.Customer;
+import main.java.travel.DBConnection;
 import java.util.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

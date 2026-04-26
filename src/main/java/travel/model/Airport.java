@@ -1,4 +1,4 @@
-package travel.model;
+package main.java.travel.model;
 
 public class Airport {
 

@@ -1,13 +1,12 @@
 package travel.dao;
 
-import travel.DBConnection;
-import travel.model.Flight;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.*;
+import travel.DBConnection;
+import travel.model.Flight;
 
 public class FlightDAO {
 
@@ -15,7 +14,7 @@ public class FlightDAO {
     // types our `Flight`
     private Flight mapRow(ResultSet rs) throws SQLException {
         Flight f = new Flight();
-        f.setFlightNumber(rs.getString("flightNumber"));
+        f.setFlightNumber(Integer.parseInt(rs.getString("flightNumber")));
         f.setLineID(rs.getString("lineID"));
         f.setDeparturePortID(rs.getString("departure_portID"));
         f.setDestinationPortID(rs.getString("destination_portID"));
@@ -45,11 +44,11 @@ public class FlightDAO {
     }
 
     public Flight findByKey(String flightNumber, String lineID) {
-        return null;
+        return new Flight();
     }
 
     public List<Flight> findByRoute(String from, String to) {
-       return null;
+        return new ArrayList<>();
     }
 
     public void insert(Flight f) {

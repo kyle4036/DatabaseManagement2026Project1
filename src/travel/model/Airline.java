@@ -1,6 +1,10 @@
 package travel.model;
 
+<<<<<<< Updated upstream
 public class Airline {
+=======
+class pu Airline {
+>>>>>>> Stashed changes
 
     private String lineID;
     private String name;

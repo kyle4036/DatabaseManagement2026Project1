@@ -7,7 +7,7 @@ public class WaitingList {
     private int customerID;
     private int flightNumber;
     private String lineID;
-    private LocalTime requestTime;
+    private LocalTime requestTime; // Question: Would we have to modify this for Java Swing?
 
     public WaitingList() {
 

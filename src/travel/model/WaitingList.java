@@ -1,7 +1,6 @@
 package travel.model;
 
 import java.time.LocalTime;
-import java.time.ZonedDateTime;
 
 public class WaitingList {
 

@@ -1,3 +1,5 @@
+package travel.ui;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;

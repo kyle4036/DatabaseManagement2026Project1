@@ -8,11 +8,11 @@ import javax.swing.*;
 public class LoginFrame extends JFrame{
 
     JLabel msg;
-    public static Connection con = null;
-    public static Statement stmt = null;
-    public static boolean userLoggedin = false;
-    JTextField tfuser, tfpasswd;
-    public static String user = "";
+    private static Connection con = null;
+    private static Statement stmt = null;
+    private static boolean userLoggedin = false;
+    private JTextField tfuser, tfpasswd;
+    private static String user = "";
 
     public static void main(String[] args) {
         public static void main(String[] args) throws Exception {

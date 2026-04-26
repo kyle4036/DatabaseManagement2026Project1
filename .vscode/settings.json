@@ -1,6 +1,14 @@
 {
+<<<<<<< HEAD
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
         "src/mysql-connector-j-9.6.0/mysql-connector-j-9.6.0/mysql-connector-j-9.6.0.jar"
+=======
+    "java.project.sourcePaths": [
+        "src"
+    ],
+    "java.project.referencedLibraries": [
+        "mysql-connector-j-8.3.0.jar"
+>>>>>>> 544c728675038caec468f3451f4251dc88530e1b
     ]
 }

@@ -19,7 +19,7 @@ public class LoginFrame extends JFrame{
     private JTextField tfuser, tfpasswd;
     private static String user = "";
 
-    public LoginFrame(){
+    public LoginFrame() throws Exception {
         JPanel lframe = this.createLoginPanel();
         this.add(lframe);
         this.setTitle("Login Page");
@@ -29,7 +29,7 @@ public class LoginFrame extends JFrame{
         this.setVisible(true);
     }
 
-    public JPanel createLoginPanel() throws Exception {
+    public JPanel createLoginPanel() {
         // inputPanel: ------------------------------------
         // -- inputPanel components
         JLabel lbuser=new JLabel("Username");
@@ -169,7 +169,7 @@ public class LoginFrame extends JFrame{
             System.exit(0);
         }
         LoginFrame myFrame = new LoginFrame();
-        myFrame.initialize();
+        // myFrame.initialize();
     }
     
 }

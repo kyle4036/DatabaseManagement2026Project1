@@ -67,29 +67,47 @@ public class CustomerDAO {
     }
 
     public void update(Customer c) {
-    String sql = """
-        UPDATE Customers
-        SET firstName = ?, lastName = ?, username = ?, 
-            password = ?, email = ?, phoneNumber = ?
-        WHERE customerID = ?
-    """;
+        String sql = """
+            UPDATE Customers
+            SET firstName = ?, lastName = ?, username = ?, 
+                password = ?, email = ?, phoneNumber = ?
+            WHERE customerID = ?
+        """;
 
-    try (Connection connection = DBConnection.get();
-         PreparedStatement ps = connection.prepareStatement(sql)) {
+        try (Connection connection = DBConnection.get();
+            PreparedStatement ps = connection.prepareStatement(sql)) {
 
-        ps.setString(1, c.getFirstName());
-        ps.setString(2, c.getLastName());
-        ps.setString(3, c.getUsername());
-        ps.setString(4, c.getPassword());
-        ps.setString(5, c.getEmail());
-        ps.setString(6, c.getPhoneNumber());
-        ps.setInt(7, c.getCustomerID());
+            ps.setString(1, c.getFirstName());
+            ps.setString(2, c.getLastName());
+            ps.setString(3, c.getUsername());
+            ps.setString(4, c.getPassword());
+            ps.setString(5, c.getEmail());
+            ps.setString(6, c.getPhoneNumber());
+            ps.setInt(7, c.getCustomerID());
 
-        ps.executeUpdate();
+            ps.executeUpdate();
 
-    } catch (SQLException e) {
-        throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
-}
+
+    public boolean verifyCustomer(String username, String password) {
+        String sql = "SELECT 1 FROM Customers WHERE username = ? AND password = ?";
+
+        try (Connection connection = DBConnection.get();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+
+            ps.setString(1, username);
+            ps.setString(2, password);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
 

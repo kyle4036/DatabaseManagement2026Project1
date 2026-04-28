@@ -83,4 +83,22 @@ public class EmployeeDAO {
             throw new RuntimeException(ex);
         }
     }
+
+    public boolean verifyEmployee(String username, String password) {
+        String sql = "SELECT 1 FROM Employees WHERE username = ? AND password = ?";
+
+        try (Connection connection = DBConnection.get();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+
+            ps.setString(1, username);
+            ps.setString(2, password);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
 }

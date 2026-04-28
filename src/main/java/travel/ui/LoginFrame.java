@@ -170,6 +170,6 @@ public class LoginFrame extends JFrame{
         }
         LoginFrame myFrame = new LoginFrame();
         myFrame.initialize();
-    
     }
+    
 }

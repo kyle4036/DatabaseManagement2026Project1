@@ -10,7 +10,8 @@ import javax.swing.*;
 //clear; javac ./src/travel/ui/LoginFrame.java; java -cp "./mysql-connector-j-8.3.0.jar" ./src/travel/ui/LoginFrame.java
 
 public class LoginFrame extends JFrame{
-
+    
+    final private Font mainFont = new Font("Lucida Sans", Font.BOLD, 18);
     JLabel msg;
     private static Connection con = null;
     private static Statement stmt = null;
@@ -18,27 +19,8 @@ public class LoginFrame extends JFrame{
     private JTextField tfuser, tfpasswd;
     private static String user = "";
 
-    public static void main(String[] args) throws Exception {
-        
-        // Initialize the connection to the database
-        /* String url = "jdbc:mysql://localhost:3306/testproject";
-        String user = "testuser";
-        String password = "abc123"; */
-        try {
-            con = DBConnection.get();
-            stmt = con.createStatement();
-        } catch (SQLException e) {
-            System.out.println("Unable to create a connection to the database");
-            e.printStackTrace();
-            System.exit(0);
-        }
-        LoginFrame myFrame = new LoginFrame();
-        myFrame.initialize();
-    
-    }
-
     public LoginFrame(){
-        JFrame lframe = this.createLoginPanel();
+        JPanel lframe = this.createLoginPanel();
         this.add(lframe);
         this.setTitle("Login Page");
         this.setSize(500, 300);
@@ -170,5 +152,24 @@ public class LoginFrame extends JFrame{
         mainPanel.add(buttonPanel,BorderLayout.SOUTH);
 
         return mainPanel;
+    }
+
+    public static void main(String[] args) throws Exception {
+        
+        // Initialize the connection to the database
+        /* String url = "jdbc:mysql://localhost:3306/testproject";
+        String user = "testuser";
+        String password = "abc123"; */
+        try {
+            con = DBConnection.get();
+            stmt = con.createStatement();
+        } catch (SQLException e) {
+            System.out.println("Unable to create a connection to the database");
+            e.printStackTrace();
+            System.exit(0);
+        }
+        LoginFrame myFrame = new LoginFrame();
+        myFrame.initialize();
+    
     }
 }

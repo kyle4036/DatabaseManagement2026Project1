@@ -1,6 +1,8 @@
 package travel.dao;
+
 import travel.model.Customer;
 import travel.DBConnection;
+
 import java.util.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

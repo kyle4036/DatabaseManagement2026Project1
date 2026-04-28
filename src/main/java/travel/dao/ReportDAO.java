@@ -1,12 +1,13 @@
 package travel.dao;
 
+import travel.DBConnection;
+import travel.model.*;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
-import travel.DBConnection;
-import travel.model.*;
 
 public class ReportDAO {
     

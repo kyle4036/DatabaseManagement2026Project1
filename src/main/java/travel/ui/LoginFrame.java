@@ -1,5 +1,7 @@
 package travel.ui;
 
+import travel.DBConnection;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
@@ -19,11 +21,11 @@ public class LoginFrame extends JFrame{
     public static void main(String[] args) throws Exception {
         
         // Initialize the connection to the database
-        String url = "jdbc:mysql://localhost:3306/testproject";
+        /* String url = "jdbc:mysql://localhost:3306/testproject";
         String user = "testuser";
-        String password = "abc123";
+        String password = "abc123"; */
         try {
-            con = DriverManager.getConnection(url, user, password);
+            con = DBConnection.get();
             stmt = con.createStatement();
         } catch (SQLException e) {
             System.out.println("Unable to create a connection to the database");
@@ -36,7 +38,7 @@ public class LoginFrame extends JFrame{
     }
 
     public LoginFrame(){
-        Jframe lframe = this.createLoginPanel();
+        JFrame lframe = this.createLoginPanel();
         this.add(lframe);
         this.setTitle("Login Page");
         this.setSize(500, 300);

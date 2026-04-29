@@ -13,6 +13,10 @@ public class CustomerDAO {
     
     private static Connection connection = null;
 
+    public CustomerDAO(DBConnection dbc){
+        connection = dbc.getConnection();
+    }
+
     private Customer mapRow(ResultSet rs, Connection con) throws SQLException {
         Customer c = new Customer();
         connection = con;
@@ -26,9 +30,7 @@ public class CustomerDAO {
         return c;
     }
 
-    public CustomerDao(DBConnection dbc){
-        connection = dbc.getConnection();
-    }
+
 
     public void insert(Customer c) {
           String sql = """
@@ -109,6 +111,19 @@ public class CustomerDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static void main(String[] args) throws Exception{
+        DBConnection dbc = new DBConnection();
+        try{dbc.initialize();}catch(Exception e){throw e;}
+        CustomerDAO CDao = new CustomerDAO(dbc);
+        boolean v = CDao.verifyCustomer("user1", "pass1");
+        if(v)
+            System.out.println("user exists!");
+        else
+            System.out.println("user doesn't exist!");
+
+        System.exit(0);
     }
 
 }

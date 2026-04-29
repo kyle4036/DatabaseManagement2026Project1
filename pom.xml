@@ -37,6 +37,7 @@
 
     <profiles>
 
+        <!-- Main execution point-->
         <profile>
             <id>TravelMain</id>
             <properties>
@@ -51,6 +52,7 @@
             </properties>
         </profile>
 
+        <!--Graphical point-->
         <profile>
             <id>ProjectFrame</id>
             <properties>
@@ -65,6 +67,7 @@
             </properties>
         </profile>
 
+        <!--Service point-->
         <profile>
             <id>BookingService</id>
             <properties>
@@ -83,6 +86,14 @@
             <id>AdminService</id>
             <properties>
                 <exec.mainClass>travel.services.AdminService</exec.mainClass>
+            </properties>
+        </profile>
+
+        <!--DAO points-->
+        <profile>
+            <id>CustomerDAO</id>
+            <properties>
+                <exec.mainClass>travel.dao.CustomerDAO</exec.mainClass>
             </properties>
         </profile>
     </profiles>

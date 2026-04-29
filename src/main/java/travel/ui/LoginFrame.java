@@ -179,15 +179,15 @@ public class LoginFrame extends JFrame{
         /* String url = "jdbc:mysql://localhost:3306/testproject";
         String user = "testuser";
         String password = "abc123"; */
+        DBConnection dbc = new DBConnection();
         try {
-            Connection con1 = DBConnection.get();
-            Statement stmt1 = con.createStatement();
+            dbc.initialize();;
         } catch (SQLException e) {
             System.out.println("Unable to create a connection to the database");
             e.printStackTrace();
             System.exit(0);
         }
-        LoginFrame myFrame = new LoginFrame(con1,stmt1);
+        LoginFrame myFrame = new LoginFrame(dbc);
         LoginFrame.initialize();
     }
     

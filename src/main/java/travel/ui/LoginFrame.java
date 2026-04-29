@@ -2,6 +2,7 @@ package travel.ui;
 
 import travel.DBConnection;
 import travel.services.AuthenticationService;
+import travel.model.*;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -20,6 +21,10 @@ public class LoginFrame extends JFrame{
     private static boolean userLoggedin = false;
     private JTextField tfuser, tfpasswd;
     private static String user = "";
+
+    private Customer custAcc = null;
+    private Employee empAcc = null;
+    private LoginAccountListener loginListener = null;
 
     public LoginFrame(DBConnection dbc){
         con = dbc.getConnection();
@@ -102,10 +107,13 @@ public class LoginFrame extends JFrame{
                     user=tfuser.getText();
                     String passwd=tfpasswd.getText();
 
-                    //userLoggedin = AuService.login(user, passwd);
+                    userLoggedin = AuService.login(user, passwd);
 
-                    //if(userLoggedin){}
-                    ///*
+                    if(userLoggedin && loginListener != null){
+                        loginListener.onLogin();
+                    }
+
+                    /*
                     String query="select * from users where ";
                     // check to see if they are in the database 
                     query+="user='"+user+"' and password='"+passwd+"'";
@@ -126,7 +134,8 @@ public class LoginFrame extends JFrame{
                         msg.setText("<html> Error in the query: "+query);
                         // e1.printStackTrace();
                     }
-                    //*/
+                    */
+
                 }
             }
         );
@@ -181,7 +190,7 @@ public class LoginFrame extends JFrame{
         String password = "abc123"; */
         DBConnection dbc = new DBConnection();
         try {
-            dbc.initialize();;
+            dbc.initialize();
         } catch (SQLException e) {
             System.out.println("Unable to create a connection to the database");
             e.printStackTrace();

@@ -1,7 +1,9 @@
 package travel.ui;
 
-import javax.swing.JFrame;
+import javax.swing.*;
+import java.awt.CardLayout;
 
-public class CustomerFrame extends JFrame{
+public class CustomerLayout extends CardLayout{
+    
     
 }

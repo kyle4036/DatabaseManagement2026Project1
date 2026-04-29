@@ -1,8 +1,7 @@
 package travel.ui;
 
-import travel.DBConnection;
+import javax.swing.JFrame;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.sql.*;
-import javax.swing.*;
+public class AdminFrame extends JFrame{
+
+}

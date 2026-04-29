@@ -11,7 +11,7 @@ import travel.model.Customer;
 
 public class CustomerDAO {
     
-    private static Connection connection = null;
+    private Connection connection = null;
 
     public CustomerDAO(DBConnection dbc){
         connection = dbc.getConnection();

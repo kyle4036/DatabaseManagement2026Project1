@@ -1,5 +1,6 @@
 package travel.services;
 
+import travel.DBConnection;
 import travel.dao.CustomerDAO;
 import travel.dao.EmployeeDAO;
 import travel.model.Customer;
@@ -7,8 +8,8 @@ import travel.model.Employee;
 
 public class AuthenticationService {
 
-    private final CustomerDAO customerDAO = null;
-    private final EmployeeDAO employeeDAO = null;
+    private CustomerDAO customerDAO = null;
+    private EmployeeDAO employeeDAO = null;
 
     public AuthenticationService(DBConnection dbc){
         customerDAO = new CustomerDAO(dbc);

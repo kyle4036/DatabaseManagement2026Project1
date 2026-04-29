@@ -1,6 +1,7 @@
 package travel.ui;
 
 import travel.DBConnection;
+import travel.services.AuthenticationService;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -13,8 +14,9 @@ public class LoginFrame extends JFrame{
     
     final private Font mainFont = new Font("Lucida Sans", Font.BOLD, 18);
     JLabel msg;
-    private static Connection con = null;
-    private static Statement stmt = null;
+    private Connection con = null;
+    private Statement stmt = null;
+    private AuthenticationService AuService = null;
     private static boolean userLoggedin = false;
     private JTextField tfuser, tfpasswd;
     private static String user = "";
@@ -22,6 +24,7 @@ public class LoginFrame extends JFrame{
     public LoginFrame(DBConnection dbc){
         con = dbc.getConnection();
         stmt = dbc.getStatement();
+        AuService = new AuthenticationService(dbc);
     }
     //public LoginFrame(){};
 
@@ -98,6 +101,11 @@ public class LoginFrame extends JFrame{
                     // they are in the database
                     user=tfuser.getText();
                     String passwd=tfpasswd.getText();
+
+                    //userLoggedin = AuService.login(user, passwd);
+
+                    //if(userLoggedin){}
+                    ///*
                     String query="select * from users where ";
                     // check to see if they are in the database 
                     query+="user='"+user+"' and password='"+passwd+"'";
@@ -118,6 +126,7 @@ public class LoginFrame extends JFrame{
                         msg.setText("<html> Error in the query: "+query);
                         // e1.printStackTrace();
                     }
+                    //*/
                 }
             }
         );
@@ -158,6 +167,10 @@ public class LoginFrame extends JFrame{
         mainPanel.add(buttonPanel,BorderLayout.SOUTH);
 
         return mainPanel;
+    }
+
+    public void close(){
+        this.dispose();
     }
 
     public static void main(String[] args) throws Exception {

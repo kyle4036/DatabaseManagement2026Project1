@@ -8,10 +8,10 @@ import java.sql.Statement;
 
 public class DBConnection {
 
-    private static Connection con = null;
-    private static Statement stmt = null;
+    private Connection con = null;
+    private Statement stmt = null;
 
-    private static Connection get() throws SQLException {
+    private Connection get() throws SQLException {
         return DriverManager.getConnection("jdbc:mysql://localhost:3306/testproject", "testuser", "abc123");
     }
 

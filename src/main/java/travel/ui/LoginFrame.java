@@ -25,11 +25,13 @@ public class LoginFrame extends JFrame{
     private Customer custAcc = null;
     private Employee empAcc = null;
     private LoginAccountListener loginListener = null;
+    private DBConnection dbc = null;
 
     public LoginFrame(DBConnection dbc){
         con = dbc.getConnection();
         stmt = dbc.getStatement();
         AuService = new AuthenticationService(dbc);
+        this.dbc = dbc;
     }
     //public LoginFrame(){};
 
@@ -82,7 +84,7 @@ public class LoginFrame extends JFrame{
                     String user=tfuser.getText();
                     String passwd=tfpasswd.getText();
                     // insert into the database
-                    String instruction="insert into users values ";
+                    /*String instruction="insert into users values ";
                     instruction+="('"+user+"','"+passwd+"')";
                     try{
                         int result=stmt.executeUpdate(instruction);
@@ -92,6 +94,12 @@ public class LoginFrame extends JFrame{
                     catch (SQLException e1) {
                         msg.setText("Unable to add new user");
                     }
+                    */
+                    Customer newCust = new Customer();
+                    newCust.setUsername(user);
+                    newCust.setPassword(passwd);
+
+
                 }
             }
         );

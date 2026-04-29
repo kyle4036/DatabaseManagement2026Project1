@@ -10,13 +10,13 @@ public class AuthenticationService {
     private final CustomerDAO customerDAO = new CustomerDAO();
     private final EmployeeDAO employeeDAO = new EmployeeDAO();
 
-    public int login(String username, String password){
+    public boolean login(String username, String password){
 
         if (customerDAO.verifyCustomer(username, password) || employeeDAO.verifyEmployee(username, password)){
-            return 1; // Should I modify this?
+            return true; // Should I modify this?
         }
         else{
-            return 0; // Should I modify this?
+            return false; // Should I modify this?
         }
     }
 

@@ -11,7 +11,7 @@
 
     <properties>
         <maven.compiler.release>17</maven.compiler.release>
-        <!-- <exec.mainClass>travel.ui.ProjectFrame</exec.mainClass> --><!--This creates a default execution path-->
+        <exec.mainClass>travel.TravelMain</exec.mainClass> <!--This creates a default execution path-->
     </properties>
 
     <dependencies>
@@ -36,6 +36,14 @@
     </build>
 
     <profiles>
+
+        <profile>
+            <id>TravelMain</id>
+            <properties>
+                <exec.mainClass>travel.TravelMain</exec.mainClass>
+            </properties>
+        </profile>
+
         <profile>
             <id>ProjectFrame</id>
             <properties>

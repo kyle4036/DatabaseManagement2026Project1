@@ -36,8 +36,7 @@ public class CustomerDAO {
                 (customerID, firstName, lastName, username, password, email, phoneNumber)
                 VALUES (?, ?, ?, ?, ?, ?, ?)
         """;
-            try (Connection connection = DBConnection.get();
-                PreparedStatement ps = connection.prepareStatement(sql)) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
 
                 ps.setInt(1, c.getCustomerID());
                 ps.setString(2, c.getFirstName());

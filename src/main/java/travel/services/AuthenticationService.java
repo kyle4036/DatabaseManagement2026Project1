@@ -7,8 +7,13 @@ import travel.model.Employee;
 
 public class AuthenticationService {
 
-    private final CustomerDAO customerDAO = new CustomerDAO();
-    private final EmployeeDAO employeeDAO = new EmployeeDAO();
+    private final CustomerDAO customerDAO = null;
+    private final EmployeeDAO employeeDAO = null;
+
+    public AuthenticationService(DBConnection dbc){
+        customerDAO = new CustomerDAO(dbc);
+        employeeDAO = new EmployeeDAO(dbc);
+    }
 
     public boolean login(String username, String password){
 

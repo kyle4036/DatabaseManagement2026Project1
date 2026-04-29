@@ -10,6 +10,12 @@ import java.sql.SQLException;
 
 public class EmployeeDAO {
 
+    private Connection connection = null;
+
+    public EmployeeDao(DBConnection dbc){
+        connection = dbc.getConnection();
+    }
+
     private Employee mapRow(ResultSet rs) throws SQLException {
         Employee e = new Employee();
         e.setEmployeeID(rs.getInt("employeeID"));
@@ -28,8 +34,7 @@ public class EmployeeDAO {
             VALUES (?, ?, ?, ?, ?, ?)
         """;
 
-        try (Connection connection = DBConnection.get();
-             PreparedStatement ps = connection.prepareStatement(sql)) {
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
 
             ps.setInt(1, e.getEmployeeID());
             ps.setString(2, e.getFirstName());
@@ -48,8 +53,7 @@ public class EmployeeDAO {
     public void delete(int id) {
         String sql = "DELETE FROM Employees WHERE employeeID = ?";
 
-        try (Connection connection = DBConnection.get();
-             PreparedStatement ps = connection.prepareStatement(sql)) {
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
 
             ps.setInt(1, id);
             ps.executeUpdate();
@@ -67,8 +71,7 @@ public class EmployeeDAO {
             WHERE employeeID = ?
         """;
 
-        try (Connection connection = DBConnection.get();
-             PreparedStatement ps = connection.prepareStatement(sql)) {
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
 
             ps.setString(1, e.getFirstName());
             ps.setString(2, e.getLastName());
@@ -87,8 +90,7 @@ public class EmployeeDAO {
     public boolean verifyEmployee(String username, String password) {
         String sql = "SELECT 1 FROM Employees WHERE username = ? AND password = ?";
 
-        try (Connection connection = DBConnection.get();
-             PreparedStatement ps = connection.prepareStatement(sql)) {
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
 
             ps.setString(1, username);
             ps.setString(2, password);

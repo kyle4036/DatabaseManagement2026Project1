@@ -7,11 +7,17 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.*;
 import java.util.*;
 
 public class ReportDAO {
     
 //wip
+    private Connection conn = null;
+
+    public ReportDao(DBConnection dbc){
+        conn = dbc.getConnection();
+    }
     private ReservationReportRow mapRowRes(ResultSet rs) throws SQLException {
         ReservationReportRow r = new ReservationReportRow();
         r.setTicketNumber(rs.getInt("ticketNumber"));
@@ -70,8 +76,7 @@ public class ReportDAO {
                 WHERE FT.flightNumber = ? AND FT.lineID = ?;
                 """;
         ArrayList<ReservationReportRow> results = new ArrayList<>();
-            try (Connection conn = DBConnection.get();
-                    PreparedStatement ps = conn.prepareStatement(sql)) {
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setString(1, flightNumber);
                 ps.setString(2, lineID);
                 try (ResultSet rs = ps.executeQuery()) {
@@ -96,8 +101,7 @@ public class ReportDAO {
                 """;
 
         ArrayList<ReservationReportRow> results = new ArrayList<>();
-            try (Connection conn = DBConnection.get();
-                    PreparedStatement ps = conn.prepareStatement(sql)) {
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ps.setString(1, "%" + name + "%");
                 ps.setInt(2, customerID);
                 try (ResultSet rs = ps.executeQuery()) {
@@ -120,8 +124,7 @@ public class ReportDAO {
                 WHERE C.customerID = ?
                 GROUP BY C.customerID;
                 """;
-        try (Connection conn = DBConnection.get();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, customerID);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next())
@@ -149,8 +152,7 @@ public class ReportDAO {
                 WHERE F.flightNumber = ? AND F.lineID = ?
                 GROUP BY F.flightNumber, F.lineID;
                 """;
-        try (Connection conn = DBConnection.get();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, flightNumber);
             ps.setString(2, lineID);
             try (ResultSet rs = ps.executeQuery()) {
@@ -179,8 +181,7 @@ public class ReportDAO {
                 WHERE A.lineID = ?
                 GROUP BY A.lineID, A.name;
                 """;
-        try (Connection conn = DBConnection.get();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, lineID);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next())
@@ -202,8 +203,7 @@ public class ReportDAO {
                 ORDER BY totalRevenue DESC
                 LIMIT 1;
                 """;
-        try (Connection conn = DBConnection.get();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next())
                     return mapRowRevSum(rs);
@@ -225,8 +225,7 @@ public class ReportDAO {
                 LIMIT 10;
                 """;
         ArrayList<FlightSummaryRow> results = new ArrayList<>();
-            try (Connection conn = DBConnection.get();
-                    PreparedStatement ps = conn.prepareStatement(sql)) {
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 try (ResultSet rs = ps.executeQuery()) {
                     while (rs.next())
                         results.add(mapRowFlightSum(rs));
@@ -279,8 +278,7 @@ public class ReportDAO {
                     AND YEAR(T.purchaseTime) = ?
                 ) AS totalRevenue
                 """;
-        try (Connection conn = DBConnection.get();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, month);
             ps.setInt(2, year);
             try (ResultSet rs = ps.executeQuery()) {

@@ -18,6 +18,7 @@ public class ReportDAO {
     public ReportDao(DBConnection dbc){
         conn = dbc.getConnection();
     }
+    
     private ReservationReportRow mapRowRes(ResultSet rs) throws SQLException {
         ReservationReportRow r = new ReservationReportRow();
         r.setTicketNumber(rs.getInt("ticketNumber"));

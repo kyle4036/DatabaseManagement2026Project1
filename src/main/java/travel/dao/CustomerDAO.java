@@ -26,6 +26,10 @@ public class CustomerDAO {
         return c;
     }
 
+    public CustomerDao(DBConnection dbc){
+        connection = dbc.getConnection();
+    }
+
     public void insert(Customer c) {
           String sql = """
                 INSERT INTO Customers 
@@ -55,8 +59,7 @@ public class CustomerDAO {
     public void delete(int id) {
         String sql =  "DELETE FROM Customers C WHERE C.customerID = ?";
 
-        try (Connection connection = DBConnection.get();
-        PreparedStatement ps = connection.prepareStatement(sql)) {
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
 
             ps.setInt(1, id);
             ps.executeUpdate();
@@ -76,8 +79,7 @@ public class CustomerDAO {
             WHERE customerID = ?
         """;
 
-        try (Connection connection = DBConnection.get();
-            PreparedStatement ps = connection.prepareStatement(sql)) {
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
 
             ps.setString(1, c.getFirstName());
             ps.setString(2, c.getLastName());
@@ -97,8 +99,7 @@ public class CustomerDAO {
     public boolean verifyCustomer(String username, String password) {
         String sql = "SELECT 1 FROM Customers WHERE username = ? AND password = ?";
 
-        try (Connection connection = DBConnection.get();
-             PreparedStatement ps = connection.prepareStatement(sql)) {
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
 
             ps.setString(1, username);
             ps.setString(2, password);

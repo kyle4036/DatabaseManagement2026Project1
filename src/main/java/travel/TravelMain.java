@@ -1,8 +1,5 @@
 package travel;
 
-import java.sql.Connection;
-import java.sql.Statement;
-
 import javax.swing.JLabel;
 
 import travel.ui.LoginFrame;
@@ -22,6 +19,6 @@ public class TravelMain {
         }
 
         LoginFrame lFrame = new LoginFrame(dbc);
-            lFrame.initialize();
+        lFrame.initialize();
     }
 }

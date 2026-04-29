@@ -1,19 +1,27 @@
 package travel;
 
 import java.sql.Connection;
+import java.sql.Statement;
 
 import javax.swing.JLabel;
 
 import travel.ui.LoginFrame;
 
+
 public class TravelMain {
 
     JLabel msg;
-    private static Connection con = null;
-    private static Statement stmt = null;
-    
+    private static DBConnection dbc = null;
+
     public static void main(String[] args){
-        LoginFrame lFrame = new LoginFrame();
-        lFrame.initialize();
+        dbc = new DBConnection();
+        try{
+            dbc.initialize();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        LoginFrame lFrame = new LoginFrame(dbc);
+            lFrame.initialize();
     }
 }

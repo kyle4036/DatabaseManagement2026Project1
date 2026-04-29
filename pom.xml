@@ -45,6 +45,13 @@
         </profile>
 
         <profile>
+            <id>DBConnection</id>
+            <properties>
+                <exec.mainClass>travel.DBConnection</exec.mainClass>
+            </properties>
+        </profile>
+
+        <profile>
             <id>ProjectFrame</id>
             <properties>
                 <exec.mainClass>travel.ui.ProjectFrame</exec.mainClass>

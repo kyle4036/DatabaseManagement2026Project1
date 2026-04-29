@@ -4,6 +4,7 @@ import travel.DBConnection;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.*;
 import javax.swing.*;
 
 //clear; javac ./src/travel/ui/LoginFrame.java; java -cp "./mysql-connector-j-8.3.0.jar" ./src/travel/ui/LoginFrame.java
@@ -18,7 +19,13 @@ public class LoginFrame extends JFrame{
     private JTextField tfuser, tfpasswd;
     private static String user = "";
 
-    public initialize() throws Exception {
+    public LoginFrame(DBConnection dbc){
+        con = dbc.getConnection();
+        stmt = dbc.getStatement();
+    }
+    //public LoginFrame(){};
+
+    public void initialize(){
         JPanel lframe = this.createLoginPanel();
         this.add(lframe);
         this.setTitle("Login Page");
@@ -160,14 +167,14 @@ public class LoginFrame extends JFrame{
         String user = "testuser";
         String password = "abc123"; */
         try {
-            con = DBConnection.get();
-            stmt = con.createStatement();
+            Connection con1 = DBConnection.get();
+            Statement stmt1 = con.createStatement();
         } catch (SQLException e) {
             System.out.println("Unable to create a connection to the database");
             e.printStackTrace();
             System.exit(0);
         }
-        LoginFrame myFrame = new LoginFrame();
+        LoginFrame myFrame = new LoginFrame(con1,stmt1);
         LoginFrame.initialize();
     }
     

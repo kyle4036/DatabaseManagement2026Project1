@@ -3,18 +3,46 @@ package travel;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
+
 
 public class DBConnection {
 
-    public static Connection get() throws SQLException {
+    private static Connection con = null;
+    private static Statement stmt = null;
+
+    private static Connection get() throws SQLException {
         return DriverManager.getConnection("jdbc:mysql://localhost:3306/testproject", "testuser", "abc123");
     }
 
+    public void initialize() throws SQLException{
+        try{
+            con = get();
+            stmt = con.createStatement();
+        }catch(SQLException e) {
+            System.out.println("Unable to create a connection to the database");
+            e.printStackTrace();
+            System.exit(0);
+        }
+    }
+
+    public Connection getConnection(){
+        return con;
+    }
+    public Statement getStatement(){
+        return stmt;
+    }
+
     public static void main(String[] args) {
-        try (Connection conn = get()) {
+        DBConnection dbc = new DBConnection();
+
+        try{
+            dbc.initialize()
+            Connection conn = dbc.getConnection();
             System.out.println("Connected: " + conn.getMetaData().getDatabaseProductVersion());
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        
     }
 }

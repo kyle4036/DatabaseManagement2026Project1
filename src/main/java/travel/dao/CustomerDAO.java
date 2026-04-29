@@ -1,19 +1,21 @@
 package travel.dao;
 
-import travel.model.Customer;
-import travel.DBConnection;
-
-import java.util.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import travel.DBConnection;
+import travel.model.Customer;
+
 
 public class CustomerDAO {
     
-    private Customer mapRow(ResultSet rs) throws SQLException {
+    private static Connection connection = null;
+
+    private Customer mapRow(ResultSet rs, Connection con) throws SQLException {
         Customer c = new Customer();
+        connection = con;
         c.setCustomerID(rs.getInt("customerID"));
         c.setEmail(rs.getString("email"));
         c.setFirstName(rs.getString("firstName"));

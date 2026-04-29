@@ -148,16 +148,16 @@ public class TestSearchFrame extends JFrame {
         /* String url = "jdbc:mysql://localhost:3306/testproject";
         String user = "testuser";
         String password = "abc123"; */
+        DBConnection dbc = new DBConnection();
         try {
-            con = DBConnection.get();
-            stmt = con.createStatement();
+            dbc.initialize();
         } catch (SQLException e) {
             System.out.println("Unable to create a connection to the database");
             e.printStackTrace();
             System.exit(0);
         }
 
-        ProjectFrame myFrame = new ProjectFrame();
+        ProjectFrame myFrame = new ProjectFrame(dbc);
         myFrame.initialize();
     }
 

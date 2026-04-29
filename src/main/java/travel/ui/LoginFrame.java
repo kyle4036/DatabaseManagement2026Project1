@@ -188,7 +188,7 @@ public class LoginFrame extends JFrame{
             System.exit(0);
         }
         LoginFrame myFrame = new LoginFrame(dbc);
-        LoginFrame.initialize();
+        myFrame.initialize();
     }
     
 }

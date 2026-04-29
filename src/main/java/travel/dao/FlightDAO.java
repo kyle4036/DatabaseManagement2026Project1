@@ -1,15 +1,22 @@
 package travel.dao;
 
-import travel.DBConnection;
-import travel.model.Flight;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import travel.DBConnection;
+import travel.model.Flight;
 
 public class FlightDAO {
+
+    private Connection conn = null;
+
+    public FlightDAO(DBConnection dbc){
+        conn = dbc.getConnection();
+    }
 
     // Invisible Helper method that converts JDBC output from type ResultSet to
     // types our `Flight`
@@ -31,8 +38,7 @@ public class FlightDAO {
     public List<Flight> findAll() {
         String sql = "SELECT * FROM Flights";
         ArrayList<Flight> results = new ArrayList<>();
-        try (Connection conn = DBConnection.get();
-                PreparedStatement ps = conn.prepareStatement(sql);
+        try (PreparedStatement ps = conn.prepareStatement(sql);
                 ResultSet rs = ps.executeQuery()) {
 
             while (rs.next())

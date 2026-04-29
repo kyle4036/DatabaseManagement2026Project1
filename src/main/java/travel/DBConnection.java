@@ -37,7 +37,7 @@ public class DBConnection {
         DBConnection dbc = new DBConnection();
 
         try{
-            dbc.initialize()
+            dbc.initialize();
             Connection conn = dbc.getConnection();
             System.out.println("Connected: " + conn.getMetaData().getDatabaseProductVersion());
         } catch (SQLException e) {

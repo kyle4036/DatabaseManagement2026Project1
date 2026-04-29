@@ -1,21 +1,21 @@
 package travel.dao;
 
-import travel.DBConnection;
-import travel.model.*;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import travel.DBConnection;
+import travel.model.FlightSummaryRow;
+import travel.model.ReservationReportRow;
+import travel.model.RevenueSummaryRow;
+import travel.model.SalesReportRow;
 
 public class ReportDAO {
     
 //wip
     private Connection conn = null;
 
-    public ReportDao(DBConnection dbc){
+    public ReportDAO(DBConnection dbc){
         conn = dbc.getConnection();
     }
     

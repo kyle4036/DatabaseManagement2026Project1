@@ -12,14 +12,14 @@ import travel.model.Customer;
 public class CustomerDAO {
     
     private Connection connection = null;
+    private Customer custAcc = null;
 
     public CustomerDAO(DBConnection dbc){
         connection = dbc.getConnection();
     }
 
-    private Customer mapRow(ResultSet rs, Connection con) throws SQLException {
+    private Customer mapRow(ResultSet rs) throws SQLException {
         Customer c = new Customer();
-        connection = con;
         c.setCustomerID(rs.getInt("customerID"));
         c.setEmail(rs.getString("email"));
         c.setFirstName(rs.getString("firstName"));
@@ -97,6 +97,10 @@ public class CustomerDAO {
         }
     }
 
+    public Customer getLastVerifiedCustomer(){
+        return custAcc;
+    }
+
     public boolean verifyCustomer(String username, String password) {
         String sql = "SELECT 1 FROM Customers WHERE username = ? AND password = ?";
 
@@ -106,6 +110,7 @@ public class CustomerDAO {
             ps.setString(2, password);
 
             try (ResultSet rs = ps.executeQuery()) {
+                custAcc = mapRow(rs);
                 return rs.next();
             }
         } catch (SQLException e) {

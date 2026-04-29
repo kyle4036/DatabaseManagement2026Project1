@@ -3,11 +3,15 @@ package travel.ui;
 import travel.DBConnection;
 import travel.services.AuthenticationService;
 import travel.model.*;
+import travel.dao.*;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
+
 import javax.swing.*;
+
+import travel.dao.EmployeeDAO;
 
 //clear; javac ./src/travel/ui/LoginFrame.java; java -cp "./mysql-connector-j-8.3.0.jar" ./src/travel/ui/LoginFrame.java
 
@@ -17,7 +21,6 @@ public class LoginFrame extends JFrame{
     JLabel msg;
     private Connection con = null;
     private Statement stmt = null;
-    private AuthenticationService AuService = null;
     private static boolean userLoggedin = false;
     private JTextField tfuser, tfpasswd;
     private static String user = "";
@@ -26,12 +29,18 @@ public class LoginFrame extends JFrame{
     private Employee empAcc = null;
     private LoginAccountListener loginListener = null;
     private DBConnection dbc = null;
+    private AuthenticationService AuService = null;
+    private CustomerDAO cDao = null;
+    private EmployeeDAO eDao = null;
 
     public LoginFrame(DBConnection dbc){
         con = dbc.getConnection();
         stmt = dbc.getStatement();
         AuService = new AuthenticationService(dbc);
         this.dbc = dbc;
+
+        cDao = new CustomerDAO(dbc);
+        eDao = new EmployeeDAO(dbc);
     }
     //public LoginFrame(){};
 
@@ -99,7 +108,7 @@ public class LoginFrame extends JFrame{
                     newCust.setUsername(user);
                     newCust.setPassword(passwd);
 
-
+                    cDao.insert(newCust); 
                 }
             }
         );
@@ -118,6 +127,7 @@ public class LoginFrame extends JFrame{
                     userLoggedin = AuService.login(user, passwd);
 
                     if(userLoggedin && loginListener != null){
+                        custAcc = cDao.getLastVerifiedCustomer();
                         loginListener.onLogin();
                     }
 
@@ -190,6 +200,10 @@ public class LoginFrame extends JFrame{
         this.dispose();
     }
 
+    public void setLoginAccountListener(LoginAccountListener l){
+        loginListener = l;
+    }
+
     public static void main(String[] args) throws Exception {
         
         // Initialize the connection to the database
@@ -205,7 +219,16 @@ public class LoginFrame extends JFrame{
             System.exit(0);
         }
         LoginFrame myFrame = new LoginFrame(dbc);
+        myFrame.setLoginAccountListener(()->{
+            accountListenerTest();
+        });
+
         myFrame.initialize();
+    }
+
+    public static void accountListenerTest(){
+        System.out.println("able to login");
+        System.out.println("");
     }
     
 }

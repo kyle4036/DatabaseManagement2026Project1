@@ -11,6 +11,7 @@
 
     <properties>
         <maven.compiler.release>17</maven.compiler.release>
+        <!-- <exec.mainClass>travel.ui.ProjectFrame</exec.mainClass> --><!--This creates a default execution path-->
     </properties>
 
     <dependencies>
@@ -28,10 +29,47 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.1.0</version>
                 <configuration>
-                    <mainClass>travel.ui.ProjectFrame</mainClass>
+                    <mainClass>${exec.mainClass}</mainClass>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>ProjectFrame</id>
+            <properties>
+                <exec.mainClass>travel.ui.ProjectFrame</exec.mainClass>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>LoginFrame</id>
+            <properties>
+                <exec.mainClass>travel.ui.LoginFrame</exec.mainClass>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>BookingService</id>
+            <properties>
+                <exec.mainClass>travel.services.BookingService</exec.mainClass>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>AuthenticationService</id>
+            <properties>
+                <exec.mainClass>travel.services.AuthenticationService</exec.mainClass>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>AdminService</id>
+            <properties>
+                <exec.mainClass>travel.services.AdminService</exec.mainClass>
+            </properties>
+        </profile>
+    </profiles>
 
 </project>

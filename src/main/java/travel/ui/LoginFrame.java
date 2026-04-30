@@ -24,7 +24,6 @@ public class LoginFrame extends JFrame{
     private JTextField tfuser, tfpasswd;
     private static String user = "";
 
-;
     private Customer custAcc = null;
     private Employee empAcc = null;
     private LoginAccountListener loginListener = null;

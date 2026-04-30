@@ -1,9 +1,9 @@
 package travel;
 
-import javax.swing.JLabel;
-
 import travel.ui.LoginFrame;
 
+import javax.swing.*;
+import java.util.concurrent.CountDownLatch;
 
 public class TravelMain {
 
@@ -18,7 +18,18 @@ public class TravelMain {
             e.printStackTrace();
         }
 
+        CountDownLatch latch = new CountDownLatch(1);
+
         LoginFrame lFrame = new LoginFrame(dbc);
+        lFrame.setLoginAccountListener( () ->
+            latch.countDown();
+            loginAccountAction();
+        );
         lFrame.initialize();
+        latch.await();
+    }
+
+    public static void loginAccountAction(){
+
     }
 }

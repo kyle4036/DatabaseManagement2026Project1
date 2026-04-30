@@ -124,12 +124,14 @@ public class LoginFrame extends JFrame{
                     user=tfuser.getText();
                     String passwd=tfpasswd.getText();
 
-                    userLoggedin = AuService.login(user, passwd);
+                    /*userLoggedin = AuService.login(user, passwd);
 
                     if(userLoggedin && loginListener != null){
                         custAcc = cDao.getLastVerifiedCustomer();
                         loginListener.onLogin();
-                    }
+                    }*/
+
+                    loginListener.onLogin();
 
                     /*
                     String query="select * from users where ";
@@ -218,6 +220,7 @@ public class LoginFrame extends JFrame{
             e.printStackTrace();
             System.exit(0);
         }
+
         LoginFrame myFrame = new LoginFrame(dbc);
         myFrame.setLoginAccountListener(()->{
             accountListenerTest();
@@ -228,7 +231,7 @@ public class LoginFrame extends JFrame{
 
     public static void accountListenerTest(){
         System.out.println("able to login");
-        System.out.println("");
+        System.out.println("helloworld");
     }
     
 }

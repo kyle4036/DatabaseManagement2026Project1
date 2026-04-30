@@ -11,7 +11,6 @@ import java.sql.*;
 
 import javax.swing.*;
 
-import travel.dao.EmployeeDAO;
 
 //clear; javac ./src/travel/ui/LoginFrame.java; java -cp "./mysql-connector-j-8.3.0.jar" ./src/travel/ui/LoginFrame.java
 
@@ -25,9 +24,7 @@ public class LoginFrame extends JFrame{
     private JTextField tfuser, tfpasswd;
     private static String user = "";
 
-    public enum UserAccountType{CUSTOMER, REP, ADMIN};
-    public UserAccountType accType;
-
+;
     private Customer custAcc = null;
     private Employee empAcc = null;
     private LoginAccountListener loginListener = null;
@@ -35,6 +32,7 @@ public class LoginFrame extends JFrame{
     private AuthenticationService AuService = null;
     private CustomerDAO cDao = null;
     private EmployeeDAO eDao = null;
+    public UserAccountType accType;
 
     public LoginFrame(DBConnection dbc){
         con = dbc.getConnection();
@@ -202,7 +200,7 @@ public class LoginFrame extends JFrame{
     }
 
     public UserAccountType getUserAccountType(){
-        return accType
+        return accType;
     }
 
     public void close(){

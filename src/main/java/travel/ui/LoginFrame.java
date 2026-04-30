@@ -124,12 +124,12 @@ public class LoginFrame extends JFrame{
                     user=tfuser.getText();
                     String passwd=tfpasswd.getText();
 
-                    /*userLoggedin = AuService.login(user, passwd);
+                    userLoggedin = AuService.login(user, passwd);
 
                     if(userLoggedin && loginListener != null){
                         custAcc = cDao.getLastVerifiedCustomer();
                         loginListener.onLogin();
-                    }*/
+                    }
 
                     loginListener.onLogin();
 

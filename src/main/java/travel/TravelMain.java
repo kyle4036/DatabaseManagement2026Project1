@@ -21,15 +21,21 @@ public class TravelMain {
         CountDownLatch latch = new CountDownLatch(1);
 
         LoginFrame lFrame = new LoginFrame(dbc);
-        lFrame.setLoginAccountListener( () ->
+        lFrame.setLoginAccountListener( () ->{
             latch.countDown();
             loginAccountAction();
-        );
+        });
         lFrame.initialize();
-        latch.await();
+        try{
+            latch.await();
+        }catch(InterruptedException e){
+            e.printStackTrace();
+        }
+
+
     }
 
     public static void loginAccountAction(){
-
+        LoginFrame.accountListenerTest();
     }
 }

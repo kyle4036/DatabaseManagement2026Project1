@@ -1,0 +1,158 @@
+<mxfile host="app.diagrams.net" pages="3">
+  <diagram name="Literal" id="Pe7Oowi6g3WVXiAJeCFD">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="OFm7QBTPotm9oehmyqdu-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="440" width="520" x="120" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="OFm7QBTPotm9oehmyqdu-2" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;ProjectFrame&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 24px;&quot;&gt;implements JFrame&lt;/font&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="160" width="140" x="130" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="OFm7QBTPotm9oehmyqdu-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="70" width="330" x="280" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="OFm7QBTPotm9oehmyqdu-4" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;UILayout implements CardLayout&lt;/font&gt;" vertex="1">
+          <mxGeometry height="50" width="320" x="290" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="l3-vaq4ftchymSFCtLCf-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="440" width="440" x="670" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="l3-vaq4ftchymSFCtLCf-2" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;BuildLayoutType&lt;/font&gt;" vertex="1">
+          <mxGeometry height="30" width="60" x="740" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="l3-vaq4ftchymSFCtLCf-5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Build a CardLayout for either a customer user, rep user, or admin" vertex="1">
+          <mxGeometry height="60" width="120" x="690" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="p7qHYMyJB-78KUCviYiD-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="240" width="880" x="120" y="680" as="geometry" />
+        </mxCell>
+        <mxCell id="SWftx88xxjjkXb5UmORu-1" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;CustomerLayout implements CardLayout&lt;/font&gt;" vertex="1">
+          <mxGeometry height="30" width="450" x="125" y="690" as="geometry" />
+        </mxCell>
+        <mxCell id="SWftx88xxjjkXb5UmORu-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;DecisionPanel&lt;/font&gt;" vertex="1">
+          <mxGeometry height="140" width="170" x="150" y="750" as="geometry" />
+        </mxCell>
+        <mxCell id="SWftx88xxjjkXb5UmORu-4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;FlightListPanel&lt;/font&gt;" vertex="1">
+          <mxGeometry height="140" width="170" x="360" y="750" as="geometry" />
+        </mxCell>
+        <mxCell id="SWftx88xxjjkXb5UmORu-5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;ReservationsPanel&lt;/font&gt;" vertex="1">
+          <mxGeometry height="140" width="170" x="560" y="750" as="geometry" />
+        </mxCell>
+        <mxCell id="SWftx88xxjjkXb5UmORu-6" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;Complaints&lt;/font&gt;" vertex="1">
+          <mxGeometry height="140" width="170" x="770" y="750" as="geometry" />
+        </mxCell>
+        <mxCell id="SWftx88xxjjkXb5UmORu-7" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="(if time allows)" vertex="1">
+          <mxGeometry height="30" width="100" x="810" y="840" as="geometry" />
+        </mxCell>
+        <mxCell id="nzm7_xuBPCSvuPQvcXXU-3" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;TravelMain&lt;/font&gt;" vertex="1">
+          <mxGeometry height="70" width="130" x="30" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="nzm7_xuBPCSvuPQvcXXU-4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="createCustomerLayout()" vertex="1">
+          <mxGeometry height="60" width="140" x="690" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="nzm7_xuBPCSvuPQvcXXU-5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="createRepLayout()" vertex="1">
+          <mxGeometry height="60" width="140" x="690" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="nzm7_xuBPCSvuPQvcXXU-6" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="createAdminLayout()" vertex="1">
+          <mxGeometry height="60" width="140" x="690" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="nzm7_xuBPCSvuPQvcXXU-8" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;initialize&lt;/font&gt;" vertex="1">
+          <mxGeometry height="110" width="330" x="280" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="nzm7_xuBPCSvuPQvcXXU-9" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="Builds for the necessary layout" vertex="1">
+          <mxGeometry height="40" width="190" x="340" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="apQ57TouMa5HPBQaXR4f-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="520" width="240" x="1240" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="apQ57TouMa5HPBQaXR4f-4" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;FullDaoCollection&lt;/font&gt;" vertex="1">
+          <mxGeometry height="30" width="227.5" x="1240" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="apQ57TouMa5HPBQaXR4f-5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;AircraftDAO&lt;/font&gt;" vertex="1">
+          <mxGeometry height="60" width="150" x="1260" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="apQ57TouMa5HPBQaXR4f-6" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;AirlineDAO&lt;/font&gt;" vertex="1">
+          <mxGeometry height="60" width="150" x="1260" y="370" as="geometry" />
+        </mxCell>
+        <mxCell id="apQ57TouMa5HPBQaXR4f-7" edge="1" parent="1" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=5;rounded=0;" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="1334.55" y="520" as="sourcePoint" />
+            <mxPoint x="1334.55" y="440" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="apQ57TouMa5HPBQaXR4f-8" edge="1" parent="1" source="SWftx88xxjjkXb5UmORu-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.82;entryY=-0.208;entryDx=0;entryDy=0;entryPerimeter=0;curved=1;" target="OFm7QBTPotm9oehmyqdu-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="20" y="705" />
+              <mxPoint x="20" y="100" />
+              <mxPoint x="552" y="100" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="apQ57TouMa5HPBQaXR4f-9" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;Getters/Setters&lt;/font&gt;" vertex="1">
+          <mxGeometry height="60" width="180" x="1250" y="530" as="geometry" />
+        </mxCell>
+        <mxCell id="apQ57TouMa5HPBQaXR4f-10" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;initialize()&lt;/font&gt;" vertex="1">
+          <mxGeometry height="60" width="150" x="1260" y="220" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="VHk4l92D8PpubSC3OTR5" name="Flights">
+    <mxGraphModel dx="1203" dy="631" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="PTmL6cF72PYMnEmwVgMW-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="240" width="360" x="200" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="PTmL6cF72PYMnEmwVgMW-2" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;font&gt;FlightListPanel&lt;/font&gt;" vertex="1">
+          <mxGeometry height="40" width="110" x="200" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="PTmL6cF72PYMnEmwVgMW-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="FlightPanel" vertex="1">
+          <mxGeometry height="30" width="220" x="320" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="PTmL6cF72PYMnEmwVgMW-4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="FlightPanel" vertex="1">
+          <mxGeometry height="30" width="220" x="320" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="PTmL6cF72PYMnEmwVgMW-5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="FlightPanel" vertex="1">
+          <mxGeometry height="30" width="220" x="320" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="PTmL6cF72PYMnEmwVgMW-6" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="FlightPanel" vertex="1">
+          <mxGeometry height="30" width="220" x="320" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="PTmL6cF72PYMnEmwVgMW-7" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="FlightToggles" vertex="1">
+          <mxGeometry height="100" width="80" x="215" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="PTmL6cF72PYMnEmwVgMW-8" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+          <mxGeometry height="80" width="320" x="600" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="PTmL6cF72PYMnEmwVgMW-9" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="FlightPanel" vertex="1">
+          <mxGeometry height="30" width="60" x="600" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="PTmL6cF72PYMnEmwVgMW-10" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Date/Time" vertex="1">
+          <mxGeometry height="40" width="60" x="620" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="PTmL6cF72PYMnEmwVgMW-12" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Departing&lt;div&gt;Airport&lt;/div&gt;" vertex="1">
+          <mxGeometry height="40" width="60" x="700" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="PTmL6cF72PYMnEmwVgMW-13" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Arriving&lt;div&gt;Airport&lt;/div&gt;" vertex="1">
+          <mxGeometry height="40" width="60" x="780" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="PTmL6cF72PYMnEmwVgMW-14" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Buy Button" vertex="1">
+          <mxGeometry height="40" width="60" x="850" y="180" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="MgJ40rDWFQaWxwBm_DBK" name="Reservations">
+    <mxGraphModel dx="1373" dy="757" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

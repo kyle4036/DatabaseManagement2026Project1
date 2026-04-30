@@ -25,6 +25,9 @@ public class LoginFrame extends JFrame{
     private JTextField tfuser, tfpasswd;
     private static String user = "";
 
+    public enum UserAccountType{CUSTOMER, REP, ADMIN};
+    public UserAccountType accType;
+
     private Customer custAcc = null;
     private Employee empAcc = null;
     private LoginAccountListener loginListener = null;
@@ -131,7 +134,7 @@ public class LoginFrame extends JFrame{
                         loginListener.onLogin();
                     }
 
-                    loginListener.onLogin();
+                    //loginListener.onLogin();
 
                     /*
                     String query="select * from users where ";
@@ -196,6 +199,10 @@ public class LoginFrame extends JFrame{
         mainPanel.add(buttonPanel,BorderLayout.SOUTH);
 
         return mainPanel;
+    }
+
+    public UserAccountType getUserAccountType(){
+        return accType
     }
 
     public void close(){

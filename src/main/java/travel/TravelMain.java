@@ -36,6 +36,7 @@ public class TravelMain {
     }
 
     public static void loginAccountAction(){
+        //note -below is only a test function
         LoginFrame.accountListenerTest();
     }
 }

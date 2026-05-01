@@ -126,8 +126,15 @@ public class LoginFrame extends JFrame{
 
                     userLoggedin = AuService.login(user, passwd);
 
-                    if(userLoggedin && loginListener != null){
+                    /* 
+                    custAcc = new Customer();
+                    loginListener.onLogin();
+                    return;
+                    */
+
+                    if(userLoggedin && loginListenr != null){
                         custAcc = cDao.getLastVerifiedCustomer();
+                        //custAcc = new Customer();
                         loginListener.onLogin();
                     }
 

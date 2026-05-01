@@ -6,3 +6,5 @@
 *.jar
 .vscode
 target.vscode/
+target/
+.settings

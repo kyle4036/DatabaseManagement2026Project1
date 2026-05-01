@@ -1,3 +1,3 @@
 package travel.model;
 
-public enum UserAccountType{CUSTOMER, REP, ADMIN}
+public enum UserAccountType{CUSTOMER, REP, ADMIN, NOLOGIN}

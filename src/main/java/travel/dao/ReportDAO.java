@@ -11,14 +11,14 @@ import travel.model.RevenueSummaryRow;
 import travel.model.SalesReportRow;
 
 public class ReportDAO {
-    
-//wip
+
+    // wip
     private Connection conn = null;
 
-    public ReportDAO(DBConnection dbc){
-        conn = dbc.getConnection();
+    public ReportDAO() {
+        conn = DBConnection.get();
     }
-    
+
     private ReservationReportRow mapRowRes(ResultSet rs) throws SQLException {
         ReservationReportRow r = new ReservationReportRow();
         r.setTicketNumber(rs.getInt("ticketNumber"));
@@ -39,7 +39,7 @@ public class ReportDAO {
     private RevenueSummaryRow mapRowRevSum(ResultSet rs) throws SQLException {
         RevenueSummaryRow r = new RevenueSummaryRow();
         r.setEntityID(rs.getString("entityID"));
-        r.setEntityName(rs.getString("entityName")); 
+        r.setEntityName(rs.getString("entityName"));
         r.setEntityType(rs.getString("entityType"));
         r.setTotalRevenue(rs.getBigDecimal("totalRevenue"));
         return r;
@@ -66,28 +66,28 @@ public class ReportDAO {
         r.setTotalRevenue(rs.getBigDecimal("totalRevenue"));
         return r;
     }
-    
+
     public List<ReservationReportRow> getReservationsByFlightNumber(String flightNumber, String lineID) {
         String sql = """
                 SELECT T.ticketNumber, T.customerID, CONCAT(C.firstName, ' ', C.lastName) AS customerName, FT.flightNumber,
                 FT.lineID, FT.departureDate, FT.seatNumber, FT.ticketClass, T.status, T.fareCost, T.bookingFee, T.purchaseTime
                 FROM Tickets T
-                JOIN FlightTickets FT ON T.ticketNumber = FT.ticketNumber 
+                JOIN FlightTickets FT ON T.ticketNumber = FT.ticketNumber
                 JOIN Customers C ON T.customerID = C.customerID
                 WHERE FT.flightNumber = ? AND FT.lineID = ?;
                 """;
         ArrayList<ReservationReportRow> results = new ArrayList<>();
-            try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                ps.setString(1, flightNumber);
-                ps.setString(2, lineID);
-                try (ResultSet rs = ps.executeQuery()) {
-                    while (rs.next())
-                        results.add(mapRowRes(rs));
-                }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, flightNumber);
+            ps.setString(2, lineID);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next())
+                    results.add(mapRowRes(rs));
             }
-            return results;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return results;
 
     }
 
@@ -96,25 +96,24 @@ public class ReportDAO {
                 SELECT T.ticketNumber, T.customerID, CONCAT(C.firstName, ' ', C.lastName) AS customerName, FT.flightNumber,
                 FT.lineID, FT.departureDate, FT.seatNumber, FT.ticketClass, T.status, T.fareCost, T.bookingFee, T.purchaseTime
                 FROM Tickets T
-                JOIN FlightTickets FT ON T.ticketNumber = FT.ticketNumber 
+                JOIN FlightTickets FT ON T.ticketNumber = FT.ticketNumber
                 JOIN Customers C ON T.customerID = C.customerID
                 WHERE CONCAT(C.firstName, ' ', C.lastName) LIKE ? AND C.customerID = ?;
                 """;
 
         ArrayList<ReservationReportRow> results = new ArrayList<>();
-            try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                ps.setString(1, "%" + name + "%");
-                ps.setInt(2, customerID);
-                try (ResultSet rs = ps.executeQuery()) {
-                    while (rs.next())
-                        results.add(mapRowRes(rs));
-                }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, "%" + name + "%");
+            ps.setInt(2, customerID);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next())
+                    results.add(mapRowRes(rs));
             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return results;
     }
-
 
     public RevenueSummaryRow getRevenueSummaryByCustomer(int customerID) {
         String sql = """
@@ -135,15 +134,15 @@ public class ReportDAO {
             throw new RuntimeException(e);
         }
         return null;
-     } 
+    }
 
     public RevenueSummaryRow getRevenueSummaryByFlight(String flightNumber, String lineID) {
         String sql = """
-                SELECT CONCAT(F.lineID, ' ', F.flightNumber) AS entityName, 'Flight' AS entityType, 
+                SELECT CONCAT(F.lineID, ' ', F.flightNumber) AS entityName, 'Flight' AS entityType,
                 CONCAT(F.flightNumber, '-', F.lineID) AS entityID,
                 SUM((T.fareCost + T.bookingFee) * 1.0 / LC.legCount) AS totalRevenue
                 FROM Tickets T
-                JOIN FlightTickets FT ON T.ticketNumber = FT.ticketNumber 
+                JOIN FlightTickets FT ON T.ticketNumber = FT.ticketNumber
                 JOIN Flights F ON FT.flightNumber = F.flightNumber AND FT.lineID = F.lineID
                 JOIN (
                     SELECT ticketNumber, COUNT(*) AS legCount
@@ -167,7 +166,7 @@ public class ReportDAO {
 
     }
 
-    public RevenueSummaryRow getRevenueSummaryByAirline (String lineID) {
+    public RevenueSummaryRow getRevenueSummaryByAirline(String lineID) {
         String sql = """
                 SELECT A.name AS entityName, 'Airline' AS entityType, A.lineID AS entityID,
                 SUM((T.fareCost + T.bookingFee) * 1.0 / LC.legCount) AS totalRevenue
@@ -194,7 +193,7 @@ public class ReportDAO {
         return null;
     }
 
-    public RevenueSummaryRow getMostRevenueByCustomer () {
+    public RevenueSummaryRow getMostRevenueByCustomer() {
         String sql = """
                 SELECT CONCAT(C.firstName, ' ', C.lastName) AS entityName, 'Customer' AS entityType, C.customerID AS entityID,
                 SUM(T.fareCost + T.bookingFee) AS totalRevenue
@@ -213,7 +212,7 @@ public class ReportDAO {
             throw new RuntimeException(e);
         }
         return null;
-     }
+    }
 
     public List<FlightSummaryRow> getMostActiveFlights() {
         String sql = """
@@ -226,17 +225,17 @@ public class ReportDAO {
                 LIMIT 10;
                 """;
         ArrayList<FlightSummaryRow> results = new ArrayList<>();
-            try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                try (ResultSet rs = ps.executeQuery()) {
-                    while (rs.next())
-                        results.add(mapRowFlightSum(rs));
-                }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next())
+                    results.add(mapRowFlightSum(rs));
             }
-            return results;
-     }
-    
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return results;
+    }
+
     public SalesReportRow getMonthlySalesSummary(int month, int year) {
         String sql = """
                 SELECT
@@ -290,5 +289,5 @@ public class ReportDAO {
             throw new RuntimeException(e);
         }
         return null;
-     }
+    }
 }

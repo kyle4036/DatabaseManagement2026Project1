@@ -12,10 +12,10 @@ public class AdminService {
     private final EmployeeDAO employeeDAO;
     private final ReportDAO reportDAO;
 
-    public AdminService(DBConnection dbc) {
-        this.customerDAO = new CustomerDAO(dbc);
-        this.employeeDAO = new EmployeeDAO(dbc);
-        this.reportDAO = new ReportDAO(dbc);
+    public AdminService() {
+        this.customerDAO = new CustomerDAO();
+        this.employeeDAO = new EmployeeDAO();
+        this.reportDAO = new ReportDAO();
     }
 
 

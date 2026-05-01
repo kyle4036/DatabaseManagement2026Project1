@@ -132,7 +132,7 @@ public class LoginFrame extends JFrame{
                     return;
                     */
 
-                    if(userLoggedin && loginListenr != null){
+                    if(userLoggedin && loginListener != null){
                         custAcc = cDao.getLastVerifiedCustomer();
                         //custAcc = new Customer();
                         loginListener.onLogin();

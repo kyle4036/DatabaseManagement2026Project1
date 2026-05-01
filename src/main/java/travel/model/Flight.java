@@ -4,7 +4,7 @@ import java.time.LocalTime;
 
 public class Flight {
 
-    private int flightNumber;
+    private String flightNumber;
     private String lineID;
     private String departurePortID;
     private String destinationPortID;
@@ -19,7 +19,7 @@ public class Flight {
 
     }
 
-    public Flight(int flightNumber, String lineID, String departurePortID,
+    public Flight(String flightNumber, String lineID, String departurePortID,
             String destinationPortID, LocalTime departureTime,
             LocalTime arrivalTime, String flightType, String daysRunning,
             int seatsTaken, int craftID) {
@@ -36,11 +36,11 @@ public class Flight {
         this.craftID = craftID;
     }
 
-    public int getFlightNumber() {
+    public String getFlightNumber() {
         return flightNumber;
     }
 
-    public void setFlightNumber(int v) {
+    public void setFlightNumber(String v) {
         this.flightNumber = v;
     }
 

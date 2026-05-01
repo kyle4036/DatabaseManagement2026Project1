@@ -14,7 +14,7 @@ public class FlightDAO {
 
     private Connection conn = null;
 
-    public FlightDAO(DBConnection dbc){
+    public FlightDAO(DBConnection dbc) {
         conn = dbc.getConnection();
     }
 
@@ -22,7 +22,7 @@ public class FlightDAO {
     // types our `Flight`
     private Flight mapRow(ResultSet rs) throws SQLException {
         Flight f = new Flight();
-        f.setFlightNumber(Integer.parseInt(rs.getString("flightNumber")));
+        f.setFlightNumber(rs.getString("flightNumber"));
         f.setLineID(rs.getString("lineID"));
         f.setDeparturePortID(rs.getString("departure_portID"));
         f.setDestinationPortID(rs.getString("destination_portID"));

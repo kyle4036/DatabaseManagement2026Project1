@@ -4,17 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import travel.DBConnection;
 import travel.model.Employee;
 
 public class EmployeeDAO {
-
-    private Connection connection = null;
-
-    public EmployeeDAO(DBConnection dbc){
-        connection = dbc.getConnection();
-    }
 
     private Employee mapRow(ResultSet rs) throws SQLException {
         Employee e = new Employee();
@@ -29,38 +25,99 @@ public class EmployeeDAO {
         return e;
     }
 
-    public void insert(Employee e) {
-        String sql = """
-            INSERT INTO Employees
-            (employeeID, firstName, lastName, username, password, role)
-            VALUES (?, ?, ?, ?, ?, ?)
-        """;
+    public List<Employee> findAll() {
+        String sql = "SELECT * FROM Employees";
+        List<Employee> results = new ArrayList<>();
+        try (Connection conn = DBConnection.get();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) results.add(mapRow(rs));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return results;
+    }
 
-        try (PreparedStatement ps = connection.prepareStatement(sql)) {
-
-            ps.setInt(1, e.getEmployeeID());
-            ps.setString(2, e.getFirstName());
-            ps.setString(3, e.getLastName());
-            ps.setString(4, e.getUsername());
-            ps.setString(5, e.getPassword());
-            ps.setString(6, e.getRole());
-
-            ps.executeUpdate();
-
-        } catch (SQLException ex) {
-            throw new RuntimeException(ex);
+    public Employee findByKey(int employeeID) {
+        String sql = "SELECT * FROM Employees WHERE employeeID = ?";
+        try (Connection conn = DBConnection.get();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, employeeID);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next() ? mapRow(rs) : null;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
+<<<<<<< HEAD
     public void delete(int employeeID) {
         String sql = "DELETE FROM Employees WHERE employeeID = ?";
+=======
+    public Employee findByUsername(String username) {
+        String sql = "SELECT * FROM Employees WHERE username = ?";
+        try (Connection conn = DBConnection.get();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, username);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next() ? mapRow(rs) : null;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+>>>>>>> 0a5ef2e (Decouple `DBConnection` class to act as a "factory" pattern. A connection should establish itself and close once finished with a query, not keep one open indefinitely)
 
-        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+    /** Returns the Employee if credentials match, null otherwise. Replaces verifyEmployee. */
+    public Employee findByLogin(String username, String password) {
+        String sql = "SELECT * FROM Employees WHERE username = ? AND password = ?";
+        try (Connection conn = DBConnection.get();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, username);
+            ps.setString(2, password);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next() ? mapRow(rs) : null;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
+<<<<<<< HEAD
             ps.setInt(1, employeeID);
             
-            ps.executeUpdate();
+=======
+    public List<Employee> findByRole(String role) {
+        String sql = "SELECT * FROM Employees WHERE role = ?";
+        List<Employee> results = new ArrayList<>();
+        try (Connection conn = DBConnection.get();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, role);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) results.add(mapRow(rs));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return results;
+    }
 
+    public void insert(Employee e) {
+        String sql = """
+            INSERT INTO Employees
+            (firstName, lastName, username, password, role)
+            VALUES (?, ?, ?, ?, ?)
+        """;
+        try (Connection conn = DBConnection.get();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, e.getFirstName());
+            ps.setString(2, e.getLastName());
+            ps.setString(3, e.getUsername());
+            ps.setString(4, e.getPassword());
+            ps.setString(5, e.getRole());
+>>>>>>> 0a5ef2e (Decouple `DBConnection` class to act as a "factory" pattern. A connection should establish itself and close once finished with a query, not keep one open indefinitely)
+            ps.executeUpdate();
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
@@ -73,37 +130,28 @@ public class EmployeeDAO {
                 password = ?, role = ?
             WHERE employeeID = ?
         """;
-
-        try (PreparedStatement ps = connection.prepareStatement(sql)) {
-
+        try (Connection conn = DBConnection.get();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, e.getFirstName());
             ps.setString(2, e.getLastName());
             ps.setString(3, e.getUsername());
             ps.setString(4, e.getPassword());
             ps.setString(5, e.getRole());
             ps.setInt(6, e.getEmployeeID());
-
             ps.executeUpdate();
-
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
     }
 
-    public boolean verifyEmployee(String username, String password) {
-        String sql = "SELECT 1 FROM Employees WHERE username = ? AND password = ?";
-
-        try (PreparedStatement ps = connection.prepareStatement(sql)) {
-
-            ps.setString(1, username);
-            ps.setString(2, password);
-
-            try (ResultSet rs = ps.executeQuery()) {
-                return rs.next();
-            }
+    public void delete(int employeeID) {
+        String sql = "DELETE FROM Employees WHERE employeeID = ?";
+        try (Connection conn = DBConnection.get();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, employeeID);
+            ps.executeUpdate();
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
     }
-
 }

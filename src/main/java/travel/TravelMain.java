@@ -3,12 +3,16 @@ package travel;
 import travel.ui.LoginFrame;
 
 import javax.swing.*;
+
 import java.util.concurrent.CountDownLatch;
+
+import travel.model.UserAccountType;
 
 public class TravelMain {
 
     JLabel msg;
     private static DBConnection dbc = null;
+    private static LoginFrame lFrame = null;
 
     public static void main(String[] args){
         dbc = new DBConnection();
@@ -20,7 +24,7 @@ public class TravelMain {
 
         CountDownLatch latch = new CountDownLatch(1);
 
-        LoginFrame lFrame = new LoginFrame(dbc);
+        lFrame = new LoginFrame(dbc);
         lFrame.setLoginAccountListener( () ->{
             latch.countDown();
             loginAccountAction();
@@ -35,8 +39,10 @@ public class TravelMain {
 
     }
 
-    public static void loginAccountAction(){
+    public static UserAccountType loginAccountAction(){
         //note -below is only a test function
         LoginFrame.accountListenerTest();
+
+        return lFrame.getUserAccountType();
     }
 }

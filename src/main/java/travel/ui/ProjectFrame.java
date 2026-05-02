@@ -24,6 +24,7 @@ public class ProjectFrame extends JFrame {
     }
 
     public void initialize() throws Exception {
+        /*
         // inputPanel: ------------------------------------
         // -- inputPanel components
         JLabel lbuser = new JLabel("Username");
@@ -138,11 +139,14 @@ public class ProjectFrame extends JFrame {
         mainPanel.add(msg, BorderLayout.CENTER);
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
 
+        */
+
         // -- Add the mainPanel to our JForm and set up basic attributes
-        this.add(mainPanel);
-        this.setTitle("Login Page");
-        this.setSize(500, 300);
-        this.setMinimumSize(new Dimension(300, 200));
+        //this.add(mainPanel);
+        //this.setTitle("Login Page");
+        //this.setSize(500, 300);
+        //this.setMinimumSize(new Dimension(300, 200));
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setVisible(true);
     }

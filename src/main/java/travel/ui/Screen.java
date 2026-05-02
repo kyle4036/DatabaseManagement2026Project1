@@ -11,5 +11,9 @@ public final class Screen {
     public static final String ADMIN_HOME    = "adminHome";
     public static final String REP_HOME      = "repHome";
 
+    public static final String CUSTOMER_SEARCH = "customerSearch";
+    public static final String CUSTOMER_RESERVE = "customerReserve";
+    public static final String CUSTOMER_WAITLIST = "customerWait";
+
     private Screen() {}
 }

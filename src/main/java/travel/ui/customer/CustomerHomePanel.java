@@ -1,13 +1,14 @@
 package travel.ui.customer;
 
-import java.awt.BorderLayout;
-import java.awt.Font;
 import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import java.awt.BorderLayout;
+import java.awt.Font;
 
 import travel.model.Customer;
 import travel.ui.MainFrame;
@@ -42,7 +43,7 @@ public class CustomerHomePanel extends JPanel {
         JButton waitlistBtn     = new JButton("My Waitlist");
         JButton logoutBtn       = new JButton("Logout");
 
-        searchBtn.addActionListener(e -> System.out.println("TODO: search screen"));
+        searchBtn.addActionListener(e -> searchBtnPressed());
         reservationsBtn.addActionListener(e -> System.out.println("TODO: my reservations"));
         waitlistBtn.addActionListener(e -> System.out.println("TODO: waitlist"));
         logoutBtn.addActionListener(e -> onLogout());
@@ -69,5 +70,8 @@ public class CustomerHomePanel extends JPanel {
     private void onLogout() {
         mainFrame.clearSession();
         mainFrame.showScreen(Screen.LOGIN);
+    }
+    private void searchBtnPressed(){
+        mainFrame.showScreen(Screen.CUSTOMER_SEARCH);
     }
 }

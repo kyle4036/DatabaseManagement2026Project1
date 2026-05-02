@@ -5,16 +5,18 @@ public class Aircraft {
     private String lineID;
     private String portID;
     private int capacity;
+    private String model;
 
     public Aircraft() {
         
     }
 
-    public Aircraft(int craftID, String lineID, String portID, int capacity){
+    public Aircraft(int craftID, String lineID, String portID, int capacity, String model){
         this.craftID = craftID;
         this.lineID = lineID;
         this.portID = portID;
         this.capacity= capacity;
+        this.model = model;
     }
 
     public int getCraftID(){
@@ -47,6 +49,14 @@ public class Aircraft {
 
     public void setCapacity(int v){
         this.capacity = v;
+    }
+
+    public String getModel(){
+        return model;
+    }
+
+    public void setModel(String v){
+        this.model = v;
     }
 
 }

@@ -20,15 +20,17 @@ public class AircraftDAO {
         aircraft.setLineID(rs.getString("lineID"));
         aircraft.setPortID(rs.getString("portID"));
         aircraft.setCapacity(rs.getInt("capacity"));
+        aircraft.setModel(rs.getString("model"));
         
+
         return aircraft;
     }
 
     public void insert(Aircraft aircraft){
         String sql = """
             INSERT INTO Aircrafts
-            (craftID, lineID, portID, capacity)
-            VALUES (?, ?, ?, ?)
+            (craftID, lineID, portID, capacity, model)
+            VALUES (?, ?, ?, ?, ?)
         """;
 
         try (PreparedStatement ps = connection.prepareStatement(sql)){
@@ -37,6 +39,7 @@ public class AircraftDAO {
             ps.setString(2, aircraft.getLineID());
             ps.setString(3, aircraft.getPortID());
             ps.setInt(4, aircraft.getCapacity());
+            ps.setString(5, aircraft.getModel());
 
             ps.executeUpdate();
 
@@ -62,7 +65,7 @@ public class AircraftDAO {
     public void update(Aircraft aircraft){
         String sql = """
             UPDATE Aircrafts
-            SET lineID = ?, portID = ?, capacity = ?
+            SET lineID = ?, portID = ?, capacity = ?, model = ?
             WHERE craftID = ?
         """;
 
@@ -71,7 +74,8 @@ public class AircraftDAO {
             ps.setString(1, aircraft.getLineID());
             ps.setString(2, aircraft.getPortID());
             ps.setInt(3, aircraft.getCapacity());
-            ps.setInt(4, aircraft.getCraftID());
+            ps.setString(4, aircraft.getModel());
+            ps.setInt(5, aircraft.getCraftID());
 
             ps.executeUpdate();
 

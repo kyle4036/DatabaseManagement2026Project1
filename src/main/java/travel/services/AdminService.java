@@ -1,5 +1,6 @@
 package travel.services;
 
+import travel.DBConnection;
 import travel.dao.*;
 import travel.model.*;
 
@@ -11,10 +12,10 @@ public class AdminService {
     private final EmployeeDAO employeeDAO;
     private final ReportDAO reportDAO;
 
-    public AdminService() {
-        this.customerDAO = new CustomerDAO();
-        this.employeeDAO = new EmployeeDAO();
-        this.reportDAO = new ReportDAO();
+    public AdminService(DBConnection dbc) {
+        this.customerDAO = new CustomerDAO(dbc);
+        this.employeeDAO = new EmployeeDAO(dbc);
+        this.reportDAO = new ReportDAO(dbc);
     }
 
 
@@ -108,7 +109,7 @@ public class AdminService {
         if (customerID <= 0) {
             throw new IllegalArgumentException("Invalid customer ID");
         }
-        return reportDAO.getReservationsByCustomerName(name);
+        return reportDAO.getReservationsByCustomerNameAndID(name, customerID);
     }
 
     public RevenueSummaryRow revenueSummaryByCustomer(int customerID) {

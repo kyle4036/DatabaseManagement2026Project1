@@ -46,19 +46,26 @@
         </profile>
 
         <profile>
-            <id>DBSetup</id>
-            <properties>
-                <exec.mainClass>travel.DBSetup</exec.mainClass>
-            </properties>
-        </profile>
-
-        <profile>
             <id>DBConnection</id>
             <properties>
                 <exec.mainClass>travel.DBConnection</exec.mainClass>
             </properties>
         </profile>
 
+        <!--Graphical point-->
+        <profile>
+            <id>ProjectFrame</id>
+            <properties>
+                <exec.mainClass>travel.ui.ProjectFrame</exec.mainClass>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>LoginFrame</id>
+            <properties>
+                <exec.mainClass>travel.ui.LoginFrame</exec.mainClass>
+            </properties>
+        </profile>
 
         <!--Service point-->
         <profile>

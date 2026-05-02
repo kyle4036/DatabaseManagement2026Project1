@@ -20,6 +20,7 @@ public class CustomerDAO {
 
     private Customer mapRow(ResultSet rs) throws SQLException {
         Customer c = new Customer();
+        
         c.setCustomerID(rs.getInt("customerID"));
         c.setEmail(rs.getString("email"));
         c.setFirstName(rs.getString("firstName"));
@@ -27,42 +28,42 @@ public class CustomerDAO {
         c.setPassword(rs.getString("password"));
         c.setPhoneNumber(rs.getString("phoneNumber"));
         c.setUsername(rs.getString("username"));
+        
         return c;
     }
 
-
-
     public void insert(Customer c) {
-          String sql = """
-                INSERT INTO Customers 
-                (customerID, firstName, lastName, username, password, email, phoneNumber)
-                VALUES (?, ?, ?, ?, ?, ?, ?)
+        String sql = """
+            INSERT INTO Customers 
+            (customerID, firstName, lastName, username, password, email, phoneNumber)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
         """;
-            try (PreparedStatement ps = connection.prepareStatement(sql)) {
 
-                ps.setInt(1, c.getCustomerID());
-                ps.setString(2, c.getFirstName());
-                ps.setString(3, c.getLastName());
-                ps.setString(4, c.getUsername());
-                ps.setString(5, c.getPassword());
-                ps.setString(6, c.getEmail());
-                ps.setString(7, c.getPhoneNumber());
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
 
-                ps.executeUpdate(); 
+            ps.setInt(1, c.getCustomerID());
+            ps.setString(2, c.getFirstName());
+            ps.setString(3, c.getLastName());
+            ps.setString(4, c.getUsername());
+            ps.setString(5, c.getPassword());
+            ps.setString(6, c.getEmail());
+            ps.setString(7, c.getPhoneNumber());
+
+            ps.executeUpdate(); 
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     
-    public void delete(int id) {
+    public void delete(int customerID) {
         String sql =  "DELETE FROM Customers C WHERE C.customerID = ?";
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
 
-            ps.setInt(1, id);
+            ps.setInt(1, customerID);
+            
             ps.executeUpdate();
 
         } catch (SQLException e) {

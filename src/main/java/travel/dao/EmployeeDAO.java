@@ -18,12 +18,14 @@ public class EmployeeDAO {
 
     private Employee mapRow(ResultSet rs) throws SQLException {
         Employee e = new Employee();
+        
         e.setEmployeeID(rs.getInt("employeeID"));
         e.setFirstName(rs.getString("firstName"));
         e.setLastName(rs.getString("lastName"));
         e.setUsername(rs.getString("username"));
         e.setPassword(rs.getString("password"));
         e.setRole(rs.getString("role"));
+        
         return e;
     }
 
@@ -50,12 +52,13 @@ public class EmployeeDAO {
         }
     }
 
-    public void delete(int id) {
+    public void delete(int employeeID) {
         String sql = "DELETE FROM Employees WHERE employeeID = ?";
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
 
-            ps.setInt(1, id);
+            ps.setInt(1, employeeID);
+            
             ps.executeUpdate();
 
         } catch (SQLException ex) {

@@ -52,6 +52,13 @@
             </properties>
         </profile>
 
+        <profile>
+            <id>DBSetup</id>
+            <properties>
+                <exec.mainClass>travel.DBSetup</exec.mainClass>
+            </properties>
+        </profile>
+
         <!--Graphical point-->
         <profile>
             <id>ProjectFrame</id>

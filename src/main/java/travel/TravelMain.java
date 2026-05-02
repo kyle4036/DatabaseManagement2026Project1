@@ -1,42 +1,16 @@
 package travel;
 
-import travel.ui.LoginFrame;
-
-import javax.swing.*;
-import java.util.concurrent.CountDownLatch;
+import travel.ui.MainFrame;
+import travel.DBSetup;
 
 public class TravelMain {
 
-    JLabel msg;
-    private static DBConnection dbc = null;
-
-    public static void main(String[] args){
-        dbc = new DBConnection();
-        try{
-            dbc.initialize();
-        } catch (Exception e) {
-            e.printStackTrace();
+    public static void main(String[] args) {
+        for (String a : args) {
+            if (a.equals("--reset")) DBSetup.resetAndSeed();
         }
 
-        CountDownLatch latch = new CountDownLatch(1);
-
-        LoginFrame lFrame = new LoginFrame(dbc);
-        lFrame.setLoginAccountListener( () ->{
-            latch.countDown();
-            loginAccountAction();
-        });
-        lFrame.initialize();
-        try{
-            latch.await();
-        }catch(InterruptedException e){
-            e.printStackTrace();
-        }
-
-
-    }
-
-    public static void loginAccountAction(){
-        //note -below is only a test function
-        LoginFrame.accountListenerTest();
+        MainFrame mFrame = new MainFrame();
+        mFrame.setVisible(true);
     }
 }

@@ -14,14 +14,6 @@ import travel.model.Flight;
 
 public class FlightDAO {
 
-    private Connection connection = null;
-
-    public FlightDAO(DBConnection dbc) {
-        connection = dbc.getConnection();
-    }
-
-    // Invisible Helper method that converts JDBC output from type ResultSet to
-    // types our `Flight`
     private Flight mapRow(ResultSet rs) throws SQLException {
         Flight f = new Flight();
         
@@ -39,15 +31,94 @@ public class FlightDAO {
         return f;
     }
 
-    public void insert(Flight f){
+
+    
+    
+    public List<Flight> findAll() {
+        String sql = "SELECT * FROM Flights";
+        List<Flight> results = new ArrayList<>();
+        try (Connection conn = DBConnection.get();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) results.add(mapRow(rs));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return results;
+    }
+
+    public Flight findByKey(String flightNumber, String lineID) {
+        String sql = "SELECT * FROM Flights WHERE flightNumber = ? AND lineID = ?";
+        try (Connection conn = DBConnection.get();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, flightNumber);
+            ps.setString(2, lineID);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next() ? mapRow(rs) : null;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<Flight> findByRoute(String fromPortID, String toPortID) {
+        String sql = "SELECT * FROM Flights "
+                   + "WHERE departure_portID = ? AND destination_portID = ?";
+        List<Flight> results = new ArrayList<>();
+        try (Connection conn = DBConnection.get();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, fromPortID);
+            ps.setString(2, toPortID);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) results.add(mapRow(rs));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return results;
+    }
+
+    public List<Flight> findByAirport(String portID) {
+        String sql = "SELECT * FROM Flights "
+                   + "WHERE departure_portID = ? OR destination_portID = ?";
+        List<Flight> results = new ArrayList<>();
+        try (Connection conn = DBConnection.get();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, portID);
+            ps.setString(2, portID);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) results.add(mapRow(rs));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return results;
+    }
+
+    public List<Flight> findByAirline(String lineID) {
+        String sql = "SELECT * FROM Flights WHERE lineID = ?";
+        List<Flight> results = new ArrayList<>();
+        try (Connection conn = DBConnection.get();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, lineID);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) results.add(mapRow(rs));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return results;
+    }
+
+    public void insert(Flight f) {
         String sql = """
             INSERT INTO Flights
-            (flightNumber, lineID, departure_portID, destination_portID, departureTime, arrivalTime, flightType, daysRunning, seatsTaken, craftID)
+            (flightNumber, lineID, departure_portID, destination_portID,
+             departureTime, arrivalTime, flightType, daysRunning, seatsTaken, craftID)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """;
-
-        try (PreparedStatement ps = connection.prepareStatement(sql)){
-
+        try (Connection conn = DBConnection.get();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, f.getFlightNumber());
             ps.setString(2, f.getLineID());
             ps.setString(3, f.getDeparturePortID());
@@ -58,38 +129,22 @@ public class FlightDAO {
             ps.setString(8, f.getDaysRunning());
             ps.setInt(9, f.getSeatsTaken());
             ps.setInt(10, f.getCraftID());
-
             ps.executeUpdate();
-
-        } catch (SQLException ex){
-            throw new RuntimeException(ex);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
-    public void delete(String flightNumber, String lineID){
-        String sql = "DELETE FROM Flights WHERE flightNumber = ? AND lineID = ?";
-
-        try (PreparedStatement ps = connection.prepareStatement(sql)){
-
-            ps.setString(1, flightNumber);
-            ps.setString(2, lineID);
-            
-            ps.executeUpdate();
-
-        } catch (SQLException ex){
-            throw new RuntimeException(ex);
-        }
-    }
-
-    public void update(Flight f){
+    public void update(Flight f) {
         String sql = """
-            UPDATE Flights
-            SET departure_portID = ?, destination_portID = ?, departureTime = ?, arrivalTime = ?, flightType = ?, daysRunning = ?, seatsTaken = ?, craftID = ?
+            UPDATE Flights SET
+                departure_portID = ?, destination_portID = ?,
+                departureTime = ?, arrivalTime = ?,
+                flightType = ?, daysRunning = ?, seatsTaken = ?, craftID = ?
             WHERE flightNumber = ? AND lineID = ?
         """;
-
-        try (PreparedStatement ps = connection.prepareStatement(sql)){
-
+        try (Connection conn = DBConnection.get();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, f.getDeparturePortID());
             ps.setString(2, f.getDestinationPortID());
             ps.setTime(3, Time.valueOf(f.getDepartureTime()));
@@ -100,68 +155,35 @@ public class FlightDAO {
             ps.setInt(8, f.getCraftID());
             ps.setString(9, f.getFlightNumber());
             ps.setString(10, f.getLineID());
-
             ps.executeUpdate();
-
-        } catch (SQLException ex){
-            throw new RuntimeException(ex);
-        }
-    }
-    
-    public List<Flight> findAll() {
-        String sql = "SELECT * FROM Flights";
-        
-        ArrayList<Flight> results = new ArrayList<>();
-        
-        try (PreparedStatement ps = connection.prepareStatement(sql);
-                
-            ResultSet rs = ps.executeQuery()) {
-
-            while (rs.next())
-                results.add(mapRow(rs));
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return results;
     }
 
-    public Flight findByKey(String flightNumber, String lineID) throws SQLException {
-        String sql = "SELECT * FROM Flights WHERE flightNumber = ? AND lineID = ?";
-        
-        try (PreparedStatement ps = connection.prepareStatement(sql)){
+    // USE THIS FOR BOOKINGSERVICE TO UPDATE `seatsTaken`
+    public void updateSeatsTaken(String flightNumber, String lineID, int newCount) {
+        String sql = "UPDATE Flights SET seatsTaken = ? WHERE flightNumber = ? AND lineID = ?";
+        try (Connection conn = DBConnection.get();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, newCount);
+            ps.setString(2, flightNumber);
+            ps.setString(3, lineID);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
+    public void delete(String flightNumber, String lineID) {
+        String sql = "DELETE FROM Flights WHERE flightNumber = ? AND lineID = ?";
+        try (Connection conn = DBConnection.get();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, flightNumber);
-            ps.setString(2,lineID);
-
-            try (ResultSet rs = ps.executeQuery()){
-                return mapRow(rs);
-            }
-        } catch (SQLException e){
-            throw new RuntimeException(e);
-        }
-    }
-
-    public List<Flight> findByRoute(String from, String to) {
-        String sql = "SELECT * FROM Flights WHERE departure_portID = ? AND destination_portID = ?";
-        
-        ArrayList<Flight> results = new ArrayList<>();
-
-        try (PreparedStatement ps = connection.prepareStatement(sql)) {
-
-            ps.setString(1, from);
-            ps.setString(2, to);
-
-            try (ResultSet rs = ps.executeQuery()){
-                while (rs.next()){
-                    results.add(mapRow(rs));
-                }
-            }
+            ps.setString(2, lineID);
+            ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-        return results;
     }
-
 }

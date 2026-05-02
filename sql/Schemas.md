@@ -8,7 +8,9 @@ Airlines(
 
 Airports(
     portID: char(3),
-    name: char(20),
+    name: char(50),
+    city: char(50),
+    country: char(50),
     Primary key(portID)
 )
 
@@ -17,6 +19,7 @@ Aircrafts(
     lineID: char(2),
     portID: char(3),
     capacity: int,
+    model: char(50),
     Foreign key(lineID) references Airlines,
     Foreign key(portID) references Airports,
     Primary key (craftID)

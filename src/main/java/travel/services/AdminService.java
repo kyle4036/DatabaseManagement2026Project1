@@ -91,7 +91,7 @@ public class AdminService {
         }
     }
 
-    public List<ReservationReportRow> reservationsByFlightNumber(String flightNumber, String lineID) {
+    public List<Reservation> reservationsByFlightNumber(String flightNumber, String lineID) {
         if (flightNumber == null || flightNumber.isEmpty()) {
             throw new IllegalArgumentException("Flight number cannot be empty");
         }
@@ -101,7 +101,7 @@ public class AdminService {
         return reportDAO.getReservationsByFlightNumber(flightNumber, lineID);
     }
 
-    public List<ReservationReportRow> reservationsByCustomerNameAndID(String name, int customerID) {
+    public List<Reservation> reservationsByCustomerNameAndID(String name, int customerID) {
         if (name == null || name.isEmpty()) {
             throw new IllegalArgumentException("Customer name cannot be empty");
         }

@@ -41,7 +41,7 @@ public class CustomerDAO {
     public Customer findByKey(int customerID) {
         String sql = "SELECT * FROM Customers WHERE customerID = ?";
         try (Connection conn = DBConnection.get();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+            PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, customerID);
             try (ResultSet rs = ps.executeQuery()) {
                 return rs.next() ? mapRow(rs) : null;

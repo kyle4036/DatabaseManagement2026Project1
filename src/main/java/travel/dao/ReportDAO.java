@@ -17,7 +17,6 @@ public class ReportDAO {
 
     // wip
     private Connection conn = null;
-
     
     private ReservationReportRow mapRowRes(ResultSet rs) throws SQLException {
         ReservationReportRow r = new ReservationReportRow();

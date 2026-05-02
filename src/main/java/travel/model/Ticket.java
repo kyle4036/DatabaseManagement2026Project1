@@ -1,5 +1,6 @@
 package travel.model;
 
+import java.math.BigDecimal;
 import java.time.LocalTime;
 
 public class Ticket {
@@ -7,8 +8,8 @@ public class Ticket {
     private int ticketNumber;
     private int customerID;
     private LocalTime purchaseTime; // Question: Would we have to modify this for Java Swing?
-    private float bookingFee;
-    private float fareCost;
+    private BigDecimal bookingFee;
+    private BigDecimal fareCost;
     private String tripType;
     private String status;
 
@@ -16,7 +17,7 @@ public class Ticket {
 
     }
 
-    public Ticket(int ticketNumber, int customerID, LocalTime purchaseTime, float bookingFee, float fareCost, String tripType, String status){
+    public Ticket(int ticketNumber, int customerID, LocalTime purchaseTime, BigDecimal bookingFee, BigDecimal fareCost, String tripType, String status){
         this.ticketNumber = ticketNumber;
         this.customerID = customerID;
         this.purchaseTime = purchaseTime;
@@ -50,19 +51,19 @@ public class Ticket {
         this.purchaseTime = v;
     }
 
-    public float getBookingFee(){
+    public BigDecimal getBookingFee(){
         return bookingFee;
     }
 
-    public void setBookingFee(float v){
+    public void setBookingFee(BigDecimal v){
         this.bookingFee = v;
     }
 
-    public float getFareCost(){
+    public BigDecimal getFareCost(){
         return fareCost;
     }
 
-    public void setFareCost(float v){
+    public void setFareCost(BigDecimal v){
         this.fareCost = v;
     }
 

@@ -9,8 +9,6 @@ public class AircraftDAO {
   
     private Connection connection = null;
 
-    
-
     private Aircraft mapRow(ResultSet rs) throws SQLException {
         Aircraft aircraft = new Aircraft();
         

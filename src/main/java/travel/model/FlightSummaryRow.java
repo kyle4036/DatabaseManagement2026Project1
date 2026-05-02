@@ -7,6 +7,7 @@ public class FlightSummaryRow {
     private String destinationPortID;
     private String flightType;
     private int reservationCount;
+    
     public FlightSummaryRow() {
 
     }

@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import travel.DBConnection;
-import travel.model.Aircraft;
 import travel.model.Flight;
 
 public class FlightDAO {
@@ -30,9 +29,6 @@ public class FlightDAO {
         
         return f;
     }
-
-
-    
     
     public List<Flight> findAll() {
         String sql = "SELECT * FROM Flights";
@@ -61,37 +57,46 @@ public class FlightDAO {
         }
     }
 
-    public List<Flight> findByRoute(String fromPortID, String toPortID) {
+    public List<Flight> findByRoute(String fromPortID, String toPortID, String daysRunning) {
         String sql = "SELECT * FROM Flights "
-                   + "WHERE departure_portID = ? AND destination_portID = ?";
+                   + "WHERE departure_portID = ?, destination_portID = ?, daysRunning = ?";
+        
         List<Flight> results = new ArrayList<>();
+        
         try (Connection conn = DBConnection.get();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, fromPortID);
             ps.setString(2, toPortID);
+            ps.setString(3, daysRunning);
+
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) results.add(mapRow(rs));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        
         return results;
     }
 
     public List<Flight> findByAirport(String portID) {
         String sql = "SELECT * FROM Flights "
                    + "WHERE departure_portID = ? OR destination_portID = ?";
+        
         List<Flight> results = new ArrayList<>();
+        
         try (Connection conn = DBConnection.get();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, portID);
             ps.setString(2, portID);
+            
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) results.add(mapRow(rs));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
         return results;
     }
 

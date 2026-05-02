@@ -4,9 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
+import java.math.BigDecimal;
+import java.sql.Timestamp;
 
 import travel.DBConnection;
 import travel.model.Customer;
@@ -19,7 +20,7 @@ public class TicketDAO {
         
         t.setTicketNumber(rs.getInt("ticketNumber"));
         t.setCustomerID(rs.getInt("customerID"));
-        t.setPurchaseTime(rs.getTime("purchaseTime").toLocalTime());
+        t.setPurchaseTime(rs.getTimestamp("purchaseTime"));
         t.setBookingFee(rs.getBigDecimal("bookingFee"));
         t.setFareCost(rs.getBigDecimal("fareCost"));
         t.setTripType(rs.getString("tripType"));
@@ -74,7 +75,7 @@ public class TicketDAO {
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, t.getTicketNumber());
             ps.setInt(2, t.getCustomerID());
-            ps.setTime(3, Time.valueOf(t.getPurchaseTime()));
+            ps.setTimestamp(3, t.getPurchaseTime());
             ps.setBigDecimal(4, t.getBookingFee());
             ps.setBigDecimal(5, t.getFareCost());
             ps.setString(6, t.getTripType());
@@ -100,7 +101,7 @@ public class TicketDAO {
             PreparedStatement ps = conn.prepareStatement(sql)) {
             
             ps.setInt(1, t.getCustomerID());
-            ps.setTime(2, Time.valueOf(t.getPurchaseTime()));
+            ps.setTimestamp(2, t.getPurchaseTime());
             ps.setBigDecimal(3, t.getBookingFee());
             ps.setBigDecimal(4, t.getFareCost());
             ps.setString(5, t.getTripType());
@@ -148,5 +149,20 @@ public class TicketDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static void main(String[] args) {
+        TicketDAO td = new TicketDAO();
+        java.util.Date utilDate = new java.util.Date();
+        Timestamp sq = new Timestamp(utilDate.getTime());
+        td.insert(new Ticket(
+            5, 
+            1, 
+            sq, 
+            new BigDecimal("19.99"),
+            new BigDecimal("19.99"),
+            "One-way",
+            "1"));
+        System.out.println("success maybe");
     }
 }

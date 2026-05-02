@@ -1,13 +1,13 @@
 package travel.model;
 
 import java.math.BigDecimal;
-import java.time.LocalTime;
+import java.sql.Timestamp;
 
 public class Ticket {
 
     private int ticketNumber;
     private int customerID;
-    private LocalTime purchaseTime; // Question: Would we have to modify this for Java Swing?
+    private Timestamp purchaseTime; // Question: Would we have to modify this for Java Swing?
     private BigDecimal bookingFee;
     private BigDecimal fareCost;
     private String tripType;
@@ -17,7 +17,7 @@ public class Ticket {
 
     }
 
-    public Ticket(int ticketNumber, int customerID, LocalTime purchaseTime, BigDecimal bookingFee, BigDecimal fareCost, String tripType, String status){
+    public Ticket(int ticketNumber, int customerID, Timestamp purchaseTime, BigDecimal bookingFee, BigDecimal fareCost, String tripType, String status){
         this.ticketNumber = ticketNumber;
         this.customerID = customerID;
         this.purchaseTime = purchaseTime;
@@ -43,11 +43,11 @@ public class Ticket {
         this.customerID = v;
     }
 
-    public LocalTime getPurchaseTime(){
+    public Timestamp getPurchaseTime(){
         return purchaseTime;
     }
 
-    public void setPurchaseTime(LocalTime v){
+    public void setPurchaseTime(Timestamp v){
         this.purchaseTime = v;
     }
 

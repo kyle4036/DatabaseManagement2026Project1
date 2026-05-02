@@ -110,9 +110,12 @@ public class FlightDAO {
     
     public List<Flight> findAll() {
         String sql = "SELECT * FROM Flights";
+        
         ArrayList<Flight> results = new ArrayList<>();
+        
         try (PreparedStatement ps = connection.prepareStatement(sql);
-                ResultSet rs = ps.executeQuery()) {
+                
+            ResultSet rs = ps.executeQuery()) {
 
             while (rs.next())
                 results.add(mapRow(rs));
@@ -123,12 +126,42 @@ public class FlightDAO {
         return results;
     }
 
-    public Flight findByKey(String flightNumber, String lineID) {
-        return new Flight();
+    public Flight findByKey(String flightNumber, String lineID) throws SQLException {
+        String sql = "SELECT * FROM Flights WHERE flightNumber = ? AND lineID = ?";
+        
+        try (PreparedStatement ps = connection.prepareStatement(sql)){
+
+            ps.setString(1, flightNumber);
+            ps.setString(2,lineID);
+
+            try (ResultSet rs = ps.executeQuery()){
+                return mapRow(rs);
+            }
+        } catch (SQLException e){
+            throw new RuntimeException(e);
+        }
     }
 
     public List<Flight> findByRoute(String from, String to) {
-        return new ArrayList<>();
+        String sql = "SELECT * FROM Flights WHERE departure_portID = ? AND destination_portID = ?";
+        
+        ArrayList<Flight> results = new ArrayList<>();
+
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+
+            ps.setString(1, from);
+            ps.setString(2, to);
+
+            try (ResultSet rs = ps.executeQuery()){
+                while (rs.next()){
+                    results.add(mapRow(rs));
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return results;
     }
 
 }

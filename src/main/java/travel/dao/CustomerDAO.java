@@ -111,8 +111,11 @@ public class CustomerDAO {
             ps.setString(2, password);
 
             try (ResultSet rs = ps.executeQuery()) {
-                custAcc = mapRow(rs);
-                return rs.next();
+                if (rs.next()){
+                    custAcc = mapRow(rs);
+                    return true;
+                }
+                return false;
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

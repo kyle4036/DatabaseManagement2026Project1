@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import org.apache.commons.dbutils;
 
 
 public class DBConnection {
@@ -24,13 +25,32 @@ public class DBConnection {
             e.printStackTrace();
             System.exit(0);
         }
+        DbUtils.closeQuietly(con);
     }
 
     public Connection getConnection(){
-        return con;
+        Connection conTemp;
+        try{
+            conTemp = get();
+        }catch(SQLException e){
+            System.out.println("Unable to create a connection to the database");
+            e.printStackTrace();
+            System.exit(0);
+        }
+        return conTemp;
     }
     public Statement getStatement(){
-        return stmt;
+        Connection conTemp;
+        Statement stmtTemp;
+        try{
+            conTemp = get();
+            stmtTemp = conTemp.createStatement();
+        }catch(SQLException e){
+            System.out.println("Unable to create a connection to the database");
+            e.printStackTrace();
+            System.exit(0);
+        }
+        return stmtTemp;
     }
 
     public static void main(String[] args) {

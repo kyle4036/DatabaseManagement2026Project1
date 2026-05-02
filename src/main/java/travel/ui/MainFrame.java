@@ -7,6 +7,10 @@ import java.awt.Dimension;
 
 import travel.model.Customer;
 import travel.model.Employee;
+import travel.ui.admin.AdminHomePanel;
+import travel.ui.rep.RepHomePanel;
+import travel.ui.customer.CustomerHomePanel;
+
 
 /**
  * The single window for the entire app. Holds a CardLayout container with

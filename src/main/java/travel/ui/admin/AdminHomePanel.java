@@ -1,4 +1,4 @@
-package travel.ui;
+package travel.ui.admin;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
@@ -10,6 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import travel.model.Employee;
+import travel.ui.MainFrame;
+import travel.ui.Screen;
 
 public class AdminHomePanel extends JPanel {
 

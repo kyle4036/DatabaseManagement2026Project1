@@ -14,17 +14,17 @@ public class AircraftDAO {
     }
 
     private Aircraft mapRow(ResultSet rs) throws SQLException {
-        Aircraft a = new Aircraft();
+        Aircraft aircraft = new Aircraft();
         
-        a.setCraftID(rs.getInt("craftID"));
-        a.setLineID(rs.getString("lineID"));
-        a.setPortID(rs.getString("portID"));
-        a.setCapacity(rs.getInt("capacity"));
+        aircraft.setCraftID(rs.getInt("craftID"));
+        aircraft.setLineID(rs.getString("lineID"));
+        aircraft.setPortID(rs.getString("portID"));
+        aircraft.setCapacity(rs.getInt("capacity"));
         
-        return a;
+        return aircraft;
     }
 
-    public void insert(Aircraft a){
+    public void insert(Aircraft aircraft){
         String sql = """
             INSERT INTO Aircrafts
             (craftID, lineID, portID, capacity)
@@ -33,10 +33,10 @@ public class AircraftDAO {
 
         try (PreparedStatement ps = connection.prepareStatement(sql)){
 
-            ps.setInt(1, a.getCraftID());
-            ps.setString(2, a.getLineID());
-            ps.setString(3, a.getPortID());
-            ps.setInt(4, a.getCapacity());
+            ps.setInt(1, aircraft.getCraftID());
+            ps.setString(2, aircraft.getLineID());
+            ps.setString(3, aircraft.getPortID());
+            ps.setInt(4, aircraft.getCapacity());
 
             ps.executeUpdate();
 
@@ -59,19 +59,19 @@ public class AircraftDAO {
         }
     }
 
-    public void update(Aircraft a){
+    public void update(Aircraft aircraft){
         String sql = """
             UPDATE Aircrafts
             SET lineID = ?, portID = ?, capacity = ?
-            WHERE craftID = ?a
+            WHERE craftID = ?
         """;
 
         try (PreparedStatement ps = connection.prepareStatement(sql)){
 
-            ps.setString(1, a.getLineID());
-            ps.setString(2, a.getPortID());
-            ps.setInt(3, a.getCapacity());
-            ps.setInt(4, a.getCraftID());
+            ps.setString(1, aircraft.getLineID());
+            ps.setString(2, aircraft.getPortID());
+            ps.setInt(3, aircraft.getCapacity());
+            ps.setInt(4, aircraft.getCraftID());
 
             ps.executeUpdate();
 

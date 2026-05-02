@@ -6,7 +6,7 @@ public class FlightSummaryRow {
     private String originPortID;
     private String destinationPortID;
     private String flightType;
-
+    private int reservationCount;
     public FlightSummaryRow() {
 
     }
@@ -45,6 +45,14 @@ public class FlightSummaryRow {
 
     public String getDestinationPortID() {
         return destinationPortID;
+    }
+
+    public int getReservationCount() {
+        return reservationCount;
+    }
+
+    public void setReservationCount(int reservationCount) {
+        this.reservationCount = reservationCount;
     }
 
     public void setDestinationPortID(String destinationPortID) {

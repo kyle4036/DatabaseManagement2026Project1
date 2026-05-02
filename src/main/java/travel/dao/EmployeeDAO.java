@@ -62,7 +62,6 @@ public class EmployeeDAO {
         }
     }
 
-    /** Returns the Employee if credentials match, null otherwise. Replaces verifyEmployee. */
     public Employee findByLogin(String username, String password) {
         String sql = "SELECT * FROM Employees WHERE username = ? AND password = ?";
         try (Connection conn = DBConnection.get();

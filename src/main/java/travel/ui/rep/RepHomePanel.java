@@ -1,4 +1,4 @@
-package travel.ui;
+package travel.ui.rep;
 
 
 import java.awt.BorderLayout;
@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import travel.model.Employee;
+import travel.ui.MainFrame;
+import travel.ui.Screen;
 
 public class RepHomePanel extends JPanel {
 

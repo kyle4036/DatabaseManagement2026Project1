@@ -1,15 +1,16 @@
 package travel.ui;
 
-import javax.swing.*;
-
 import java.awt.CardLayout;
 import java.awt.Dimension;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import travel.model.Customer;
 import travel.model.Employee;
 import travel.ui.admin.AdminHomePanel;
-import travel.ui.rep.RepHomePanel;
 import travel.ui.customer.CustomerHomePanel;
+import travel.ui.rep.RepHomePanel;
 
 
 /**

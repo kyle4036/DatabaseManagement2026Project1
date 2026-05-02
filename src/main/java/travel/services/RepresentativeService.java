@@ -3,10 +3,15 @@ package travel.services;
 import travel.dao.AircraftDAO;
 import travel.dao.FlightDAO;
 import travel.dao.AirportDAO;
+import travel.dao.FlightTicketDAO;
+import travel.dao.TicketDAO;
 
 import travel.model.Aircraft;
 import travel.model.Flight;
 import travel.model.Airport;
+import travel.model.FlightTicket;
+import travel.model.Customer;
+import travel.model.Ticket;
 import java.util.List;
 
 
@@ -14,11 +19,16 @@ public class RepresentativeService {
     private final AircraftDAO aircraftDAO;
     private final FlightDAO flightDAO;
     private final AirportDAO airportDAO;
+    private final TicketDAO ticketDAO;
+    private final FlightTicketDAO flightTicketDAO;
+    
 
     public RepresentativeService(){
         this.aircraftDAO = new AircraftDAO();
         this.flightDAO = new FlightDAO();
         this.airportDAO = new AirportDAO();
+        this.ticketDAO = new TicketDAO();
+        this.flightTicketDAO = new FlightTicketDAO();
     }
 
     public void addAircraft(Aircraft aircraft) {

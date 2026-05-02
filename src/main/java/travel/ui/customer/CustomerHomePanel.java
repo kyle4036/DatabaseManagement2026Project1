@@ -1,5 +1,7 @@
-package travel.ui;
+package travel.ui.customer;
 
+import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
@@ -7,10 +9,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import java.awt.BorderLayout;
-import java.awt.Font;
-
 import travel.model.Customer;
+import travel.ui.MainFrame;
+import travel.ui.Screen;
 
 /**
  * Landing page after a customer logs in

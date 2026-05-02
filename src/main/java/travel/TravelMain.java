@@ -1,7 +1,7 @@
 package travel;
 
-import travel.ui.MainFrame;
 import travel.DBSetup;
+import travel.ui.MainFrame;
 
 public class TravelMain {
 

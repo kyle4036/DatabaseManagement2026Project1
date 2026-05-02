@@ -3,66 +3,22 @@ package travel;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
-import org.apache.commons.dbutils;
-
 
 public class DBConnection {
+    private static final String URL = "jdbc:mysql://localhost:3306/testproject";
+    private static final String USER = "testuser";
+    private static final String PASS = "abc123";
 
-    private Connection con = null;
-    private Statement stmt = null;
-
-    private Connection get() throws SQLException {
-        return DriverManager.getConnection("jdbc:mysql://localhost:3306/testproject", "testuser", "abc123");
-    }
-
-    public void initialize() throws SQLException{
-        try{
-            con = get();
-            stmt = con.createStatement();
-        }catch(SQLException e) {
-            System.out.println("Unable to create a connection to the database");
-            e.printStackTrace();
-            System.exit(0);
-        }
-        DbUtils.closeQuietly(con);
-    }
-
-    public Connection getConnection(){
-        Connection conTemp;
-        try{
-            conTemp = get();
-        }catch(SQLException e){
-            System.out.println("Unable to create a connection to the database");
-            e.printStackTrace();
-            System.exit(0);
-        }
-        return conTemp;
-    }
-    public Statement getStatement(){
-        Connection conTemp;
-        Statement stmtTemp;
-        try{
-            conTemp = get();
-            stmtTemp = conTemp.createStatement();
-        }catch(SQLException e){
-            System.out.println("Unable to create a connection to the database");
-            e.printStackTrace();
-            System.exit(0);
-        }
-        return stmtTemp;
+    public static Connection get() throws SQLException {
+        return DriverManager.getConnection(URL, USER, PASS);
     }
 
     public static void main(String[] args) {
-        DBConnection dbc = new DBConnection();
-
-        try{
-            dbc.initialize();
-            Connection conn = dbc.getConnection();
-            System.out.println("Connected: " + conn.getMetaData().getDatabaseProductVersion());
+        try (Connection conn = DBConnection.get()) {
+            System.out.println("Connected established to " + conn.getMetaData().getDatabaseProductName()
+                    + " with version " + conn.getMetaData().getDatabaseProductVersion());
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
     }
 }

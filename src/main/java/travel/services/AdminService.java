@@ -1,6 +1,5 @@
 package travel.services;
 
-import travel.DBConnection;
 import travel.dao.*;
 import travel.model.*;
 
@@ -109,7 +108,7 @@ public class AdminService {
         if (customerID <= 0) {
             throw new IllegalArgumentException("Invalid customer ID");
         }
-        return reportDAO.getReservationsByCustomerNameAndID(name, customerID);
+        return reportDAO.getReservationsByCustomerName(name);
     }
 
     public RevenueSummaryRow revenueSummaryByCustomer(int customerID) {

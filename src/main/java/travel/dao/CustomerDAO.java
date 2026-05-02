@@ -64,16 +64,13 @@ public class CustomerDAO {
         }
     }
 
-    public boolean verifyCustomer(String username, String password) {
+    public Customer findByLogin(String username, String password) {
         String sql = "SELECT * FROM Customers WHERE username = ? AND password = ?";
         try (Connection conn = DBConnection.get(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, username);
             ps.setString(2, password);
             try (ResultSet rs = ps.executeQuery()) {  // If a row exists with username and password, return true, otherwise false
-                if (rs.next()) {
-                    return true;
-                }
-                return false;
+                return rs.next() ? mapRow(rs) : null;
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

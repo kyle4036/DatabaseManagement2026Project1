@@ -9,9 +9,6 @@ public class AirportDAO {
   
     private Connection connection = null;
 
-    public AirportDAO(DBConnection dbc){
-        connection = dbc.getConnection();
-    }
 
     private Airport mapRow(ResultSet rs) throws SQLException {
         Airport airport = new Airport();

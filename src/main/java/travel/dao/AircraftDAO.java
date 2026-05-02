@@ -9,9 +9,7 @@ public class AircraftDAO {
   
     private Connection connection = null;
 
-    public AircraftDAO(DBConnection dbc){
-        connection = dbc.getConnection();
-    }
+    
 
     private Aircraft mapRow(ResultSet rs) throws SQLException {
         Aircraft aircraft = new Aircraft();

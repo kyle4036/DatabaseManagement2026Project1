@@ -51,10 +51,6 @@ public class EmployeeDAO {
         }
     }
 
-<<<<<<< HEAD
-    public void delete(int employeeID) {
-        String sql = "DELETE FROM Employees WHERE employeeID = ?";
-=======
     public Employee findByUsername(String username) {
         String sql = "SELECT * FROM Employees WHERE username = ?";
         try (Connection conn = DBConnection.get();
@@ -67,7 +63,6 @@ public class EmployeeDAO {
             throw new RuntimeException(e);
         }
     }
->>>>>>> 0a5ef2e (Decouple `DBConnection` class to act as a "factory" pattern. A connection should establish itself and close once finished with a query, not keep one open indefinitely)
 
     /** Returns the Employee if credentials match, null otherwise. Replaces verifyEmployee. */
     public Employee findByLogin(String username, String password) {
@@ -84,10 +79,6 @@ public class EmployeeDAO {
         }
     }
 
-<<<<<<< HEAD
-            ps.setInt(1, employeeID);
-            
-=======
     public List<Employee> findByRole(String role) {
         String sql = "SELECT * FROM Employees WHERE role = ?";
         List<Employee> results = new ArrayList<>();
@@ -116,7 +107,6 @@ public class EmployeeDAO {
             ps.setString(3, e.getUsername());
             ps.setString(4, e.getPassword());
             ps.setString(5, e.getRole());
->>>>>>> 0a5ef2e (Decouple `DBConnection` class to act as a "factory" pattern. A connection should establish itself and close once finished with a query, not keep one open indefinitely)
             ps.executeUpdate();
         } catch (SQLException ex) {
             throw new RuntimeException(ex);

@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 public class WaitingList {
 
     private int customerID;
-    private int flightNumber;
+    private String flightNumber;
     private String lineID;
     private LocalDateTime requestTime; // Question: Would we have to modify this for Java Swing?
 
@@ -13,7 +13,7 @@ public class WaitingList {
 
     }
 
-    public WaitingList(int customerID, int flightNumber, String lineID, LocalDateTime requestTime) {
+    public WaitingList(int customerID, String flightNumber, String lineID, LocalDateTime requestTime) {
         this.customerID = customerID;
         this.flightNumber = flightNumber;
         this.lineID = lineID;
@@ -28,11 +28,11 @@ public class WaitingList {
         this.customerID = v;
     }
 
-    public int getFlightNumber(){
+    public String getFlightNumber(){
         return flightNumber;
     }
 
-    public void setFlightNumber(int v){
+    public void setFlightNumber(String v){
         this.flightNumber = v;
     }
 

@@ -1,5 +1,16 @@
 package travel.ui.customer;
 
-public class CustomerWaitListPanel {
+import javax.swing.*;
+
+import travel.ui.*;
+
+
+public class CustomerWaitListPanel extends JPanel{
+
+    private final MainFrame mainFrame;
+
+    public CustomerWaitListPanel(MainFrame mainFrame){
+        this.mainFrame = mainFrame;
+    }
     
 }

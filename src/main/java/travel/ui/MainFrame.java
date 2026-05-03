@@ -14,6 +14,9 @@ import travel.ui.admin.AdminActiveFlightsPanel;
 import travel.ui.admin.AdminRevenueReportPanel;
 import travel.ui.admin.AdminSalesReportPanel;
 import travel.ui.customer.CustomerHomePanel;
+import travel.ui.customer.CustomerReservationsPanel;
+import travel.ui.customer.CustomerSearchTicketPanel;
+import travel.ui.customer.CustomerWaitListPanel;
 import travel.ui.rep.RepHomePanel;
 
 
@@ -52,6 +55,7 @@ public class MainFrame extends JFrame {
         // add each panel under an indexed name, CardLayout will use these names to swap.
         container.add(login, Screen.LOGIN);
         container.add(customerHome, Screen.CUSTOMER_HOME);
+        //this.addCustomerPanels();
         container.add(adminHome, Screen.ADMIN_HOME);
         container.add(adminManageUsers, Screen.ADMIN_MANAGE_USERS);
         container.add(adminSalesReport, Screen.ADMIN_SALES_REPORT);
@@ -92,5 +96,14 @@ public class MainFrame extends JFrame {
     public void clearSession() {
         this.currentCustomer = null;
         this.currentEmployee = null;
+    }
+
+    private void addCustomerPanels(){
+        CustomerHomePanel chp = new CustomerHomePanel(this);
+        CustomerReservationsPanel crp = new CustomerReservationsPanel(this);
+        CustomerSearchTicketPanel csp =new CustomerSearchTicketPanel(this);
+        CustomerWaitListPanel cwp = new CustomerWaitListPanel(this);
+
+
     }
 }

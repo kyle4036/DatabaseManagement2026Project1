@@ -37,11 +37,10 @@ public class AdminHomePanel extends JPanel {
         JButton activeFlights = new JButton("Most Active Flights");
         JButton logoutBtn     = new JButton("Logout");
 
-        // TODO: Finish up each functionality 
-        manageUsers.addActionListener(e -> System.out.println("TODO: manage users"));
-        salesReport.addActionListener(e -> System.out.println("TODO: sales report"));
-        revenueReport.addActionListener(e -> System.out.println("TODO: revenue report"));
-        activeFlights.addActionListener(e -> System.out.println("TODO: active flights"));
+        manageUsers.addActionListener(e -> onManageUsers());
+        salesReport.addActionListener(e -> onSalesReport());
+        revenueReport.addActionListener(e -> onRevenueReport());
+        activeFlights.addActionListener(e -> onActiveFlights());
         logoutBtn.addActionListener(e -> onLogout());
 
         buttonPanel.add(manageUsers);
@@ -67,5 +66,21 @@ public class AdminHomePanel extends JPanel {
     private void onLogout() {
         mainFrame.clearSession();
         mainFrame.showScreen(Screen.LOGIN);
+    }
+
+    private void onManageUsers() {
+        mainFrame.showScreen(Screen.ADMIN_MANAGE_USERS);
+    }
+
+    private void onSalesReport() {
+        mainFrame.showScreen(Screen.ADMIN_SALES_REPORT);
+    }
+
+    private void onRevenueReport() {
+        mainFrame.showScreen(Screen.ADMIN_REVENUE_REPORT);
+    }
+
+    private void onActiveFlights() {
+        mainFrame.showScreen(Screen.ADMIN_ACTIVE_FLIGHTS);
     }
 }

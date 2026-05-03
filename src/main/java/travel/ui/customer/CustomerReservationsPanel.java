@@ -35,10 +35,9 @@ public class CustomerReservationsPanel extends JPanel{
 
         JPanel resultPanel = new JPanel(new GridLayout(0, 2, 10, 10));
 
-        JButton byCustomerBtn = new JButton("By Customer ID");
-        JButton byFlightBtn = new JButton("By Flight + Airline");
-        JButton byAirlineBtn = new JButton("By Airline");
-        JButton topCustomerBtn = new JButton("Most Revenue Customer");
+        JButton byCustomerBtn = new JButton("");
+        JButton byFlightBtn = new JButton("");
+        JButton byAirlineBtn = new JButton("");
         JButton backBtn = new JButton("Back");
 
         backBtn.addActionListener(e -> mainFrame.showScreen(Screen.CUSTOMER_HOME));
@@ -47,7 +46,6 @@ public class CustomerReservationsPanel extends JPanel{
         actions.add(byCustomerBtn);
         actions.add(byFlightBtn);
         actions.add(byAirlineBtn);
-        actions.add(topCustomerBtn);
         actions.add(backBtn);
 
         JPanel center = new JPanel(new BorderLayout(20, 20));

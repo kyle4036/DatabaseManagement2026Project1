@@ -36,6 +36,7 @@ public class RepHomePanel extends JPanel {
         JButton editReservation = new JButton("Edit Reservation");
         JButton manageFlights = new JButton("Manage Flights / Aircrafts / Airports");
         JButton viewWaitlist = new JButton("View Flight Waitlist");
+        JButton qnaBtn = new JButton("Questions & Answers");
         JButton logoutBtn = new JButton("Logout");
 
         // TODO: Complete the below actions 
@@ -43,12 +44,14 @@ public class RepHomePanel extends JPanel {
         editReservation.addActionListener(e -> System.out.println("TODO: edit reservation"));
         manageFlights.addActionListener(e -> System.out.println("TODO: manage flights"));
         viewWaitlist.addActionListener(e -> System.out.println("TODO: view waitlist"));
+        qnaBtn.addActionListener(e -> onQnAPress());
         logoutBtn.addActionListener(e -> onLogout());
 
         buttonPanel.add(bookForCustomer);
         buttonPanel.add(editReservation);
         buttonPanel.add(manageFlights);
         buttonPanel.add(viewWaitlist);
+        buttonPanel.add(qnaBtn);
         buttonPanel.add(logoutBtn);
 
         JPanel center = new JPanel();
@@ -63,6 +66,10 @@ public class RepHomePanel extends JPanel {
         if (e != null) {
             welcomeLabel.setText("Customer Rep: " + e.getFirstName() + " " + e.getLastName());
         }
+    }
+
+    private void onQnAPress() {
+        mainFrame.showScreen(Screen.REP_QNA);
     }
 
     private void onLogout() {

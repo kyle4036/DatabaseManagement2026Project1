@@ -19,6 +19,7 @@ import travel.ui.customer.CustomerSearchTicketPanel;
 import travel.ui.customer.CustomerWaitListPanel;
 import travel.ui.customer.CustomerQnAPanel;
 import travel.ui.rep.RepHomePanel;
+import travel.ui.rep.RepQnAPanel;
 
 /**
  * The single window for the entire app. Holds a CardLayout container with
@@ -43,21 +44,13 @@ public class MainFrame extends JFrame {
     public MainFrame() {
         // Build each panel, give it a reference to this main frame
         // we can then use mainFrame.showScreen("...") on the name to add .
-        LoginPanel login = new LoginPanel(this);
-        CustomerHomePanel customerHome = new CustomerHomePanel(this);
-        AdminHomePanel adminHome = new AdminHomePanel(this);
-        RepHomePanel repHome = new RepHomePanel(this);
 
         addCustomerPanels();
         addAdminPanels();
-        // addRepPanels();
-        // add each panel under an indexed name, CardLayout will use these names to swap.
-        container.add(login, Screen.LOGIN);
-        container.add(customerHome, Screen.CUSTOMER_HOME);
-        container.add(adminHome, Screen.ADMIN_HOME);
-        container.add(repHome, Screen.REP_HOME);
+        addRepPanels();
 
-        // This is initializing the MainFrame constructor to always start on the LOGIN page
+        LoginPanel login = new LoginPanel(this);
+        container.add(login, Screen.LOGIN);
         cards.show(container, Screen.LOGIN);
 
         add(container);
@@ -93,26 +86,38 @@ public class MainFrame extends JFrame {
     }
 
     private void addCustomerPanels(){
+        CustomerHomePanel         chp = new CustomerHomePanel(this);
         // CustomerReservationsPanel crp = new CustomerReservationsPanel(this);
         // CustomerSearchTicketPanel csp = new CustomerSearchTicketPanel(this);
         // CustomerWaitListPanel     cwp = new CustomerWaitListPanel(this);
         CustomerQnAPanel          cqp = new CustomerQnAPanel(this);
+
+        container.add(chp, Screen.CUSTOMER_HOME);
         // container.add(crp, Screen.CUSTOMER_RESERVE);
         // container.add(csp, Screen.CUSTOMER_SEARCH);
         // container.add(cwp, Screen.CUSTOMER_WAITLIST);
         container.add(cqp, Screen.CUSTOMER_QNA);
+    }
 
+    private void addRepPanels() {
 
+        RepHomePanel rhp = new RepHomePanel(this);
+        RepQnAPanel  rqp = new RepQnAPanel(this); 
+
+        container.add(rqp, Screen.REP_QNA);
+        container.add(rhp, Screen.REP_HOME);
     }
     private void addAdminPanels() {
-        AdminManageUsersPanel adminManageUsers = new AdminManageUsersPanel(this);
-        AdminSalesReportPanel adminSalesReport = new AdminSalesReportPanel(this);
-        AdminRevenueReportPanel adminRevenueReport = new AdminRevenueReportPanel(this);
-        AdminActiveFlightsPanel adminActiveFlights = new AdminActiveFlightsPanel(this);
+        AdminHomePanel           ahp = new AdminHomePanel(this);
+        AdminManageUsersPanel    amp = new AdminManageUsersPanel(this);
+        AdminSalesReportPanel    asp = new AdminSalesReportPanel(this);
+        AdminRevenueReportPanel  arp = new AdminRevenueReportPanel(this);
+        AdminActiveFlightsPanel aafp = new AdminActiveFlightsPanel(this);
 
-        container.add(adminManageUsers, Screen.ADMIN_MANAGE_USERS);
-        container.add(adminSalesReport, Screen.ADMIN_SALES_REPORT);
-        container.add(adminRevenueReport, Screen.ADMIN_REVENUE_REPORT);
-        container.add(adminActiveFlights, Screen.ADMIN_ACTIVE_FLIGHTS);
+        container.add(ahp, Screen.ADMIN_HOME);
+        container.add(amp, Screen.ADMIN_MANAGE_USERS);
+        container.add(asp, Screen.ADMIN_SALES_REPORT);
+        container.add(arp, Screen.ADMIN_REVENUE_REPORT);
+        container.add(aafp, Screen.ADMIN_ACTIVE_FLIGHTS);
     }
 }

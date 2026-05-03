@@ -11,6 +11,8 @@ import travel.model.Employee;
 import travel.ui.admin.AdminHomePanel;
 import travel.ui.customer.CustomerHomePanel;
 import travel.ui.customer.CustomerReservationsPanel;
+import travel.ui.customer.CustomerSearchTicketPanel;
+import travel.ui.customer.CustomerWaitListPanel;
 import travel.ui.rep.RepHomePanel;
 
 
@@ -87,6 +89,9 @@ public class MainFrame extends JFrame {
     private void addCustomerPanels(){
         CustomerHomePanel chp = new CustomerHomePanel(this);
         CustomerReservationsPanel crp = new CustomerReservationsPanel(this);
-        
+        CustomerSearchTicketPanel csp =new CustomerSearchTicketPanel(this);
+        CustomerWaitListPanel cwp = new CustomerWaitListPanel(this);
+
+
     }
 }

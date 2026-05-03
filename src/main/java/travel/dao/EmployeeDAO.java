@@ -3,6 +3,7 @@ package travel.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -101,13 +102,20 @@ public class EmployeeDAO {
             VALUES (?, ?, ?, ?, ?)
         """;
         try (Connection conn = DBConnection.get();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, e.getFirstName());
             ps.setString(2, e.getLastName());
             ps.setString(3, e.getUsername());
             ps.setString(4, e.getPassword());
             ps.setString(5, e.getRole());
             ps.executeUpdate();
+
+            try (ResultSet rs = ps.getGeneratedKeys()){
+                if (rs.next()){
+                    e.setEmployeeID(rs.getInt(1));
+                }
+            }
+
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }

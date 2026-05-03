@@ -3,6 +3,7 @@ package travel.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -84,7 +85,7 @@ public class CustomerDAO {
             VALUES (?, ?, ?, ?, ?, ?)
         """;
         try (Connection conn = DBConnection.get();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, c.getFirstName());
             ps.setString(2, c.getLastName());
             ps.setString(3, c.getUsername());
@@ -92,6 +93,13 @@ public class CustomerDAO {
             ps.setString(5, c.getEmail());
             ps.setString(6, c.getPhoneNumber());
             ps.executeUpdate();
+
+            try (ResultSet rs = ps.getGeneratedKeys()){
+                if (rs.next()){
+                    c.setCustomerID(rs.getInt(1));
+                }
+            }
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

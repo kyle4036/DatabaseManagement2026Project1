@@ -7,8 +7,6 @@ import travel.model.Aircraft;
 
 public class AircraftDAO {
   
-    private Connection connection = null;
-
     private Aircraft mapRow(ResultSet rs) throws SQLException {
         Aircraft aircraft = new Aircraft();
         
@@ -25,19 +23,25 @@ public class AircraftDAO {
     public void insert(Aircraft aircraft){
         String sql = """
             INSERT INTO Aircrafts
-            (craftID, lineID, portID, capacity, model)
-            VALUES (?, ?, ?, ?, ?)
+            (lineID, portID, capacity, model)
+            VALUES (?, ?, ?, ?)
         """;
 
-        try (PreparedStatement ps = connection.prepareStatement(sql)){
+        try (Connection conn = DBConnection.get();
+            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-            ps.setInt(1, aircraft.getCraftID());
-            ps.setString(2, aircraft.getLineID());
-            ps.setString(3, aircraft.getPortID());
-            ps.setInt(4, aircraft.getCapacity());
-            ps.setString(5, aircraft.getModel());
+            ps.setString(1, aircraft.getLineID());
+            ps.setString(2, aircraft.getPortID());
+            ps.setInt(3, aircraft.getCapacity());
+            ps.setString(4, aircraft.getModel());
 
             ps.executeUpdate();
+
+            try (ResultSet rs = ps.getGeneratedKeys()){
+                if (rs.next()){
+                    aircraft.setCraftID(rs.getInt(1));
+                }
+            }
 
         } catch (SQLException ex){
             throw new RuntimeException(ex);
@@ -47,7 +51,9 @@ public class AircraftDAO {
     public void delete(int craftID){
         String sql = "DELETE FROM Aircrafts WHERE craftID = ?";
 
-        try (PreparedStatement ps = connection.prepareStatement(sql)){
+        try (Connection conn = DBConnection.get();
+            
+            PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, craftID);
             
@@ -65,7 +71,9 @@ public class AircraftDAO {
             WHERE craftID = ?
         """;
 
-        try (PreparedStatement ps = connection.prepareStatement(sql)){
+        try (Connection conn = DBConnection.get();
+            
+            PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setString(1, aircraft.getLineID());
             ps.setString(2, aircraft.getPortID());

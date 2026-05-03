@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import travel.DBConnection;
 import travel.model.Ticket;
@@ -20,7 +21,7 @@ public class TicketDAO {
         
         t.setTicketNumber(rs.getInt("ticketNumber"));
         t.setCustomerID(rs.getInt("customerID"));
-        t.setPurchaseTime(rs.getTimestamp("purchaseTime"));
+        t.setPurchaseTime(rs.getTimestamp("purchaseTime").toLocalDateTime());
         t.setBookingFee(rs.getBigDecimal("bookingFee"));
         t.setFareCost(rs.getBigDecimal("fareCost"));
         t.setTripType(rs.getString("tripType"));
@@ -72,9 +73,9 @@ public class TicketDAO {
         """;
 
         try (Connection conn = DBConnection.get();
-             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setInt(1, t.getCustomerID());
-            ps.setTimestamp(2, t.getPurchaseTime());
+            ps.setTimestamp(2, Timestamp.valueOf(t.getPurchaseTime()));
             ps.setBigDecimal(3, t.getBookingFee());
             ps.setBigDecimal(4, t.getFareCost());
             ps.setString(5, t.getTripType());
@@ -84,7 +85,7 @@ public class TicketDAO {
         
             try (ResultSet rs = ps.getGeneratedKeys()){
                 if (rs.next()){
-                    t.setTicketNumber(1);
+                    t.setTicketNumber(rs.getInt(1));
                 }
             }
             
@@ -106,7 +107,7 @@ public class TicketDAO {
             PreparedStatement ps = conn.prepareStatement(sql)) {
             
             ps.setInt(1, t.getCustomerID());
-            ps.setTimestamp(2, t.getPurchaseTime());
+            ps.setTimestamp(2, Timestamp.valueOf(t.getPurchaseTime()));
             ps.setBigDecimal(3, t.getBookingFee());
             ps.setBigDecimal(4, t.getFareCost());
             ps.setString(5, t.getTripType());
@@ -158,12 +159,11 @@ public class TicketDAO {
 
     public static void main(String[] args) {
         TicketDAO td = new TicketDAO();
-        java.util.Date utilDate = new java.util.Date();
-        Timestamp sq = new Timestamp(utilDate.getTime());
+        
         td.insert(new Ticket(
             5, 
             1, 
-            sq, 
+            LocalDateTime.now(), 
             new BigDecimal("19.99"),
             new BigDecimal("19.99"),
             "One-way",

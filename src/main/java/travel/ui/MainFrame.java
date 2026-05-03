@@ -19,7 +19,6 @@ import travel.ui.customer.CustomerSearchTicketPanel;
 import travel.ui.customer.CustomerWaitListPanel;
 import travel.ui.rep.RepHomePanel;
 
-
 /**
  * The single window for the entire app. Holds a CardLayout container with
  * one panel per "screen". Panels call mainFrame.showScreen(name) to navigate.

@@ -6,9 +6,6 @@ import travel.DBConnection;
 import travel.model.Airport;
 
 public class AirportDAO {
-  
-    private Connection connection = null;
-
 
     private Airport mapRow(ResultSet rs) throws SQLException {
         Airport airport = new Airport();
@@ -28,7 +25,9 @@ public class AirportDAO {
             VALUES (?, ?, ?, ?)
         """;
 
-        try (PreparedStatement ps = connection.prepareStatement(sql)){
+        try (Connection conn = DBConnection.get();
+            
+            PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setString(1, airport.getPortID());
             ps.setString(2, airport.getName());
@@ -45,7 +44,9 @@ public class AirportDAO {
     public void delete(String portID){
         String sql = "DELETE FROM Airports WHERE portID = ?";
 
-        try (PreparedStatement ps = connection.prepareStatement(sql)){
+        try (Connection conn = DBConnection.get();
+            
+            PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setString(1, portID);
             
@@ -63,7 +64,9 @@ public class AirportDAO {
             WHERE portID = ?
         """;
 
-        try (PreparedStatement ps = connection.prepareStatement(sql)){
+        try (Connection conn = DBConnection.get();
+            
+            PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setString(1, airport.getName());
             ps.setString(2, airport.getCity());

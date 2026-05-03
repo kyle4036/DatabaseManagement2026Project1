@@ -5,14 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Date;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
 import travel.DBConnection;
-import travel.model.Customer;
 import travel.model.FlightTicket;
-import travel.model.Ticket;
 
 public class FlightTicketDAO {
     

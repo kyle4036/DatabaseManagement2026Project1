@@ -30,7 +30,7 @@ public class TicketDAO {
     }
 
     public List<Ticket> findAll(int customerID) {
-        String sql = "SELECT * FROM Flights WHERE customerID = ?";
+        String sql = "SELECT * FROM Tickets WHERE customerID = ?";
         
         List<Ticket> results = new ArrayList<>();
         

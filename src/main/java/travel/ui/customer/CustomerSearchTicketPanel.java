@@ -5,10 +5,10 @@ import java.awt.BorderLayout;
 
 import travel.ui.*;
 
-public class CustomerSearchFlightPanel extends JPanel{
+public class CustomerSearchTicketPanel extends JPanel{
 
     private final MainFrame mainFrame;
-    public CustomerSearchFlightPanel(MainFrame mainFrame) {
+    public CustomerSearchTicketPanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         buildUI();
     }
@@ -17,7 +17,7 @@ public class CustomerSearchFlightPanel extends JPanel{
         setLayout(new BorderLayout(20,20));
         setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
 
-
+        
     }
     
 }

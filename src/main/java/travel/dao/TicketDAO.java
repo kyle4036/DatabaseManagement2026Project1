@@ -3,6 +3,7 @@ package travel.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,6 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 import travel.DBConnection;
-import travel.model.Customer;
 import travel.model.Ticket;
 
 public class TicketDAO {
@@ -39,9 +39,9 @@ public class TicketDAO {
              
             ps.setInt(1, customerID);
 
-            ResultSet rs = ps.executeQuery();
-            
-            while (rs.next()) results.add(mapRow(rs));
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) results.add(mapRow(rs));
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -67,22 +67,27 @@ public class TicketDAO {
     public void insert(Ticket t) {
         String sql = """
             INSERT INTO Tickets
-            (ticketNumber, customerID, purchaseTime, bookingFee, fareCost, tripType, status)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
+            (customerID, purchaseTime, bookingFee, fareCost, tripType, status)
+            VALUES (?, ?, ?, ?, ?, ?)
         """;
 
         try (Connection conn = DBConnection.get();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, t.getTicketNumber());
-            ps.setInt(2, t.getCustomerID());
-            ps.setTimestamp(3, t.getPurchaseTime());
-            ps.setBigDecimal(4, t.getBookingFee());
-            ps.setBigDecimal(5, t.getFareCost());
-            ps.setString(6, t.getTripType());
-            ps.setString(7, t.getStatus());
+             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            ps.setInt(1, t.getCustomerID());
+            ps.setTimestamp(2, t.getPurchaseTime());
+            ps.setBigDecimal(3, t.getBookingFee());
+            ps.setBigDecimal(4, t.getFareCost());
+            ps.setString(5, t.getTripType());
+            ps.setString(6, t.getStatus());
             
             ps.executeUpdate();
         
+            try (ResultSet rs = ps.getGeneratedKeys()){
+                if (rs.next()){
+                    t.setTicketNumber(1);
+                }
+            }
+            
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

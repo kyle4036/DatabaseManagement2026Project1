@@ -44,7 +44,7 @@ public class FlightTicket {
         this.flightNumber = v;
     }
 
-    public String getlineID(){
+    public String getLineID(){
         return lineID;
     }
 

@@ -83,4 +83,10 @@ public class Ticket {
         this.status = v;
     }
 
+    public static Timestamp getCurrentTimestamp(){
+        java.util.Date utilDate = new java.util.Date();
+        Timestamp sq = new Timestamp(utilDate.getTime());
+        return sq;
+    }
+
 }

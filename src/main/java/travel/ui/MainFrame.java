@@ -9,6 +9,10 @@ import javax.swing.JPanel;
 import travel.model.Customer;
 import travel.model.Employee;
 import travel.ui.admin.AdminHomePanel;
+import travel.ui.admin.AdminManageUsersPanel;
+import travel.ui.admin.AdminActiveFlightsPanel;
+import travel.ui.admin.AdminRevenueReportPanel;
+import travel.ui.admin.AdminSalesReportPanel;
 import travel.ui.customer.CustomerHomePanel;
 import travel.ui.customer.CustomerReservationsPanel;
 import travel.ui.customer.CustomerSearchTicketPanel;
@@ -42,6 +46,10 @@ public class MainFrame extends JFrame {
         LoginPanel login = new LoginPanel(this);
         CustomerHomePanel customerHome = new CustomerHomePanel(this);
         AdminHomePanel adminHome = new AdminHomePanel(this);
+        AdminManageUsersPanel adminManageUsers = new AdminManageUsersPanel(this);
+        AdminSalesReportPanel adminSalesReport = new AdminSalesReportPanel(this);
+        AdminRevenueReportPanel adminRevenueReport = new AdminRevenueReportPanel(this);
+        AdminActiveFlightsPanel adminActiveFlights = new AdminActiveFlightsPanel(this);
         RepHomePanel repHome = new RepHomePanel(this);
 
         // add each panel under an indexed name, CardLayout will use these names to swap.
@@ -49,6 +57,10 @@ public class MainFrame extends JFrame {
         container.add(customerHome, Screen.CUSTOMER_HOME);
         //this.addCustomerPanels();
         container.add(adminHome, Screen.ADMIN_HOME);
+        container.add(adminManageUsers, Screen.ADMIN_MANAGE_USERS);
+        container.add(adminSalesReport, Screen.ADMIN_SALES_REPORT);
+        container.add(adminRevenueReport, Screen.ADMIN_REVENUE_REPORT);
+        container.add(adminActiveFlights, Screen.ADMIN_ACTIVE_FLIGHTS);
         container.add(repHome, Screen.REP_HOME);
 
         // This is initializing the MainFrame constructor to always start on the LOGIN page

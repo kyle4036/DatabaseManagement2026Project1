@@ -10,6 +10,10 @@ public final class Screen {
     public static final String CUSTOMER_HOME = "customerHome";
     public static final String ADMIN_HOME    = "adminHome";
     public static final String REP_HOME      = "repHome";
+    public static final String ADMIN_MANAGE_USERS = "adminManageUsers";
+    public static final String ADMIN_SALES_REPORT = "adminSalesReport";
+    public static final String ADMIN_REVENUE_REPORT = "adminRevenueReport";
+    public static final String ADMIN_ACTIVE_FLIGHTS = "adminActiveFlights";
 
     public static final String CUSTOMER_SEARCH = "customerSearch";
     public static final String CUSTOMER_RESERVE = "customerReserve";

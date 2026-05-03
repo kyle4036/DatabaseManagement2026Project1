@@ -41,18 +41,22 @@ public class CustomerHomePanel extends JPanel {
         JButton searchBtn       = new JButton("Search Flights");
         JButton reservationsBtn = new JButton("My Reservations");
         JButton waitlistBtn     = new JButton("My Waitlist");
+        JButton qnaBtn          = new JButton("Questions and Answers");
         JButton logoutBtn       = new JButton("Logout");
 
         searchBtn.addActionListener(e -> searchBtnPressed());
         reservationsBtn.addActionListener(e -> reservationBtnPressed());
         waitlistBtn.addActionListener(e -> waitBtnPressed());
+        qnaBtn.addActionListener(e -> qnaBtnPressed());
         logoutBtn.addActionListener(e -> onLogout());
+        
 
         buttonPanel.add(searchBtn);
         buttonPanel.add(reservationsBtn);
         buttonPanel.add(waitlistBtn);
+        buttonPanel.add(qnaBtn);
         buttonPanel.add(logoutBtn);
-
+        
         JPanel center = new JPanel();
         center.add(buttonPanel);
         add(center, BorderLayout.CENTER);
@@ -79,5 +83,8 @@ public class CustomerHomePanel extends JPanel {
     }
     private void waitBtnPressed(){
         mainFrame.showScreen(Screen.CUSTOMER_WAITLIST);
+    }
+    private void qnaBtnPressed() {
+        mainFrame.showScreen(Screen.CUSTOMER_QNA);
     }
 }

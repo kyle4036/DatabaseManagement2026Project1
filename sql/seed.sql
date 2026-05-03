@@ -82,7 +82,16 @@ INSERT INTO FlightTickets (ticketNumber, flightNumber, lineID, legOrder, departu
   (3, '410','B6',1,'2026-05-18','22C','economy', NULL),
   (4, '100','AA',1,'2026-06-01','3A', 'first',   'halal');
 
--- Waiting list — customers waiting on a popular full flight
+-- Waiting list customers waiting on a popular full flight
 INSERT INTO WaitingList (customerID, flightNumber, lineID, requestTime) VALUES
   (4, '101','AA','2026-04-10 09:00:00'),
-  (3, '101','AA','2026-04-10 14:30:00')
+  (3, '101','AA','2026-04-10 14:30:00');
+
+INSERT INTO QnA (questionID, customerID, question) VALUES
+  (1, 1, 'Can I change my seat after booking?'),
+  (2, 2, 'What is the baggage limit for international flights?'),
+  (3, 3, 'How do I cancel a business class ticket?');
+
+UPDATE QnA SET answer = 'Yes, you can change your seat through the reservations page or contact a representative.',
+              employeeID = 2
+WHERE questionID = 1;

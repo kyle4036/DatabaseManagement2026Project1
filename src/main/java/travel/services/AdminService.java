@@ -17,7 +17,6 @@ public class AdminService {
         this.reportDAO = new ReportDAO();
     }
 
-
     public void addCustomer(Customer c) {
         verifyCustomer(c);
         customerDAO.insert(c);
@@ -36,7 +35,7 @@ public class AdminService {
     }
 
     private void verifyCustomer(Customer c) {
-       if (c.getFirstName() == null || c.getFirstName().isEmpty()) {
+        if (c.getFirstName() == null || c.getFirstName().isEmpty()) {
             throw new IllegalArgumentException("First name cannot be empty");
         }
         if (c.getLastName() == null || c.getLastName().isEmpty()) {
@@ -56,7 +55,7 @@ public class AdminService {
         }
     }
 
-   public void addEmployee(Employee e) {
+    public void addEmployee(Employee e) {
         verifyEmployee(e);
         employeeDAO.insert(e);
     }
@@ -152,5 +151,4 @@ public class AdminService {
         }
         return reportDAO.getMonthlySalesSummary(month, year);
     }
-    
 }

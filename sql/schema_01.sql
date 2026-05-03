@@ -109,3 +109,13 @@ CREATE TABLE WaitingList (
     FOREIGN KEY (customerID) REFERENCES Customers(customerID),
     FOREIGN KEY (flightNumber, lineID) REFERENCES Flights(flightNumber, lineID)
 );
+
+CREATE TABLE QnA (
+    questionID INT AUTO_INCREMENT PRIMARY KEY,
+    customerID INT NOT NULL,
+    employeeID INT,
+    question TEXT NOT NULL,
+    answer TEXT,
+    FOREIGN KEY (customerID) REFERENCES Customers(customerID),
+    FOREIGN KEY (employeeID) REFERENCES Employees(employeeID)
+);

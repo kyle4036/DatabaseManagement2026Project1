@@ -52,7 +52,7 @@ public class CustomerReservationsPanel extends JPanel{
 
         JPanel center = new JPanel(new BorderLayout(20, 20));
         center.add(resultPanel, BorderLayout.CENTER);
-        center.add(actions, BorderLayout.East);
+        center.add(actions, BorderLayout.EAST);
         add(center, BorderLayout.CENTER);
     }
 

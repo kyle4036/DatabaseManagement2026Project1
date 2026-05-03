@@ -18,6 +18,7 @@ public final class Screen {
     public static final String CUSTOMER_SEARCH = "customerSearch";
     public static final String CUSTOMER_RESERVE = "customerReserve";
     public static final String CUSTOMER_WAITLIST = "customerWait";
-
+    public static final String CUSTOMER_QNA = "customerQNA";
+    
     private Screen() {}
 }

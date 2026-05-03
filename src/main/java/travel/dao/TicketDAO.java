@@ -161,13 +161,13 @@ public class TicketDAO {
         java.util.Date utilDate = new java.util.Date();
         Timestamp sq = new Timestamp(utilDate.getTime());
         td.insert(new Ticket(
-            5, 
+            -1, 
             1, 
-            sq, 
+            Ticket.getCurrentTimestamp(), 
             new BigDecimal("19.99"),
             new BigDecimal("19.99"),
             "One-way",
-            "1"));
+            "active"));
         System.out.println("success maybe");
     }
 }

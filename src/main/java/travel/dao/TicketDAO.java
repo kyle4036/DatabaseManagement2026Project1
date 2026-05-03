@@ -161,13 +161,13 @@ public class TicketDAO {
         TicketDAO td = new TicketDAO();
         
         td.insert(new Ticket(
-            5, 
+            -1, 
             1, 
             LocalDateTime.now(), 
             new BigDecimal("19.99"),
             new BigDecimal("19.99"),
             "One-way",
-            "1"));
+            "active"));
         System.out.println("success maybe");
     }
 }

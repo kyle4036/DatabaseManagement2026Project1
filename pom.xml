@@ -103,6 +103,13 @@
                 <exec.mainClass>travel.dao.CustomerDAO</exec.mainClass>
             </properties>
         </profile>
+        
+        <profile>
+            <id>TicketDAO</id>
+            <properties>
+                <exec.mainClass>travel.dao.TicketDAO</exec.mainClass>
+            </properties>
+        </profile>
     </profiles>
 
 </project>

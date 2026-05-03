@@ -44,8 +44,8 @@ public class CustomerHomePanel extends JPanel {
         JButton logoutBtn       = new JButton("Logout");
 
         searchBtn.addActionListener(e -> searchBtnPressed());
-        reservationsBtn.addActionListener(e -> System.out.println("TODO: my reservations"));
-        waitlistBtn.addActionListener(e -> System.out.println("TODO: waitlist"));
+        reservationsBtn.addActionListener(e -> reservationBtnPressed());
+        waitlistBtn.addActionListener(e -> waitBtnPressed());
         logoutBtn.addActionListener(e -> onLogout());
 
         buttonPanel.add(searchBtn);
@@ -73,5 +73,11 @@ public class CustomerHomePanel extends JPanel {
     }
     private void searchBtnPressed(){
         mainFrame.showScreen(Screen.CUSTOMER_SEARCH);
+    }
+    private void reservationBtnPressed(){
+        mainFrame.showScreen(Screen.CUSTOMER_RESERVE);  
+    }
+    private void waitBtnPressed(){
+        mainFrame.showScreen(Screen.CUSTOMER_WAITLIST);
     }
 }

@@ -10,6 +10,7 @@ import travel.model.Customer;
 import travel.model.Employee;
 import travel.ui.admin.AdminHomePanel;
 import travel.ui.customer.CustomerHomePanel;
+import travel.ui.customer.CustomerReservationsPanel;
 import travel.ui.rep.RepHomePanel;
 
 
@@ -44,6 +45,7 @@ public class MainFrame extends JFrame {
         // add each panel under an indexed name, CardLayout will use these names to swap.
         container.add(login, Screen.LOGIN);
         container.add(customerHome, Screen.CUSTOMER_HOME);
+        //this.addCustomerPanels();
         container.add(adminHome, Screen.ADMIN_HOME);
         container.add(repHome, Screen.REP_HOME);
 
@@ -80,5 +82,11 @@ public class MainFrame extends JFrame {
     public void clearSession() {
         this.currentCustomer = null;
         this.currentEmployee = null;
+    }
+
+    private void addCustomerPanels(){
+        CustomerHomePanel chp = new CustomerHomePanel(this);
+        CustomerReservationsPanel crp = new CustomerReservationsPanel(this);
+        
     }
 }

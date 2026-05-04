@@ -17,7 +17,7 @@ public class FlightTicketDAO {
         FlightTicket ft = new FlightTicket();
 
         ft.setTicketNumber(rs.getInt("ticketNumber"));
-        ft.setFlightNumber(rs.getInt("flightNumber"));
+        ft.setFlightNumber(rs.getString("flightNumber"));
         ft.setLineID(rs.getString("lineID"));
         ft.setLegOrder(rs.getInt("legOrder"));
         ft.setDepartureDate(rs.getDate("departureDate").toLocalDate());
@@ -28,7 +28,7 @@ public class FlightTicketDAO {
         return ft;
     }
 
-    public List<FlightTicket> findByFlight(int flightNumber) {
+    public List<FlightTicket> findByFlight(String flightNumber) {
         String sql = "SELECT * FROM FlightTickets WHERE flightNumber = ?";
 
         List<FlightTicket> results = new ArrayList<>();
@@ -36,7 +36,7 @@ public class FlightTicketDAO {
         try (Connection conn = DBConnection.get();
                 PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            ps.setInt(1, flightNumber);
+            ps.setString(1, flightNumber);
 
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next())
@@ -79,7 +79,7 @@ public class FlightTicketDAO {
                 PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, ft.getTicketNumber());
-            ps.setInt(2, ft.getFlightNumber());
+            ps.setString(2, ft.getFlightNumber());
             ps.setString(3, ft.getLineID());
             ps.setInt(4, ft.getLegOrder());
             ps.setDate(5, Date.valueOf(ft.getDepartureDate()));
@@ -106,7 +106,7 @@ public class FlightTicketDAO {
 
                 PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            ps.setInt(1, ft.getFlightNumber());
+            ps.setString(1, ft.getFlightNumber());
             ps.setString(2, ft.getLineID());
             ps.setDate(3, Date.valueOf(ft.getDepartureDate()));
             ps.setString(4, ft.getSeatNumber());

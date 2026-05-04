@@ -63,7 +63,7 @@ public class ReservationService {
 
             for (FlightTicket flightTicket : flightTickets) {
                 Flight flight = flightDAO.findByKey(
-                    String.valueOf(flightTicket.getFlightNumber()),
+                    flightTicket.getFlightNumber(),
                     flightTicket.getLineID()
                 );
                 reservations.add(buildReservationRow(ticket, flightTicket, flight));
@@ -123,7 +123,7 @@ public class ReservationService {
         row.setTicketNumber(ticket.getTicketNumber());
         row.setCustomerID(ticket.getCustomerID());
         row.setCustomerName(customer.getFirstName() + " " + customer.getLastName());
-        row.setFlightNumber(String.valueOf(flightTicket.getFlightNumber()));
+        row.setFlightNumber(flightTicket.getFlightNumber());
         row.setLineID(flightTicket.getLineID());
         row.setLegOrder(flightTicket.getLegOrder());
         row.setOriginPortID(flight.getDeparturePortID());

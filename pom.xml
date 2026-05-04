@@ -110,6 +110,13 @@
                 <exec.mainClass>travel.dao.TicketDAO</exec.mainClass>
             </properties>
         </profile>
+        
+        <profile>
+            <id>FlightDAO</id>
+            <properties>
+                <exec.mainClass>travel.dao.FlightDAO</exec.mainClass>
+            </properties>
+        </profile>
     </profiles>
 
 </project>

@@ -191,4 +191,11 @@ public class FlightDAO {
             throw new RuntimeException(e);
         }
     }
+
+    public static void main(String[] args) {
+        FlightDAO fdao = new FlightDAO();
+        //List<Flight> fList = fdao.findByRoute("JFK", "LAX","0111110");
+        List<Flight> fList = fdao.findAll();
+        System.out.println(fList.get(1));
+    }
 }

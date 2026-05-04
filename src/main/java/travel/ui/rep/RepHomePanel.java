@@ -42,8 +42,8 @@ public class RepHomePanel extends JPanel {
         // TODO: Complete the below actions 
         bookForCustomer.addActionListener(e -> System.out.println("TODO: book for customer"));
         editReservation.addActionListener(e -> System.out.println("TODO: edit reservation"));
-        manageFlights.addActionListener(e -> System.out.println("TODO: manage flights"));
-        viewWaitlist.addActionListener(e -> System.out.println("TODO: view waitlist"));
+        manageFlights.addActionListener(e -> onManagementPress());
+        viewWaitlist.addActionListener(e -> onWaitlistPress());
         qnaBtn.addActionListener(e -> onQnAPress());
         logoutBtn.addActionListener(e -> onLogout());
 
@@ -68,6 +68,13 @@ public class RepHomePanel extends JPanel {
         }
     }
 
+    private void onManagementPress() {
+        mainFrame.showScreen(Screen.REP_MANAGEMENT);
+    }
+
+    private void onWaitlistPress() {
+        mainFrame.showScreen(Screen.REP_WAITLIST);
+    }
     private void onQnAPress() {
         mainFrame.showScreen(Screen.REP_QNA);
     }

@@ -12,6 +12,9 @@ import javax.swing.JOptionPane;
 
 import java.awt.GridLayout;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+
 import travel.ui.MainFrame;
 
 public class CustomerSearchFlightPanel extends JPanel {
@@ -53,6 +56,17 @@ public class CustomerSearchFlightPanel extends JPanel {
         if (choice != JOptionPane.OK_OPTION) {
             return;
         }
+
+
     }
+
+    private String dateToBitMask(String date){
+        LocalDate lDate = LocalDate.parse(date);
+        DayOfWeek day = lDate.getDayOfWeek();
+        String mask = "0000000";
+        char[] aMask = mask.toCharArray();
+        aMask[day.getValue()] = '1';
+        return String.valueOf(aMask);
+    })
 
 }

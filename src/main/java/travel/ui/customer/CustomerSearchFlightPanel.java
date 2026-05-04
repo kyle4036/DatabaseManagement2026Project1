@@ -57,7 +57,7 @@ public class CustomerSearchFlightPanel extends JPanel {
             return;
         }
 
-
+        //need to query Booking.findByRout(...) in order to return the flights
     }
 
     private String dateToBitMask(String date){

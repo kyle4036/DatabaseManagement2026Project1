@@ -9,18 +9,21 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JOptionPane;
+import javax.swing.JButton;
 
 import java.awt.GridLayout;
 
-import java.time.DayOfWeek;
-import java.time.LocalDate;
+import java.util.List;
 
+import travel.services.BookingService;
 import travel.ui.MainFrame;
+import travel.model.*;
 
 public class CustomerSearchFlightPanel extends JPanel {
 
     private final MainFrame mainFrame;
     private final JLabel welcomeLabel = new JLabel();
+    private final BookingService bService = new BookingService();
 
     public CustomerSearchFlightPanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
@@ -28,16 +31,29 @@ public class CustomerSearchFlightPanel extends JPanel {
     }
 
     private void buildUI() {
-        setLayout(new BorderLayout(20, 20));
-        setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-
-        welcomeLabel.setFont(new Font("Lucida Sans", Font.BOLD, 22));
-        add(welcomeLabel, BorderLayout.NORTH);
+        //setLayout(new BorderLayout(20, 20));
+        //setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         JLabel title = new JLabel("Search Flights ");
+        title.setFont(new Font("Lucida Sans", Font.BOLD, 22));
+        add(title, BorderLayout.NORTH);
+
+        JButton searchButton = new JButton("Search Flights");
+
+        searchButton.addActionListener(e -> withGuard(this::searchPressed));
+
+        this.add(searchButton);
     }
 
-    private void promptSearch(){
+    private void searchPressed(){
+        List<Flight> flights = promptSearch();
+        if(flights == null){
+            return;
+        }
+
+    }
+
+    private List<Flight> promptSearch(){
         JTextField dateField = new JTextField();
         JTextField departureField = new JTextField();
         JTextField arrivalField = new JTextField();
@@ -46,7 +62,6 @@ public class CustomerSearchFlightPanel extends JPanel {
 
         panel.add(new JLabel("Date:"));
         panel.add(dateField);
-        panel.add(timeField);
         panel.add(new JLabel("Departure Airport:"));
         panel.add(departureField);
         panel.add(new JLabel("Arrival Airport:"));
@@ -54,19 +69,23 @@ public class CustomerSearchFlightPanel extends JPanel {
         
         int choice = JOptionPane.showConfirmDialog(this, panel, "Search Flights" , JOptionPane.OK_CANCEL_OPTION);
         if (choice != JOptionPane.OK_OPTION) {
-            return;
+            return null;
         }
 
-        //need to query Booking.findByRout(...) in order to return the flights
+        return bService.findByRoute(
+                departureField.getText().trim(),
+                arrivalField.getText().trim(),
+                dateField.getText().trim());
+
     }
 
-    private String dateToBitMask(String date){
-        LocalDate lDate = LocalDate.parse(date);
-        DayOfWeek day = lDate.getDayOfWeek();
-        String mask = "0000000";
-        char[] aMask = mask.toCharArray();
-        aMask[day.getValue()] = '1';
-        return String.valueOf(aMask);
-    })
-
+    private void withGuard(Runnable action) {
+        try {
+            action.run();
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Validation Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Operation Failed", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 }

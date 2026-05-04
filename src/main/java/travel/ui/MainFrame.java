@@ -11,6 +11,7 @@ import travel.model.Employee;
 import travel.ui.admin.AdminHomePanel;
 import travel.ui.admin.AdminManageUsersPanel;
 import travel.ui.admin.AdminActiveFlightsPanel;
+import travel.ui.admin.AdminReservationsPanel;
 import travel.ui.admin.AdminRevenueReportPanel;
 import travel.ui.admin.AdminSalesReportPanel;
 import travel.ui.customer.CustomerHomePanel;
@@ -89,13 +90,13 @@ public class MainFrame extends JFrame {
 
     private void addCustomerPanels(){
         CustomerHomePanel         chp = new CustomerHomePanel(this);
-        // CustomerReservationsPanel crp = new CustomerReservationsPanel(this);
+        CustomerReservationsPanel crp = new CustomerReservationsPanel(this);
         // CustomerSearchTicketPanel csp = new CustomerSearchTicketPanel(this);
         // CustomerWaitListPanel     cwp = new CustomerWaitListPanel(this);
         CustomerQnAPanel          cqp = new CustomerQnAPanel(this);
 
         container.add(chp, Screen.CUSTOMER_HOME);
-        // container.add(crp, Screen.CUSTOMER_RESERVE);
+        container.add(crp, Screen.CUSTOMER_RESERVE);
         // container.add(csp, Screen.CUSTOMER_SEARCH);
         // container.add(cwp, Screen.CUSTOMER_WAITLIST);
         container.add(cqp, Screen.CUSTOMER_QNA);
@@ -120,11 +121,13 @@ public class MainFrame extends JFrame {
         AdminSalesReportPanel    asp = new AdminSalesReportPanel(this);
         AdminRevenueReportPanel  arp = new AdminRevenueReportPanel(this);
         AdminActiveFlightsPanel aafp = new AdminActiveFlightsPanel(this);
+        AdminReservationsPanel  arsp = new AdminReservationsPanel(this);
 
         container.add(ahp, Screen.ADMIN_HOME);
         container.add(amp, Screen.ADMIN_MANAGE_USERS);
         container.add(asp, Screen.ADMIN_SALES_REPORT);
         container.add(arp, Screen.ADMIN_REVENUE_REPORT);
         container.add(aafp, Screen.ADMIN_ACTIVE_FLIGHTS);
+        container.add(arsp, Screen.ADMIN_RESERVATIONS);
     }
 }

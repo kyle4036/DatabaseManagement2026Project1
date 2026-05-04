@@ -34,18 +34,21 @@ public class AdminHomePanel extends JPanel {
         JButton manageUsers   = new JButton("Manage Customers / Employees");
         JButton salesReport   = new JButton("Sales Report");
         JButton revenueReport = new JButton("Revenue Reports");
+        JButton reservations  = new JButton("Reservations");
         JButton activeFlights = new JButton("Most Active Flights");
         JButton logoutBtn     = new JButton("Logout");
 
         manageUsers.addActionListener(e -> onManageUsers());
         salesReport.addActionListener(e -> onSalesReport());
         revenueReport.addActionListener(e -> onRevenueReport());
+        reservations.addActionListener(e -> onReservations());
         activeFlights.addActionListener(e -> onActiveFlights());
         logoutBtn.addActionListener(e -> onLogout());
 
         buttonPanel.add(manageUsers);
         buttonPanel.add(salesReport);
         buttonPanel.add(revenueReport);
+        buttonPanel.add(reservations);
         buttonPanel.add(activeFlights);
         buttonPanel.add(logoutBtn);
 
@@ -78,6 +81,10 @@ public class AdminHomePanel extends JPanel {
 
     private void onRevenueReport() {
         mainFrame.showScreen(Screen.ADMIN_REVENUE_REPORT);
+    }
+
+    private void onReservations() {
+        mainFrame.showScreen(Screen.ADMIN_RESERVATIONS);
     }
 
     private void onActiveFlights() {

@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import travel.model.Flight;
 
 import travel.DBConnection;
 import travel.model.FlightSummaryRow;
@@ -27,9 +26,15 @@ public class ReportDAO {
         r.setCustomerName(rs.getString("customerName"));
         r.setFlightNumber(rs.getString("flightNumber"));
         r.setLineID(rs.getString("lineID"));
+        r.setLegOrder(rs.getInt("legOrder"));
+        r.setOriginPortID(rs.getString("originPortID"));
+        r.setDestinationPortID(rs.getString("destinationPortID"));
         r.setDepartureDate(rs.getDate("departureDate").toLocalDate());
+        r.setDepartureTime(rs.getTime("departureTime").toLocalTime());
+        r.setArrivalTime(rs.getTime("arrivalTime").toLocalTime());
         r.setSeatNumber(rs.getString("seatNumber"));
         r.setTicketClass(rs.getString("ticketClass"));
+        r.setTripType(rs.getString("tripType"));
         r.setStatus(rs.getString("status"));
         r.setFareCost(rs.getBigDecimal("fareCost"));
         r.setBookingFee(rs.getBigDecimal("bookingFee"));
@@ -80,10 +85,14 @@ public class ReportDAO {
         String sql = """
                 SELECT T.ticketNumber, T.customerID,
                        CONCAT(C.firstName, ' ', C.lastName) AS customerName,
-                       FT.flightNumber, FT.lineID, FT.departureDate, FT.seatNumber,
-                       FT.ticketClass, T.status, T.fareCost, T.bookingFee, T.purchaseTime
+                       FT.flightNumber, FT.lineID, FT.legOrder,
+                       F.departure_portID AS originPortID,
+                       F.destination_portID AS destinationPortID,
+                       FT.departureDate, F.departureTime, F.arrivalTime, FT.seatNumber,
+                       FT.ticketClass, T.tripType, T.status, T.fareCost, T.bookingFee, T.purchaseTime
                 FROM Tickets T
                 JOIN FlightTickets FT ON T.ticketNumber = FT.ticketNumber
+                JOIN Flights F ON FT.flightNumber = F.flightNumber AND FT.lineID = F.lineID
                 JOIN Customers C ON T.customerID = C.customerID
                 WHERE FT.flightNumber = ? AND FT.lineID = ?
                 """;
@@ -106,10 +115,14 @@ public class ReportDAO {
         String sql = """
                 SELECT T.ticketNumber, T.customerID,
                        CONCAT(C.firstName, ' ', C.lastName) AS customerName,
-                       FT.flightNumber, FT.lineID, FT.departureDate, FT.seatNumber,
-                       FT.ticketClass, T.status, T.fareCost, T.bookingFee, T.purchaseTime
+                       FT.flightNumber, FT.lineID, FT.legOrder,
+                       F.departure_portID AS originPortID,
+                       F.destination_portID AS destinationPortID,
+                       FT.departureDate, F.departureTime, F.arrivalTime, FT.seatNumber,
+                       FT.ticketClass, T.tripType, T.status, T.fareCost, T.bookingFee, T.purchaseTime
                 FROM Tickets T
                 JOIN FlightTickets FT ON T.ticketNumber = FT.ticketNumber
+                JOIN Flights F ON FT.flightNumber = F.flightNumber AND FT.lineID = F.lineID
                 JOIN Customers C ON T.customerID = C.customerID
                 WHERE CONCAT(C.firstName, ' ', C.lastName) LIKE ?
                 """;

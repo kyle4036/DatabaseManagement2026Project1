@@ -3,6 +3,7 @@ package travel.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 
 //More detailed report row for reservations, to be used in the Admin Reservation Report, instead of just using FlightTicket and Ticket objects. 
@@ -14,9 +15,15 @@ public class ReservationReportRow {
     private String customerName;
     private String flightNumber;
     private String lineID;
+    private int legOrder;
+    private String originPortID;
+    private String destinationPortID;
     private LocalDate departureDate;
+    private LocalTime departureTime;
+    private LocalTime arrivalTime;
     private String seatNumber;
     private String ticketClass;
+    private String tripType;
     private String status;
     private BigDecimal fareCost;
     private BigDecimal bookingFee;
@@ -28,15 +35,40 @@ public class ReservationReportRow {
 
     }
 
-    public ReservationReportRow(int ticketNumber, int customerID, String customerName, String flightNumber, String lineID, LocalDate departureDate, String seatNumber, String ticketClass, String status, BigDecimal fareCost, BigDecimal bookingFee, LocalDateTime purchaseTime) {
+    public ReservationReportRow(
+        int ticketNumber,
+        int customerID,
+        String customerName,
+        String flightNumber,
+        String lineID,
+        int legOrder,
+        String originPortID,
+        String destinationPortID,
+        LocalDate departureDate,
+        LocalTime departureTime,
+        LocalTime arrivalTime,
+        String seatNumber,
+        String ticketClass,
+        String tripType,
+        String status,
+        BigDecimal fareCost,
+        BigDecimal bookingFee,
+        LocalDateTime purchaseTime
+    ) {
         this.ticketNumber = ticketNumber;
         this.customerID = customerID;
         this.customerName = customerName;
         this.flightNumber = flightNumber;
         this.lineID = lineID;
+        this.legOrder = legOrder;
+        this.originPortID = originPortID;
+        this.destinationPortID = destinationPortID;
         this.departureDate = departureDate;
+        this.departureTime = departureTime;
+        this.arrivalTime = arrivalTime;
         this.seatNumber = seatNumber;
         this.ticketClass = ticketClass;
+        this.tripType = tripType;
         this.status = status;
         this.fareCost = fareCost;
         this.bookingFee = bookingFee;
@@ -83,12 +115,52 @@ public class ReservationReportRow {
         this.lineID = lineID;
     }
 
+    public int getLegOrder() {
+        return legOrder;
+    }
+
+    public void setLegOrder(int legOrder) {
+        this.legOrder = legOrder;
+    }
+
+    public String getOriginPortID() {
+        return originPortID;
+    }
+
+    public void setOriginPortID(String originPortID) {
+        this.originPortID = originPortID;
+    }
+
+    public String getDestinationPortID() {
+        return destinationPortID;
+    }
+
+    public void setDestinationPortID(String destinationPortID) {
+        this.destinationPortID = destinationPortID;
+    }
+
     public LocalDate getDepartureDate() {
         return departureDate;
     }
 
     public void setDepartureDate(LocalDate departureDate) {
         this.departureDate = departureDate;
+    }
+
+    public LocalTime getDepartureTime() {
+        return departureTime;
+    }
+
+    public void setDepartureTime(LocalTime departureTime) {
+        this.departureTime = departureTime;
+    }
+
+    public LocalTime getArrivalTime() {
+        return arrivalTime;
+    }
+
+    public void setArrivalTime(LocalTime arrivalTime) {
+        this.arrivalTime = arrivalTime;
     }
 
     public String getSeatNumber() {
@@ -105,6 +177,14 @@ public class ReservationReportRow {
 
     public void setTicketClass(String ticketClass) {
         this.ticketClass = ticketClass;
+    }
+
+    public String getTripType() {
+        return tripType;
+    }
+
+    public void setTripType(String tripType) {
+        this.tripType = tripType;
     }
 
     public String getStatus() {

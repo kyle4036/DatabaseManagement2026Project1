@@ -15,6 +15,7 @@ public final class Screen {
     public static final String ADMIN_SALES_REPORT   = "adminSalesReport";
     public static final String ADMIN_REVENUE_REPORT = "adminRevenueReport";
     public static final String ADMIN_ACTIVE_FLIGHTS = "adminActiveFlights";
+    public static final String ADMIN_RESERVATIONS   = "adminReservations";
 
     public static final String CUSTOMER_SEARCH      = "customerSearch";
     public static final String CUSTOMER_RESERVE     = "customerReserve";

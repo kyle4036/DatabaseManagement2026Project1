@@ -100,14 +100,18 @@ public class AdminService {
         return reportDAO.getReservationsByFlightNumber(flightNumber, lineID);
     }
 
-    public List<ReservationReportRow> reservationsByCustomerNameAndID(String name, int customerID) {
+    public List<ReservationReportRow> reservationsByCustomerName(String name) {
         if (name == null || name.isEmpty()) {
             throw new IllegalArgumentException("Customer name cannot be empty");
         }
+        return reportDAO.getReservationsByCustomerName(name);
+    }
+
+    public List<ReservationReportRow> reservationsByCustomerNameAndID(String name, int customerID) {
         if (customerID <= 0) {
             throw new IllegalArgumentException("Invalid customer ID");
         }
-        return reportDAO.getReservationsByCustomerName(name);
+        return reservationsByCustomerName(name);
     }
 
     public RevenueSummaryRow revenueSummaryByCustomer(int customerID) {

@@ -91,13 +91,13 @@ public class MainFrame extends JFrame {
     private void addCustomerPanels(){
         CustomerHomePanel         chp = new CustomerHomePanel(this);
         CustomerReservationsPanel crp = new CustomerReservationsPanel(this);
-        // CustomerSearchTicketPanel csp = new CustomerSearchTicketPanel(this);
+        CustomerSearchTicketPanel csp = new CustomerSearchTicketPanel(this);
         // CustomerWaitListPanel     cwp = new CustomerWaitListPanel(this);
         CustomerQnAPanel          cqp = new CustomerQnAPanel(this);
 
         container.add(chp, Screen.CUSTOMER_HOME);
         container.add(crp, Screen.CUSTOMER_RESERVE);
-        // container.add(csp, Screen.CUSTOMER_SEARCH);
+        container.add(csp, Screen.CUSTOMER_SEARCH);
         // container.add(cwp, Screen.CUSTOMER_WAITLIST);
         container.add(cqp, Screen.CUSTOMER_QNA);
     }

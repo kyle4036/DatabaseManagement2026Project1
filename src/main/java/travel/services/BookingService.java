@@ -23,8 +23,12 @@ public class BookingService {
         return fDao.findAll();
     }
 
-    public  void addTicket(Ticket t){
+    public void addTicket(Ticket t){
         tDao.insert(t);
+    }
+
+    public void bookFlightByNumber(String s){
+        
     }
 
     public List<Flight> findByRoute(String fromPortID, String toPortID, String daysRunning){

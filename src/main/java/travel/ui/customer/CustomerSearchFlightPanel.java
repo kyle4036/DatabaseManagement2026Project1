@@ -36,7 +36,6 @@ public class CustomerSearchFlightPanel extends JPanel {
 
     private void promptSearch(){
         JTextField dateField = new JTextField();
-        JTextField timeField = new JTextField();
         JTextField departureField = new JTextField();
         JTextField arrivalField = new JTextField();
 
@@ -44,7 +43,6 @@ public class CustomerSearchFlightPanel extends JPanel {
 
         panel.add(new JLabel("Date:"));
         panel.add(dateField);
-        panel.add(new JLabel("Time:"));
         panel.add(timeField);
         panel.add(new JLabel("Departure Airport:"));
         panel.add(departureField);
@@ -52,6 +50,9 @@ public class CustomerSearchFlightPanel extends JPanel {
         panel.add(arrivalField);
         
         int choice = JOptionPane.showConfirmDialog(this, panel, "Search Flights" , JOptionPane.OK_CANCEL_OPTION);
+        if (choice != JOptionPane.OK_OPTION) {
+            return;
+        }
     }
 
 }

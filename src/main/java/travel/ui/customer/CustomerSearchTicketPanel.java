@@ -37,10 +37,14 @@ public class CustomerSearchTicketPanel extends JPanel{
 
     private JPanel resultsPanel;
 
+    private List<Flight> flightList;
+
     //private JPanel avaialbleFlights = null;
 
     public CustomerSearchTicketPanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
+        flightList = bService.getAllFlights();
+        tableModel = new DefaultTableModel();
         buildUI();
     }
 
@@ -80,6 +84,8 @@ public class CustomerSearchTicketPanel extends JPanel{
         panel.add(new JLabel()); // spacer
         panel.add(searchButton);
 
+        updateTicketsPanel();
+
         return panel;
     }
 
@@ -114,20 +120,22 @@ public class CustomerSearchTicketPanel extends JPanel{
             dateField.getText().trim()
         );
 
-        updateTicketsPanel(flights);
+        flightList = flights;
+
+        updateTicketsPanel();
     }
 
-    private void updateTicketsPanel(List<Flight> flights){
+    private void updateTicketsPanel(){
         tableModel.setRowCount(0); // clear table
 
-        if (flights == null || flights.isEmpty()) {
+        if (flightList == null || flightList.isEmpty()) {
             JOptionPane.showMessageDialog(this, "No flights found.");
             return;
         }
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 
-        for (Flight f : flights) {
+        for (Flight f : flightList) {
             tableModel.addRow(new Object[]{
                 f.getFlightNumber(),
                 f.getDeparturePortID(),
@@ -148,10 +156,9 @@ public class CustomerSearchTicketPanel extends JPanel{
             return;
         }
 
-        String flightNumber = (String) tableModel.getValueAt(selectedRow, 0);
+        //String flightNumber = (String) tableModel.getValueAt(selectedRow, 0);
 
-        // You will likely need a proper lookup instead of this later
-        bService.bookFlightByNumber(flightNumber);
+        bService.bookByFlight(flightList.get(selectedRow));
 
         JOptionPane.showMessageDialog(this, "Flight booked successfully.");
     }

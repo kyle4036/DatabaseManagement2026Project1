@@ -27,7 +27,7 @@ public class BookingService {
         tDao.insert(t);
     }
 
-    public void bookFlightByNumber(String s){
+    public void bookByFlight(Flight f){
         
     }
 

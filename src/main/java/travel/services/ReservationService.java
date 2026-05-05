@@ -34,6 +34,10 @@ public class ReservationService {
         this.customerDAO = new CustomerDAO();
     }
 
+    public void editReservation(int ticketNumber, String flightNumber, int legOrder){
+        FlightTicket flightTicket = flightTicketDAO.findByKey("Placeholder");
+    }
+
     public void cancelReservation(int ticketNumber) {
         Ticket ticket = ticketDAO.findByKey(ticketNumber);
         if (ticket == null) {

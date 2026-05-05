@@ -8,7 +8,7 @@ public class FlightTicket {
     private String flightNumber;
     private String lineID;
     private int legOrder;
-    private LocalDate departureDate; // Question: Would we have to modify this for Java Swing? 
+    private LocalDate departureDate; 
     private String seatNumber;
     private String ticketClass;
     private String mealOrder;

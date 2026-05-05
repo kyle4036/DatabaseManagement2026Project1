@@ -104,7 +104,7 @@ Employees(
 
 WaitingList(
     customerID: int,
-    flightNumber: int,
+    flightNumber: char(3),
     lineID: char(2),
     requestTime: datetime,
     Foreign key(customerID) references Customers,

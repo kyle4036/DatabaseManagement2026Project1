@@ -35,14 +35,24 @@ public class ReservationService {
     }
 
     public void editReservation(int ticketNumber, String flightNumber, int legOrder, String seatNumber, String ticketClass, String mealOrder){
-        FlightTicket flightTicket = flightTicketDAO.findByKey(ticketNumber, legOrder);
-        if (flightTicket == null){
-            throw new IllegalArgumentException("The reservation could not be found with flight, " + flightNumber + ", and leg order, " + legOrder + ".");
+        List<FlightTicket> flightTickets = flightTicketDAO.findByTicket(ticketNumber);
+        if (flightTickets.isEmpty()) {
+                throw new IllegalStateException(
+                    "Ticket " + ticketNumber + " does not have any associated flight legs."
+                );
+            }
+
+        for (FlightTicket flightTicket : flightTickets) {
+            if (flightTicket.getLegOrder() == legOrder) {
+                flightTicket.setSeatNumber(seatNumber);
+                flightTicket.setTicketClass(ticketClass);
+                flightTicket.setMealOrder(mealOrder);
+
+                flightTicketDAO.update(flightTicket);
+                break;
+            }
         }
 
-        flightTicket.setSeatNumber(seatNumber);
-        flightTicket.setTicketClass(ticketClass);
-        flightTicket.setMealOrder(mealOrder);
     }
 
     public void cancelReservation(int ticketNumber) {

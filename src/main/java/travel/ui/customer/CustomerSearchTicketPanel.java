@@ -145,9 +145,11 @@ public class CustomerSearchTicketPanel extends JPanel{
         }
 
         if(!departureString.isEmpty() ^ !arrivalString.isEmpty()){ //xor to search if only one field is set
-            flights = bService.findByAirport(departureString);
-            bService.removeFlightArrivals(flights, departureString);
-            if(flights.isEmpty()){
+            if(!departureString.isEmpty()){
+                flights = bService.findByAirport(departureString);
+                bService.removeFlightArrivals(flights, departureString);
+                
+            }else{
                 flights = bService.findByAirport(arrivalString);
                 bService.removeFlightDepartures(flights, arrivalString);
             }

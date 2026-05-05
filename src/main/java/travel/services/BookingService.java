@@ -54,7 +54,8 @@ public class BookingService {
                 "");
 
         ftDao.insert(ft);
-        
+
+        fDao.updateSeatsTaken(f.getFlightNumber(), f.getLineID(), f.getSeatsTaken()-1);
     }
 
     public List<Flight> findByRoute(String fromPortID, String toPortID){
@@ -66,19 +67,17 @@ public class BookingService {
     }
 
     public void removeFlightArrivals(List<Flight> flights, String portID){
+        flights.removeIf((Flight f) -> f.getDestinationPortID().equals(portID));
+        /*
         for(Flight f: flights){
             if(f.getDestinationPortID().equals(portID)){
                 flights.remove(f);
             }
-        }
+        }*/
     }
 
     public void removeFlightDepartures(List<Flight> flights, String portID){
-        for(Flight f: flights){
-            if(f.getDeparturePortID().equals(portID)){
-                flights.remove(f);
-            }
-        }
+        flights.removeIf((Flight f) -> f.getDeparturePortID().equals(portID));
     }
 
     public void removeFlightDates(List<Flight> flights, String date){
@@ -86,12 +85,21 @@ public class BookingService {
         LocalDate lDate = LocalDate.parse(date);
         DayOfWeek day = lDate.getDayOfWeek();
 
+        flights.removeIf(
+            (Flight f) ->
+                f.getDaysRunning().toCharArray()
+                [
+                    day.getValue()-1
+                ]
+                == '0'
+        );
+        /* 
         for(Flight f: flights){
             char[] dateMask = f.getDaysRunning().toCharArray();
             if(dateMask[day.getValue()] == '0'){
                 flights.remove(f);
             }
-        }
+        }*/
     }
 
 

@@ -11,6 +11,8 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
+import javax.management.RuntimeErrorException;
+
 import travel.DBConnection;
 import travel.model.Ticket;
 
@@ -155,6 +157,19 @@ public class TicketDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public Ticket getLastTicket(int customerID){
+        String sql = "SELCECT MAX(ticketNumber) FROM Tickets WHERE customerID = ?";
+        try(Connection conn = DBConnection.get();
+            PreparedStatement ps = conn.prepareStatement(sql)){
+                ps.setInt(1,customerID);
+                try(ResultSet rs = ps.executeQuery()){
+                    return rs.next() ? mapRow(rs) : null;
+                }
+            }catch(SQLException e){
+                throw new RuntimeException(e);
+            }
     }
 
     public static void main(String[] args) {

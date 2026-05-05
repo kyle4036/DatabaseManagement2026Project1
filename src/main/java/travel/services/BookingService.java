@@ -1,7 +1,9 @@
 package travel.services;
 
+import java.math.BigDecimal;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import travel.model.*;
@@ -13,10 +15,12 @@ import travel.dao.*;
 public class BookingService {
     private FlightDAO fDao = null;
     private TicketDAO tDao = null;
+    private FlightTicketDAO ftDao = null;
 
     public BookingService(){
         fDao = new FlightDAO();
         tDao = new TicketDAO();
+        ftDao = new FlightTicketDAO();
     }
 
     public List<Flight> getAllFlights(){
@@ -27,8 +31,30 @@ public class BookingService {
         tDao.insert(t);
     }
 
-    public void bookByFlight(Flight f){
+    public void bookByFlight(Flight f, Customer customer, String date){
 
+        Ticket t = new Ticket(  -1, 
+                                customer.getCustomerID(), 
+                                LocalDateTime.now(),
+                                new BigDecimal(20),
+                                new BigDecimal(100), 
+                                "One-Way",
+                                "active");
+        this.addTicket(t);
+
+        int lastTicket = tDao.getLastTicket(customer.getCustomerID()).getTicketNumber();
+        FlightTicket ft = new FlightTicket(
+                lastTicket, 
+                f.getFlightNumber(), 
+                f.getLineID(),
+                1,
+                LocalDate.parse(date),
+                "",
+                "",
+                "");
+
+        ftDao.insert(ft);
+        
     }
 
     public List<Flight> findByRoute(String fromPortID, String toPortID){

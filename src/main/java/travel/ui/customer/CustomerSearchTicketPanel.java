@@ -57,8 +57,10 @@ public class CustomerSearchTicketPanel extends JPanel{
 
         JButton bookButton = new JButton("Book Selected Flight");
         bookButton.addActionListener(e -> withGuard(this::bookSelectedFlight));
-
         add(bookButton, BorderLayout.SOUTH);
+
+        flightList = bService.getAllFlights();
+        updateTicketsPanel();
     }
 
     private JPanel createSearchPanel(){
@@ -83,8 +85,6 @@ public class CustomerSearchTicketPanel extends JPanel{
 
         panel.add(new JLabel()); // spacer
         panel.add(searchButton);
-
-        updateTicketsPanel();
 
         return panel;
     }
@@ -114,11 +114,26 @@ public class CustomerSearchTicketPanel extends JPanel{
     }
 
     private void searchPressed(){
-        List<Flight> flights = bService.findByRoute(
-            departureField.getText().trim(),
-            arrivalField.getText().trim(),
-            dateField.getText().trim()
-        );
+        String departureString = departureField.getText().trim();
+        String arrivalString = arrivalField.getText().trim();
+        String dateString = dateField.getText().trim();
+        List<Flight> flights = bService.getAllFlights();
+
+        if(departureString.isEmpty() && arrivalString.isEmpty()  && dateString.isEmpty()){
+            //all flights are already in the flights list
+        }
+
+        if(!departureString.isEmpty()  && !arrivalString.isEmpty()){
+            flights = bService.findByRoute(
+                departureField.getText().trim(),
+                arrivalField.getText().trim()
+                //,dateField.getText().trim()
+            );
+        }
+
+        if(!dateString.isEmpty()){
+
+        }
 
         flightList = flights;
 

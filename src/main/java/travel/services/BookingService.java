@@ -28,11 +28,11 @@ public class BookingService {
     }
 
     public void bookByFlight(Flight f){
-        
+
     }
 
-    public List<Flight> findByRoute(String fromPortID, String toPortID, String daysRunning){
-        return fDao.findByRoute(fromPortID, toPortID,this.dateToBitMask(daysRunning));
+    public List<Flight> findByRoute(String fromPortID, String toPortID){
+        return fDao.findByRoute(fromPortID, toPortID);
     }
 
     public static void main(String[] args) {

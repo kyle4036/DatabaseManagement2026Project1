@@ -57,17 +57,20 @@ public class FlightDAO {
         }
     }
 
-    public List<Flight> findByRoute(String fromPortID, String toPortID, String daysRunning) {
-        String sql = "SELECT * FROM Flights "
-                   + "WHERE departure_portID = ?, destination_portID = ?, daysRunning = ?";
-        
+    public List<Flight> findByRoute(String fromPortID, String toPortID ) {
+        String sql = 
+                    "SELECT * FROM Flights " +
+                    "WHERE departure_portID = ? AND " +
+                    "destination_portID = ? " 
+                    //+"daysRunning = ? ";
+                    ; 
         List<Flight> results = new ArrayList<>();
         
         try (Connection conn = DBConnection.get();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, fromPortID);
             ps.setString(2, toPortID);
-            ps.setString(3, daysRunning);
+            //ps.setString(3, daysRunning);
 
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) results.add(mapRow(rs));
@@ -194,8 +197,8 @@ public class FlightDAO {
 
     public static void main(String[] args) {
         FlightDAO fdao = new FlightDAO();
-        //List<Flight> fList = fdao.findByRoute("JFK", "LAX","0111110");
-        List<Flight> fList = fdao.findAll();
+        List<Flight> fList = fdao.findByRoute("JFK", "LAX");
+        //List<Flight> fList = fdao.findAll();
         System.out.println(fList.get(1));
     }
 }

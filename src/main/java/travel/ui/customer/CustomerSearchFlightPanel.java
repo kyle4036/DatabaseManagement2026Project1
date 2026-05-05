@@ -74,9 +74,7 @@ public class CustomerSearchFlightPanel extends JPanel {
 
         return bService.findByRoute(
                 departureField.getText().trim(),
-                arrivalField.getText().trim(),
-                dateField.getText().trim());
-
+                arrivalField.getText().trim());
     }
 
     private void withGuard(Runnable action) {

@@ -3,6 +3,7 @@ package travel.ui.customer;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.FlowLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -20,6 +21,7 @@ import java.util.List;
 import travel.services.BookingService;
 import travel.ui.MainFrame;
 import travel.model.*;
+import travel.ui.Screen;
 
 
 
@@ -55,9 +57,19 @@ public class CustomerSearchTicketPanel extends JPanel{
         add(createSearchPanel(), BorderLayout.NORTH);
         add(createResultsPanel(), BorderLayout.CENTER);
 
+        
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 8, 0));
+
+        JButton backBtn = new JButton("Back");
+        backBtn.addActionListener(e -> mainFrame.showScreen(Screen.CUSTOMER_HOME));
+
         JButton bookButton = new JButton("Book Selected Flight");
         bookButton.addActionListener(e -> withGuard(this::bookSelectedFlight));
-        add(bookButton, BorderLayout.SOUTH);
+
+        buttonPanel.add(bookButton);
+        buttonPanel.add(backBtn);
+
+        add(buttonPanel, BorderLayout.SOUTH);
 
         flightList = bService.getAllFlights();
         updateTicketsPanel();
@@ -84,6 +96,7 @@ public class CustomerSearchTicketPanel extends JPanel{
         panel.add(dateField);
 
         panel.add(new JLabel()); // spacer
+
         panel.add(searchButton);
 
         return panel;
@@ -173,7 +186,7 @@ public class CustomerSearchTicketPanel extends JPanel{
     }
 
     private void bookSelectedFlight() {
-        int selectedRow = resultsTable.getSelectedRow();
+         int selectedRow = resultsTable.getSelectedRow();
         String dateString = dateField.getText().trim();
 
         if (selectedRow == -1) {

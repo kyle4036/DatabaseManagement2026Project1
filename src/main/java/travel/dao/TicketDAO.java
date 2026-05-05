@@ -159,13 +159,14 @@ public class TicketDAO {
         }
     }
 
-    public Ticket getLastTicket(int customerID){
-        String sql = "SELECT MAX(ticketNumber) FROM Tickets WHERE customerID = ?";
+    public int getLastTicket(int customerID){
+        String sql = "SELECT Max(ticketNumber) FROM Tickets "+
+        "WHERE customerID = ?";
         try(Connection conn = DBConnection.get();
             PreparedStatement ps = conn.prepareStatement(sql)){
                 ps.setInt(1,customerID);
                 try(ResultSet rs = ps.executeQuery()){
-                    return rs.next() ? mapRow(rs) : null;
+                    return rs.next() ? rs.getInt(1) : null;
                 }
             }catch(SQLException e){
                 throw new RuntimeException(e);
@@ -183,6 +184,8 @@ public class TicketDAO {
             new BigDecimal("19.99"),
             "One-way",
             "active"));
-        System.out.println("success maybe");
+
+        int tNo = td.getLastTicket(1);
+        System.out.println(tNo);
     }
 }

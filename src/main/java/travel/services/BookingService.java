@@ -42,7 +42,7 @@ public class BookingService {
                                 "active");
         this.addTicket(t);
 
-        int lastTicket = tDao.getLastTicket(customer.getCustomerID()).getTicketNumber();
+        int lastTicket = tDao.getLastTicket(customer.getCustomerID());
         FlightTicket ft = new FlightTicket(
                 lastTicket, 
                 f.getFlightNumber(), 

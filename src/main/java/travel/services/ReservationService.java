@@ -34,8 +34,15 @@ public class ReservationService {
         this.customerDAO = new CustomerDAO();
     }
 
-    public void editReservation(int ticketNumber, String flightNumber, int legOrder){
-        FlightTicket flightTicket = flightTicketDAO.findByKey("Placeholder");
+    public void editReservation(int ticketNumber, String flightNumber, int legOrder, String seatNumber, String ticketClass, String mealOrder){
+        FlightTicket flightTicket = flightTicketDAO.findByKey(ticketNumber, legOrder);
+        if (flightTicket == null){
+            throw new IllegalArgumentException("The reservation could not be found with flight, " + flightNumber + ", and leg order, " + legOrder + ".");
+        }
+
+        flightTicket.setSeatNumber(seatNumber);
+        flightTicket.setTicketClass(ticketClass);
+        flightTicket.setMealOrder(mealOrder);
     }
 
     public void cancelReservation(int ticketNumber) {

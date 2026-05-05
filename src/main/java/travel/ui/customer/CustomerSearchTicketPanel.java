@@ -63,10 +63,14 @@ public class CustomerSearchTicketPanel extends JPanel{
         JButton backBtn = new JButton("Back");
         backBtn.addActionListener(e -> mainFrame.showScreen(Screen.CUSTOMER_HOME));
 
+        JButton allBtn = new JButton("See All");
+        allBtn.addActionListener(e -> withGuard(this::seeAllFlights));
+
         JButton bookButton = new JButton("Book Selected Flight");
         bookButton.addActionListener(e -> withGuard(this::bookSelectedFlight));
 
         buttonPanel.add(bookButton);
+        buttonPanel.add(allBtn);
         buttonPanel.add(backBtn);
 
         add(buttonPanel, BorderLayout.SOUTH);
@@ -161,6 +165,11 @@ public class CustomerSearchTicketPanel extends JPanel{
 
         flightList = flights;
 
+        updateTicketsPanel();
+    }
+
+    private void seeAllFlights(){
+        flightList = bService.getAllFlights();
         updateTicketsPanel();
     }
 

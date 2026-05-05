@@ -68,6 +68,20 @@ public class FlightTicketDAO {
         return results;
     }
 
+    public FlightTicket findByKey(int ticketNumber, int legOrder) {
+        String sql = "SELECT * FROM FlightTickets WHERE ticketNumber = ? AND legOrder = ?";
+        try (Connection conn = DBConnection.get();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, ticketNumber);
+            ps.setInt(2, legOrder);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next() ? mapRow(rs) : null;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void insert(FlightTicket ft) {
         String sql = """
                     INSERT INTO FlightTickets

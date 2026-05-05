@@ -160,7 +160,7 @@ public class TicketDAO {
     }
 
     public Ticket getLastTicket(int customerID){
-        String sql = "SELCECT MAX(ticketNumber) FROM Tickets WHERE customerID = ?";
+        String sql = "SELECT MAX(ticketNumber) FROM Tickets WHERE customerID = ?";
         try(Connection conn = DBConnection.get();
             PreparedStatement ps = conn.prepareStatement(sql)){
                 ps.setInt(1,customerID);

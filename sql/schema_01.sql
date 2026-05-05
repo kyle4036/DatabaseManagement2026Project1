@@ -92,7 +92,7 @@ CREATE TABLE FlightTickets (
     lineID CHAR(2) NOT NULL,
     legOrder INT NOT NULL,
     departureDate DATE NOT NULL,
-    seatNumber VARCHAR(5),
+    seatNumber VARCHAR(5) NOT NULL,
     ticketClass VARCHAR(15) NOT NULL,
     mealOrder VARCHAR(50),
     PRIMARY KEY (ticketNumber, legOrder),

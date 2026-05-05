@@ -10,6 +10,7 @@ import travel.dao.FlightDAO;
 import travel.dao.FlightTicketDAO;
 import travel.dao.TicketDAO;
 import travel.dao.CustomerDAO;
+import travel.model.Aircraft;
 import travel.model.Customer;
 import travel.model.Flight;
 import travel.model.FlightTicket;
@@ -34,14 +35,17 @@ public class ReservationService {
         this.customerDAO = new CustomerDAO();
     }
 
-    public void editReservation(int ticketNumber, String flightNumber, int legOrder, String seatNumber, String ticketClass, String mealOrder){
+    public void editReservation(int ticketNumber, int legOrder, String seatNumber, String ticketClass, String mealOrder){
+        verifyEditReservation(ticketNumber, legOrder, seatNumber, ticketClass, mealOrder);
+        
         List<FlightTicket> flightTickets = flightTicketDAO.findByTicket(ticketNumber);
         if (flightTickets.isEmpty()) {
-                throw new IllegalStateException(
+                throw new IllegalArgumentException(
                     "Ticket " + ticketNumber + " does not have any associated flight legs."
                 );
             }
 
+        boolean found = false;
         for (FlightTicket flightTicket : flightTickets) {
             if (flightTicket.getLegOrder() == legOrder) {
                 flightTicket.setSeatNumber(seatNumber);
@@ -49,10 +53,35 @@ public class ReservationService {
                 flightTicket.setMealOrder(mealOrder);
 
                 flightTicketDAO.update(flightTicket);
+                
+                found = true;
                 break;
             }
         }
 
+        if (!found) {
+            throw new IllegalArgumentException(
+                "No flight leg, " + legOrder + " found."
+            );
+        }
+    }
+
+    public void verifyEditReservation(int ticketNumber, int legOrder, String seatNumber, String ticketClass, String mealOrder) {
+        if (ticketNumber <= 0) {
+            throw new IllegalArgumentException("Ticket number must be a positive integer.");
+        }   
+        if (legOrder <= 0) {
+            throw new IllegalArgumentException("Leg order must be a positive integer.");
+        }
+        if (seatNumber == null || seatNumber.isEmpty()) {
+            throw new IllegalArgumentException("Seat number cannot be null or empty.");
+        }
+        if (ticketClass == null || ticketClass.isEmpty() || ((!ticketClass.equalsIgnoreCase("Economy")) && (!ticketClass.equalsIgnoreCase("Business")) && (!ticketClass.equalsIgnoreCase("First")))) {
+            throw new IllegalArgumentException("Ticket class cannot be null or empty. It must either be 'Economy', 'Business' or 'First'.");
+        }
+        if (mealOrder == null || mealOrder.isEmpty()) {
+            throw new IllegalArgumentException("Meal order cannot be null or empty. Anyone opting out of meal orders should have it listed as 'None'.");
+        }
     }
 
     public void cancelReservation(int ticketNumber) {
@@ -77,7 +106,7 @@ public class ReservationService {
         for (Ticket ticket : ticketDAO.findAll(customerID)) {
             List<FlightTicket> flightTickets = flightTicketDAO.findByTicket(ticket.getTicketNumber());
             if (flightTickets.isEmpty()) {
-                throw new IllegalStateException(
+                throw new IllegalArgumentException(
                     "Ticket " + ticket.getTicketNumber() + " does not have any associated flight legs."
                 );
             }
@@ -133,7 +162,7 @@ public class ReservationService {
 
     private ReservationReportRow buildReservationRow(Ticket ticket, FlightTicket flightTicket, Flight flight) {
         if (flight == null) {
-            throw new IllegalStateException(
+            throw new IllegalArgumentException(
                 "Flight " + flightTicket.getFlightNumber() + " / " + flightTicket.getLineID()
                     + " was not found for ticket " + ticket.getTicketNumber() + "."
             );

@@ -35,6 +35,40 @@ public class BookingService {
         return fDao.findByRoute(fromPortID, toPortID);
     }
 
+    public List<Flight> findByAirport(String portID){
+        return fDao.findByAirport(portID);
+    }
+
+    public void removeFlightArrivals(List<Flight> flights, String portID){
+        for(Flight f: flights){
+            if(f.getDestinationPortID().equals(portID)){
+                flights.remove(f);
+            }
+        }
+    }
+
+    public void removeFlightDepartures(List<Flight> flights, String portID){
+        for(Flight f: flights){
+            if(f.getDeparturePortID().equals(portID)){
+                flights.remove(f);
+            }
+        }
+    }
+
+    public void removeFlightDates(List<Flight> flights, String date){
+        //String dateMask = this.dateToBitMask(date);
+        LocalDate lDate = LocalDate.parse(date);
+        DayOfWeek day = lDate.getDayOfWeek();
+
+        for(Flight f: flights){
+            char[] dateMask = f.getDaysRunning().toCharArray();
+            if(dateMask[day.getValue()] == '0'){
+                flights.remove(f);
+            }
+        }
+    }
+
+
     public static void main(String[] args) {
         //FlightDAO fd = new FlightDAO();
         new BookingService().getAllFlights();

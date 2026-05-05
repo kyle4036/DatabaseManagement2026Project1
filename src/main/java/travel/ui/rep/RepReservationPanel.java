@@ -11,10 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import travel.model.Customer;
-import travel.model.Employee;
 import travel.model.FlightTicket;
-import travel.services.AdminService;
 import travel.services.ReservationService;
 import travel.ui.MainFrame;
 import travel.ui.Screen;
@@ -39,7 +36,7 @@ public class RepReservationPanel extends JPanel {
     }
 
     private void onEditReservation() {
-        FlightTicket flightTicket = promptFlightTicket(false);
+        FlightTicket flightTicket = promptEditReservation(false);
         if (flightTicket == null) {
             return;
         }
@@ -47,7 +44,7 @@ public class RepReservationPanel extends JPanel {
         showInfo("Reservation updated successfully.");
     }
 
-    private FlightTicket promptFlightTicket(boolean includeId) {
+    private FlightTicket promptEditReservation(boolean includeId) {
         JTextField idField = new JTextField();
         JTextField seatNumber = new JTextField();
         JTextField ticketClass = new JTextField();        
@@ -92,6 +89,16 @@ public class RepReservationPanel extends JPanel {
             return Integer.parseInt(trimmed);
         } catch (NumberFormatException ex) {
             throw new IllegalArgumentException(label + " must be a number");
+        }
+    }
+
+    private void withGuard(Runnable action) {
+        try {
+            action.run();
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Validation Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Operation Failed", JOptionPane.ERROR_MESSAGE);
         }
     }
 

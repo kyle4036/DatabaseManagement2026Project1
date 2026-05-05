@@ -35,22 +35,28 @@ public class ReservationService {
         this.customerDAO = new CustomerDAO();
     }
 
-    public void editReservation(int ticketNumber, int legOrder, String seatNumber, String ticketClass, String mealOrder){
-        verifyEditReservation(ticketNumber, legOrder, seatNumber, ticketClass, mealOrder);
+    public void editReservation(FlightTicket flightTicket){
+        verifyEditReservation(flightTicket);
         
+        int ticketNumber = flightTicket.getTicketNumber();
+        int legOrder = flightTicket.getLegOrder();
+        String seatNumber = flightTicket.getSeatNumber();
+        String ticketClass = flightTicket.getTicketClass();
+        String mealOrder =flightTicket.getMealOrder();
+
         List<FlightTicket> flightTickets = flightTicketDAO.findByTicket(ticketNumber);
         if (flightTickets.isEmpty()) {
-                throw new IllegalArgumentException(
-                    "Ticket " + ticketNumber + " does not have any associated flight legs."
-                );
-            }
+            throw new IllegalArgumentException(
+                "Ticket " + ticketNumber + " does not have any associated flight legs."
+            );
+        }
 
         boolean found = false;
-        for (FlightTicket flightTicket : flightTickets) {
-            if (flightTicket.getLegOrder() == legOrder) {
-                flightTicket.setSeatNumber(seatNumber);
-                flightTicket.setTicketClass(ticketClass);
-                flightTicket.setMealOrder(mealOrder);
+        for (FlightTicket flightTicketElement : flightTickets) {
+            if (flightTicketElement.getLegOrder() == legOrder) {
+                flightTicketElement.setSeatNumber(seatNumber);
+                flightTicketElement.setTicketClass(ticketClass);
+                flightTicketElement.setMealOrder(mealOrder);
 
                 flightTicketDAO.update(flightTicket);
                 
@@ -66,7 +72,13 @@ public class ReservationService {
         }
     }
 
-    public void verifyEditReservation(int ticketNumber, int legOrder, String seatNumber, String ticketClass, String mealOrder) {
+    public void verifyEditReservation(FlightTicket flightTicket) {
+        int ticketNumber = flightTicket.getTicketNumber();
+        int legOrder = flightTicket.getLegOrder();
+        String seatNumber = flightTicket.getSeatNumber();
+        String ticketClass = flightTicket.getTicketClass();
+        String mealOrder =flightTicket.getMealOrder();
+        
         if (ticketNumber <= 0) {
             throw new IllegalArgumentException("Ticket number must be a positive integer.");
         }   

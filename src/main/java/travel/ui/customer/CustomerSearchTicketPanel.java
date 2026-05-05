@@ -35,9 +35,9 @@ public class CustomerSearchTicketPanel extends JPanel{
 
     private JTable resultsTable;
     private DefaultTableModel tableModel;
-    private JButton bookButton;
+    //private JButton bookButton;
 
-    private JPanel resultsPanel;
+    //private JPanel resultsPanel;
 
     private List<Flight> flightList;
 

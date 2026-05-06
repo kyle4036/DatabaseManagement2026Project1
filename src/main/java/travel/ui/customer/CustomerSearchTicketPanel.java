@@ -218,7 +218,7 @@ public class CustomerSearchTicketPanel extends JPanel{
 
         String[] columns = {
             "Flight #", "From", "To", "Departure", 
-            "Arrival", "Type", "Seats Taken"
+            "Arrival", "Type", "Price", "Seats Taken"
         };
 
         tableModel = new DefaultTableModel(columns, 0) {
@@ -309,6 +309,7 @@ public class CustomerSearchTicketPanel extends JPanel{
                 f.getDepartureTime() != null ? f.getDepartureTime().format(formatter) : "",
                 f.getArrivalTime() != null ? f.getArrivalTime().format(formatter) : "",
                 f.getFlightType(),
+                "$" + bService.estimateBaseFare(f).toPlainString(),
                 f.getSeatsTaken()
             });
         }

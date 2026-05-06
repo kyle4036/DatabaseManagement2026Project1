@@ -6,6 +6,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JOptionPane;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
@@ -13,6 +14,7 @@ import java.awt.Font;
 import travel.model.Customer;
 import travel.ui.MainFrame;
 import travel.ui.Screen;
+import travel.dao.WaitingListDAO;
 
 /**
  * Landing page after a customer logs in
@@ -23,6 +25,7 @@ public class CustomerHomePanel extends JPanel {
 
     private final MainFrame mainFrame;
     private final JLabel welcomeLabel = new JLabel();
+    private WaitingListDAO wDao = new WaitingListDAO();
 
     public CustomerHomePanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
@@ -69,6 +72,7 @@ public class CustomerHomePanel extends JPanel {
         if (c != null) {
             welcomeLabel.setText("Welcome, " + c.getFirstName() + " " + c.getLastName());
         }
+        if(wDao.checkSeatOpen(c))
     }
 
     private void onLogout() {

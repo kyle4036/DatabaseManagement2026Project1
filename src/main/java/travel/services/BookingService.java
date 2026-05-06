@@ -101,12 +101,14 @@ public class BookingService {
         //String dateMask = this.dateToBitMask(date);
         LocalDate lDate = LocalDate.parse(date);
         DayOfWeek day = lDate.getDayOfWeek();
+        int dval = day.getValue() % 7;
 
         flights.removeIf(
             (Flight f) ->
                 f.getDaysRunning().toCharArray()
                 [
-                    day.getValue()-1
+                    //day.getValue()//-1
+                    dval
                 ]
                 == '0'
         );

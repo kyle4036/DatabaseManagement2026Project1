@@ -69,24 +69,100 @@ public class CustomerSearchTicketPanel extends JPanel{
         add(createResultsPanel(), BorderLayout.CENTER);
 
         
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 8, 0));
+        // Filter panel
+        JPanel filterPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 6, 4));
+        filterPanel.setBorder(BorderFactory.createTitledBorder("Filter & Sort"));
 
+        filterPanel.add(new JLabel("Airline:"));
+        JTextField airlineFilter = new JTextField(3);
+        filterPanel.add(airlineFilter);
+
+        filterPanel.add(new JLabel("Type:"));
+        JComboBox<String> typeFilter = new JComboBox<>(new String[]{"All", "domestic", "international"});
+        filterPanel.add(typeFilter);
+
+        filterPanel.add(new JLabel("Depart after:"));
+        JTextField depAfterField = new JTextField("00:00", 5);
+        filterPanel.add(depAfterField);
+
+        filterPanel.add(new JLabel("before:"));
+        JTextField depBeforeField = new JTextField("23:59", 5);
+        filterPanel.add(depBeforeField);
+
+        filterPanel.add(new JLabel("Sort:"));
+        JComboBox<String> sortBox = new JComboBox<>(new String[]{"Departure", "Arrival", "Duration"});
+        filterPanel.add(sortBox);
+
+        JButton applyFilter = new JButton("Apply");
+        applyFilter.addActionListener(e -> {
+            if (flightList == null || flightList.isEmpty()) return;
+            List<Flight> filtered = new java.util.ArrayList<>(flightList);
+
+            // Airline filter
+            String al = airlineFilter.getText().trim().toUpperCase();
+            if (!al.isEmpty()) {
+                filtered.removeIf(f -> !f.getLineID().equalsIgnoreCase(al));
+            }
+
+            // Type filter
+            String type = (String) typeFilter.getSelectedItem();
+            if (!"All".equals(type)) {
+                filtered.removeIf(f -> !f.getFlightType().equalsIgnoreCase(type));
+            }
+
+            // Departure time range
+            try {
+                java.time.LocalTime after = java.time.LocalTime.parse(depAfterField.getText().trim());
+                filtered.removeIf(f -> f.getDepartureTime().isBefore(after));
+            } catch (Exception ex) { /* ignore bad input */ }
+            try {
+                java.time.LocalTime before = java.time.LocalTime.parse(depBeforeField.getText().trim());
+                filtered.removeIf(f -> f.getDepartureTime().isAfter(before));
+            } catch (Exception ex) { /* ignore bad input */ }
+
+            // Sort
+            String sortBy = (String) sortBox.getSelectedItem();
+            switch (sortBy) {
+                case "Departure" -> filtered.sort(java.util.Comparator.comparing(Flight::getDepartureTime));
+                case "Arrival"   -> filtered.sort(java.util.Comparator.comparing(Flight::getArrivalTime));
+                case "Duration"  -> filtered.sort(java.util.Comparator.comparing(f ->
+                    java.time.Duration.between(f.getDepartureTime(), f.getArrivalTime())));
+            }
+
+            // Update table with filtered results
+            tableModel.setRowCount(0);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+            for (Flight f : filtered) {
+                tableModel.addRow(new Object[]{
+                    f.getFlightNumber(),
+                    f.getDeparturePortID(),
+                    f.getDestinationPortID(),
+                    f.getDepartureTime() != null ? f.getDepartureTime().format(formatter) : "",
+                    f.getArrivalTime() != null ? f.getArrivalTime().format(formatter) : "",
+                    f.getFlightType(),
+                    f.getSeatsTaken()
+                });
+            }
+        });
+        filterPanel.add(applyFilter);
+
+        // Bottom buttons
+        JPanel bottomWrapper = new JPanel(new BorderLayout());
+        bottomWrapper.add(filterPanel, BorderLayout.NORTH);
+
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 8, 0));
         JButton backBtn = new JButton("Back");
         backBtn.addActionListener(e -> mainFrame.showScreen(Screen.CUSTOMER_HOME));
-
         JButton allBtn = new JButton("See All");
         allBtn.addActionListener(e -> withGuard(this::seeAllFlights));
-
         JButton bookButton = new JButton("Book Selected Flight");
         bookButton.addActionListener(e -> withGuard(this::bookSelectedFlight));
-
         buttonPanel.add(bookButton);
         buttonPanel.add(allBtn);
         buttonPanel.add(backBtn);
 
-        add(buttonPanel, BorderLayout.SOUTH);
-
-        flightList = bService.getAllFlights();
+        bottomWrapper.add(buttonPanel, BorderLayout.SOUTH);
+        add(bottomWrapper, BorderLayout.SOUTH);        flightList = bService.getAllFlights();
         updateTicketsPanel();
     }
 

@@ -118,24 +118,7 @@ public class WaitingListDAO {
             throw new RuntimeException(e);
         }
     }
-    public boolean checkSeatOpen(Customer c){
-        String sql = """
-                SELECT * FROM WaitingList w
-                JOIN Flights f ON w.flightNumber = f.flightNumber AND w.lineID = f.line
-                JOIN FlightTickets t ON t.flightNumber = f.flightNumber
-                WHERE w.customerID = ? AND f.seatsTaken < 
-                (SELECT capacity FROM Aircrafts WHERE craftID = f.craftID)
-                """;
-        try (Connection conn = DBConnection.get();
-             PreparedStatement ps = conn.prepareStatement(sql)) {   
-            ps.setInt(1, c.getCustomerID());
-            try (ResultSet rs = ps.executeQuery()) {
-                return rs.next();
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);}
 
-    }
 
     public void insert(WaitingList wl) {
         String sql = "INSERT INTO WaitingList (customerID, flightNumber, lineID, requestTime) VALUES (?, ?, ?, ?)";

@@ -262,56 +262,51 @@ public class RepManagementPanel extends JPanel {
         JTextField arrivalAirportField = new JTextField();
         JTextField departureTimeField = new JTextField();
         JTextField arrivalTimeField = new JTextField();
-        JTextField fareField = new JTextField();
+        JTextField flightTypeField = new JTextField();        // NEW
+        JTextField daysRunningField = new JTextField("1111111"); // NEW, default daily
 
         JPanel panel = new JPanel(new GridLayout(0, 2, 8, 8));
 
         panel.add(new JLabel("Flight Number"));
         panel.add(flightNumberField);
-
         panel.add(new JLabel("Line ID"));
         panel.add(lineIdField);
-
         panel.add(new JLabel("Aircraft ID"));
         panel.add(aircraftIdField);
-
         panel.add(new JLabel("Departure Airport ID"));
         panel.add(departureAirportField);
-
         panel.add(new JLabel("Arrival Airport ID"));
         panel.add(arrivalAirportField);
-
-        panel.add(new JLabel("Departure Time"));
+        panel.add(new JLabel("Departure Time (HH:mm)"));
         panel.add(departureTimeField);
-
-        panel.add(new JLabel("Arrival Time"));
+        panel.add(new JLabel("Arrival Time (HH:mm)"));
         panel.add(arrivalTimeField);
-
-        panel.add(new JLabel("Fare"));
-        panel.add(fareField);
+        panel.add(new JLabel("Type (domestic/international)"));  // NEW
+        panel.add(flightTypeField);                               // NEW
+        panel.add(new JLabel("Days Running (SMTWTFS, e.g. 0111110)"));  // NEW
+        panel.add(daysRunningField);                              // NEW
 
         int choice = JOptionPane.showConfirmDialog(
-                this,
-                panel,
-                includeId ? "Update Flight" : "Add Flight",
-                JOptionPane.OK_CANCEL_OPTION
-        );
+            this, panel,
+            includeId ? "Update Flight" : "Add Flight",
+            JOptionPane.OK_CANCEL_OPTION);
 
         if (choice != JOptionPane.OK_OPTION) return null;
 
         Flight flight = new Flight();
-
         flight.setFlightNumber(parseRequiredString(flightNumberField.getText(), "Flight Number"));
         flight.setLineID(parseRequiredString(lineIdField.getText(), "Line ID"));
         flight.setCraftID(parseRequiredInt(aircraftIdField.getText(), "Aircraft ID"));
-        flight.setDeparturePortID(parseRequiredString(departureAirportField.getText(), "Departure Airport ID"));
-        flight.setDestinationPortID(parseRequiredString(arrivalAirportField.getText(), "Arrival Airport ID"));
+        flight.setDeparturePortID(parseRequiredString(departureAirportField.getText(), "Departure Airport"));
+        flight.setDestinationPortID(parseRequiredString(arrivalAirportField.getText(), "Arrival Airport"));
         flight.setDepartureTime(parseRequiredTime(departureTimeField.getText(), "Departure Time"));
         flight.setArrivalTime(parseRequiredTime(arrivalTimeField.getText(), "Arrival Time"));
+        flight.setFlightType(parseRequiredString(flightTypeField.getText(), "Flight Type"));       // NEW
+        flight.setDaysRunning(parseRequiredString(daysRunningField.getText(), "Days Running"));    // NEW
+        flight.setSeatsTaken(0);  // new flights start with 0 seats taken
 
         return flight;
     }
-
     private Integer promptIntId(String label) {
         String raw = JOptionPane.showInputDialog(this, label);
         if (raw == null) return null;

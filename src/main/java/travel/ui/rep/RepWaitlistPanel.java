@@ -105,6 +105,16 @@ public class RepWaitlistPanel extends JPanel {
             loadWaitingListTable(flightNumber, lineID);
         });
 
+        JButton showAllBtn = new JButton("Show All");
+        showAllBtn.addActionListener(e -> {
+            tableModel.setRowCount(0);
+            List<Object[]> rows = waitinglistDAO.findAll();
+            for (Object[] row : rows) {
+                tableModel.addRow(row);
+            }
+        });
+        searchPanel.add(showAllBtn);
+
         clearButton.addActionListener(e -> {
             flightNumberField.setText("");
             lineIDField.setText("");

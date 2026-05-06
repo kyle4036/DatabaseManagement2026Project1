@@ -43,13 +43,14 @@ public class ReservationService {
     }
 
     public void editReservation(int ticketNumber, int legOrder, String seatNumber, String ticketClass, String mealOrder){
-        verifyEditReservation(ticketNumber, legOrder, seatNumber, ticketClass, mealOrder);
-
-        FlightTicket flightTicket = flightTicketDAO.findByKey(ticketNumber, legOrder);
 
         String caseModifiedSeatNumber = seatNumber == null ? null : seatNumber.trim().toUpperCase();
         String caseModifiedTicketClass = ticketClass == null ? null : ticketClass.trim().toLowerCase();
         String caseModifiedMealOrder = mealOrder == null ? null : mealOrder.trim().toLowerCase();
+
+        verifyEditReservation(ticketNumber, legOrder, seatNumber, ticketClass, mealOrder);
+
+        FlightTicket flightTicket = flightTicketDAO.findByKey(ticketNumber, legOrder);
 
         if (flightTicket == null) {
             throw new IllegalArgumentException(
@@ -64,12 +65,7 @@ public class ReservationService {
         flightTicketDAO.update(flightTicket);
     }
 
-    public void verifyEditReservation(FlightTicket flightTicket) {
-        int ticketNumber = flightTicket.getTicketNumber();
-        int legOrder = flightTicket.getLegOrder();
-        String seatNumber = flightTicket.getSeatNumber();
-        String ticketClass = normalizeTicketClass(flightTicket.getTicketClass());
-        String mealOrder =flightTicket.getMealOrder();
+    public void verifyEditReservation(int ticketNumber, int legOrder, String seatNumber, String ticketClass, String mealOrder) {
         
         if (ticketNumber <= 0) {
             throw new IllegalArgumentException("Ticket number must be a positive integer.");
@@ -80,14 +76,12 @@ public class ReservationService {
         if (seatNumber == null || seatNumber.isEmpty()) {
             throw new IllegalArgumentException("Seat number cannot be null or empty.");
         }
-        if (ticketClass == null) {
+        if (ticketClass == null || ticketClass.isEmpty() || ((!ticketClass.equalsIgnoreCase("Economy")) && (!ticketClass.equalsIgnoreCase("Business")) && (!ticketClass.equalsIgnoreCase("First")))) {
             throw new IllegalArgumentException("Ticket class cannot be null or empty. It must either be 'Economy', 'Business' or 'First'.");
         }
         if (mealOrder == null || mealOrder.isEmpty()) {
             throw new IllegalArgumentException("Meal order cannot be null or empty. Anyone opting out of meal orders should have it listed as 'None'.");
         }
-
-        flightTicket.setTicketClass(ticketClass);
     }
 
     public void cancelReservation(int ticketNumber) {

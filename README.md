@@ -21,7 +21,13 @@ or use variables to denote program logic
 ## Credentials
 
 Admin Login: admin
+
 Admin Password: admin123
 
 Customer Representative Login: mike
-Customer Representative Passwrod: rep123
+
+Customer Representative Password: rep123
+
+MySQL Database Login: testuser
+
+MySQL Database Password: abc123

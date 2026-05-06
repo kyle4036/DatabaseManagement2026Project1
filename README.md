@@ -28,9 +28,9 @@ Customer Representative Login: mike
 
 Customer Representative Password: rep123
 
-MySQL Database Login: testuser
+Customer Login: alicej
 
-MySQL Database Password: abc123
+Customer Password: pass123
 
 ## Setup
 mvn clean compile exec:java -P DBSetup

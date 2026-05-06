@@ -32,6 +32,10 @@ Customer Login: alicej
 
 Customer Password: pass123
 
+MySQL Database Login: testuser
+
+MySQL Database Password: abc123
+
 ## Setup
 mvn clean compile exec:java -P DBSetup
 ## Build/Run

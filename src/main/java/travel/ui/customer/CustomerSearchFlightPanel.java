@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 
 import java.awt.GridLayout;
 
@@ -24,6 +25,7 @@ public class CustomerSearchFlightPanel extends JPanel {
     private final MainFrame mainFrame;
     private final JLabel welcomeLabel = new JLabel();
     private final BookingService bService = new BookingService();
+    private static final String[] SORT_OPTIONS = {"Price", "Take-off Time", "Landing Time"};
 
     public CustomerSearchFlightPanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
@@ -50,13 +52,16 @@ public class CustomerSearchFlightPanel extends JPanel {
         if(flights == null){
             return;
         }
-
+        if (flights.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No flights found.");
+        }
     }
 
     private List<Flight> promptSearch(){
         JTextField dateField = new JTextField();
         JTextField departureField = new JTextField();
         JTextField arrivalField = new JTextField();
+        JComboBox<String> sortBox = new JComboBox<>(SORT_OPTIONS);
 
         JPanel panel = new JPanel(new GridLayout(0,2,8,8));
 
@@ -66,15 +71,19 @@ public class CustomerSearchFlightPanel extends JPanel {
         panel.add(departureField);
         panel.add(new JLabel("Arrival Airport:"));
         panel.add(arrivalField);
+        panel.add(new JLabel("Sort By:"));
+        panel.add(sortBox);
         
         int choice = JOptionPane.showConfirmDialog(this, panel, "Search Flights" , JOptionPane.OK_CANCEL_OPTION);
         if (choice != JOptionPane.OK_OPTION) {
             return null;
         }
 
-        return bService.findByRoute(
+        List<Flight> flights = bService.findByRoute(
                 departureField.getText().trim(),
                 arrivalField.getText().trim());
+        bService.sortFlights(flights, String.valueOf(sortBox.getSelectedItem()));
+        return flights;
     }
 
     private void withGuard(Runnable action) {

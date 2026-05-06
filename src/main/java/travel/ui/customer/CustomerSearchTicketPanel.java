@@ -39,6 +39,7 @@ public class CustomerSearchTicketPanel extends JPanel{
     private JTextField dateField;
     private JTextField departureField;
     private JTextField arrivalField;
+    private JComboBox<String> sortBox;
 
     private JTable resultsTable;
     private DefaultTableModel tableModel;
@@ -49,6 +50,7 @@ public class CustomerSearchTicketPanel extends JPanel{
     private List<Flight> flightList;
 
     private boolean roundTripCheck = false;
+    private static final String[] SORT_OPTIONS = {"Price", "Take-off Time", "Landing Time"};
 
     //private JPanel avaialbleFlights = null;
 
@@ -89,14 +91,15 @@ public class CustomerSearchTicketPanel extends JPanel{
     }
 
     private JPanel createSearchPanel(){
-        JPanel panel = new JPanel(new GridLayout(2, 4, 10, 10));
+        JPanel panel = new JPanel(new GridLayout(2, 1, 0, 8));
         panel.setBorder(BorderFactory.createTitledBorder("Search Flights"));
 
         departureField = new JTextField();
         arrivalField = new JTextField();
         dateField = new JTextField();
+        sortBox = new JComboBox<>(SORT_OPTIONS);
 
-        JButton searchButton = new JButton("Search Flights");
+        JButton searchButton = new JButton("Search");
         searchButton.addActionListener(e -> withGuard(this::searchPressed));
 
         JCheckBox roundTripBox = new JCheckBox();
@@ -107,25 +110,31 @@ public class CustomerSearchTicketPanel extends JPanel{
             }
         );
 
-        panel.add(new JLabel("Departure:"));
-        panel.add(departureField);
-
-        panel.add(new JLabel("Arrival:"));
-        panel.add(arrivalField);
-
-        panel.add(new JLabel("Date (YYYY-MM-DD):"));
-        panel.add(dateField);
+        JPanel topRow = new JPanel(new GridLayout(1, 3, 10, 0));
+        topRow.add(createLabeledFieldPanel("Departure:", departureField));
+        topRow.add(createLabeledFieldPanel("Arrival:", arrivalField));
+        topRow.add(createLabeledFieldPanel("Date (YYYY-MM-DD):", dateField));
 
         JPanel rPanel = new JPanel();
         rPanel.add(new JLabel("round trip"));
         rPanel.add(roundTripBox);
 
-        panel.add(rPanel);
-        //panel.add(new JLabel()); // spacer
+        JPanel bottomRow = new JPanel(new GridLayout(1, 3, 10, 0));
+        bottomRow.add(createLabeledFieldPanel("Sort By:", sortBox));
+        bottomRow.add(rPanel);
+        bottomRow.add(searchButton);
 
-        panel.add(searchButton);
+        panel.add(topRow);
+        panel.add(bottomRow);
 
         return panel;
+    }
+
+    private JPanel createLabeledFieldPanel(String labelText, java.awt.Component field) {
+        JPanel fieldPanel = new JPanel(new BorderLayout(0, 4));
+        fieldPanel.add(new JLabel(labelText), BorderLayout.NORTH);
+        fieldPanel.add(field, BorderLayout.CENTER);
+        return fieldPanel;
     }
 
     private JPanel createResultsPanel() {
@@ -189,6 +198,8 @@ public class CustomerSearchTicketPanel extends JPanel{
             bService.removeFlightNotRoundTrip(flights, departureString, arrivalString);
         }
 
+        bService.sortFlights(flights, String.valueOf(sortBox.getSelectedItem()));
+
         flightList = flights;
 
         updateTicketsPanel();
@@ -196,6 +207,7 @@ public class CustomerSearchTicketPanel extends JPanel{
 
     private void seeAllFlights(){
         flightList = bService.getAllFlights();
+        bService.sortFlights(flightList, String.valueOf(sortBox.getSelectedItem()));
         updateTicketsPanel();
     }
 

@@ -25,5 +25,7 @@ public final class Screen {
     public static final String REP_MANAGEMENT       = "repManagement";
     public static final String REP_QNA              = "repQNA";
     public static final String REP_WAITLIST         = "repWAITLIST";
+    public static final String REP_EDIT_RESERVATION = "repEditReservation";
+
     private Screen() {}
 }

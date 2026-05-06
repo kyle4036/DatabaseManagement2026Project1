@@ -23,6 +23,7 @@ import travel.ui.rep.RepHomePanel;
 import travel.ui.rep.RepWaitlistPanel;
 import travel.ui.rep.RepQnAPanel;
 import travel.ui.rep.RepManagementPanel;
+import travel.ui.rep.RepReservationPanel;
 
 /**
  * The single window for the entire app. Holds a CardLayout container with
@@ -108,11 +109,13 @@ public class MainFrame extends JFrame {
         RepManagementPanel rmp = new RepManagementPanel(this);
         RepQnAPanel rqp = new RepQnAPanel(this); 
         RepWaitlistPanel rwp = new RepWaitlistPanel(this);
+        RepReservationPanel rrp = new RepReservationPanel(this);
 
         container.add(rhp, Screen.REP_HOME);
         container.add(rmp, Screen.REP_MANAGEMENT);
         container.add(rwp, Screen.REP_WAITLIST);
         container.add(rqp, Screen.REP_QNA);
+        container.add(rrp, Screen.REP_EDIT_RESERVATION);
     }
 
     private void addAdminPanels() {

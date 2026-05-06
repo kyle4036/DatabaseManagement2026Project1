@@ -27,3 +27,7 @@ Admin Password: admin123
 Customer Representative Login: mike
 
 Customer Representative Password: rep123
+
+MySQL Database Login: testuser
+
+MySQL Database Password: abc123

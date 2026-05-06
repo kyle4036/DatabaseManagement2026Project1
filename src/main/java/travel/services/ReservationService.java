@@ -42,41 +42,26 @@ public class ReservationService {
         this.customerDAO = new CustomerDAO();
     }
 
-    public void editReservation(FlightTicket flightTicket){
-        verifyEditReservation(flightTicket);
-        
-        int ticketNumber = flightTicket.getTicketNumber();
-        int legOrder = flightTicket.getLegOrder();
-        String seatNumber = flightTicket.getSeatNumber();
-        String ticketClass = flightTicket.getTicketClass();
-        String mealOrder =flightTicket.getMealOrder();
+    public void editReservation(int ticketNumber, int legOrder, String seatNumber, String ticketClass, String mealOrder){
+        verifyEditReservation(ticketNumber, legOrder, seatNumber, ticketClass, mealOrder);
 
-        List<FlightTicket> flightTickets = flightTicketDAO.findByTicket(ticketNumber);
-        if (flightTickets.isEmpty()) {
+        FlightTicket flightTicket = flightTicketDAO.findByKey(ticketNumber, legOrder);
+
+        String caseModifiedSeatNumber = seatNumber == null ? null : seatNumber.trim().toUpperCase();
+        String caseModifiedTicketClass = ticketClass == null ? null : ticketClass.trim().toLowerCase();
+        String caseModifiedMealOrder = mealOrder == null ? null : mealOrder.trim().toLowerCase();
+
+        if (flightTicket == null) {
             throw new IllegalArgumentException(
-                "Ticket " + ticketNumber + " does not have any associated flight legs."
+                "No reservation found for ticket " + ticketNumber + " and leg " + legOrder + "."
             );
         }
 
-        boolean found = false;
-        for (FlightTicket flightTicketElement : flightTickets) {
-            if (flightTicketElement.getLegOrder() == legOrder) {
-                flightTicketElement.setSeatNumber(seatNumber);
-                flightTicketElement.setTicketClass(ticketClass);
-                flightTicketElement.setMealOrder(mealOrder);
+        flightTicket.setSeatNumber(caseModifiedSeatNumber);
+        flightTicket.setTicketClass(caseModifiedTicketClass);
+        flightTicket.setMealOrder(caseModifiedMealOrder);
 
-                flightTicketDAO.update(flightTicket);
-                
-                found = true;
-                break;
-            }
-        }
-
-        if (!found) {
-            throw new IllegalArgumentException(
-                "No flight leg, " + legOrder + " found."
-            );
-        }
+        flightTicketDAO.update(flightTicket);
     }
 
     public void verifyEditReservation(FlightTicket flightTicket) {

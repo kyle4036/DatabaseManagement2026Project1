@@ -17,3 +17,17 @@ additional functions
 
 an If statement should either be inverted (checking if the opposing condition is true and failing)
 or use variables to denote program logic
+
+## Credentials
+
+Admin Login: admin
+
+Admin Password: admin123
+
+Customer Representative Login: mike
+
+Customer Representative Password: rep123
+
+MySQL Database Login: testuser
+
+MySQL Database Password: abc123

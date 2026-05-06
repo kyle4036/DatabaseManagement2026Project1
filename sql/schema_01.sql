@@ -105,7 +105,6 @@ CREATE TABLE WaitingList (
     flightNumber VARCHAR(6) NOT NULL,
     lineID CHAR(2) NOT NULL,
     requestTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (customerID, flightNumber, lineID),
     FOREIGN KEY (customerID) REFERENCES Customers(customerID),
     FOREIGN KEY (flightNumber, lineID) REFERENCES Flights(flightNumber, lineID)
 );

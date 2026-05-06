@@ -25,7 +25,6 @@ public class CustomerHomePanel extends JPanel {
 
     private final MainFrame mainFrame;
     private final JLabel welcomeLabel = new JLabel();
-    private WaitingListDAO wDao = new WaitingListDAO();
 
     public CustomerHomePanel(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
@@ -72,7 +71,6 @@ public class CustomerHomePanel extends JPanel {
         if (c != null) {
             welcomeLabel.setText("Welcome, " + c.getFirstName() + " " + c.getLastName());
         }
-        
     }
 
     private void onLogout() {

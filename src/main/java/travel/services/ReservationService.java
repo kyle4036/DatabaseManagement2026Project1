@@ -42,26 +42,24 @@ public class ReservationService {
         this.customerDAO = new CustomerDAO();
     }
 
-    public void editReservation(int ticketNumber, int legOrder, String seatNumber, String ticketClass, String mealOrder){
-        verifyEditReservation(ticketNumber, legOrder, seatNumber, ticketClass, mealOrder);
+    public void editReservation(FlightTicket requestedFlightTicket) {
+        verifyEditReservation(requestedFlightTicket);
 
-        FlightTicket flightTicket = flightTicketDAO.findByKey(ticketNumber, legOrder);
+        int ticketNumber = requestedFlightTicket.getTicketNumber();
+        int legOrder = requestedFlightTicket.getLegOrder();
+        FlightTicket storedFlightTicket = flightTicketDAO.findByKey(ticketNumber, legOrder);
 
-        String caseModifiedSeatNumber = seatNumber == null ? null : seatNumber.trim().toUpperCase();
-        String caseModifiedTicketClass = ticketClass == null ? null : ticketClass.trim().toLowerCase();
-        String caseModifiedMealOrder = mealOrder == null ? null : mealOrder.trim().toLowerCase();
-
-        if (flightTicket == null) {
+        if (storedFlightTicket == null) {
             throw new IllegalArgumentException(
                 "No reservation found for ticket " + ticketNumber + " and leg " + legOrder + "."
             );
         }
 
-        flightTicket.setSeatNumber(caseModifiedSeatNumber);
-        flightTicket.setTicketClass(caseModifiedTicketClass);
-        flightTicket.setMealOrder(caseModifiedMealOrder);
+        storedFlightTicket.setSeatNumber(requestedFlightTicket.getSeatNumber().trim().toUpperCase());
+        storedFlightTicket.setTicketClass(requestedFlightTicket.getTicketClass());
+        storedFlightTicket.setMealOrder(requestedFlightTicket.getMealOrder().trim());
 
-        flightTicketDAO.update(flightTicket);
+        flightTicketDAO.update(storedFlightTicket);
     }
 
     public void verifyEditReservation(FlightTicket flightTicket) {

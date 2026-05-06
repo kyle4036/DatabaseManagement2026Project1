@@ -119,11 +119,7 @@ public class WaitingListDAO {
     }
 
     public void insert(WaitingList wl) {
-        String sql = """
-                    INSERT INTO WaitingList
-                    (customerID, flightNumber, lineID, requestTime)
-                    VALUES (?, ?, ?, ?)
-                """;
+        String sql = "INSERT INTO WaitingList (customerID, flightNumber, lineID, requestTime) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = DBConnection.get();
                 PreparedStatement ps = conn.prepareStatement(sql)) {

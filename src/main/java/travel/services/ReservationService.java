@@ -40,15 +40,19 @@ public class ReservationService {
 
         FlightTicket flightTicket = flightTicketDAO.findByKey(ticketNumber, legOrder);
 
+        String caseModifiedSeatNumber = seatNumber == null ? null : seatNumber.trim().toUpperCase();
+        String caseModifiedTicketClass = ticketClass == null ? null : ticketClass.trim().toLowerCase();
+        String caseModifiedMealOrder = mealOrder == null ? null : mealOrder.trim().toLowerCase();
+
         if (flightTicket == null) {
             throw new IllegalArgumentException(
                 "No reservation found for ticket " + ticketNumber + " and leg " + legOrder + "."
             );
         }
 
-        flightTicket.setSeatNumber(seatNumber);
-        flightTicket.setTicketClass(ticketClass);
-        flightTicket.setMealOrder(mealOrder);
+        flightTicket.setSeatNumber(caseModifiedSeatNumber);
+        flightTicket.setTicketClass(caseModifiedTicketClass);
+        flightTicket.setMealOrder(caseModifiedMealOrder);
 
         flightTicketDAO.update(flightTicket);
     }

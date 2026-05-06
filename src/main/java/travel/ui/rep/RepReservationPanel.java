@@ -57,7 +57,13 @@ public class RepReservationPanel extends JPanel {
             return;
         }
 
-        reservationService.editReservation(flightTicket);
+        int ticketNumber = flightTicket.getTicketNumber();
+        int legOrder = flightTicket.getLegOrder();
+        String seatNumber = flightTicket.getSeatNumber();
+        String ticketClass = flightTicket.getTicketClass();
+        String mealOrder =flightTicket.getMealOrder();
+
+        reservationService.editReservation(ticketNumber, legOrder, seatNumber, ticketClass, mealOrder);
         showInfo("Reservation updated successfully.");
     }
 

@@ -31,14 +31,16 @@ public class BookingService {
         tDao.insert(t);
     }
 
-    public void bookByFlight(Flight f, Customer customer, String date){
+    public void bookByFlight(Flight f, Customer customer, String date, boolean roundTripCheck){
+
+        String tripType = roundTripCheck ? "Round trip" : "One way";
 
         Ticket t = new Ticket(  -1, 
                                 customer.getCustomerID(), 
                                 LocalDateTime.now(),
                                 new BigDecimal(20),
                                 new BigDecimal(100), 
-                                "One-Way",
+                                tripType,
                                 "active");
         this.addTicket(t);
 
@@ -100,6 +102,15 @@ public class BookingService {
                 flights.remove(f);
             }
         }*/
+    }
+
+    public void removeFlightNotRoundTrip(List<Flight> flights, String fromPortID, String toPortID){
+        /*List<Flight> tempFlights = findByRoute(toPortID, fromPortID);
+        flights.removeAll(tempFlights);*/
+        List<Flight> tempFlights = getAllFlights();
+        flights.removeIf((Flight f) ->
+                !findByRoute(f.getDestinationPortID(), f.getDeparturePortID()).isEmpty()
+        );
     }
 
 

@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
+import javax.swing.JCheckBox;
 
 import java.time.format.DateTimeFormatter; 
 import java.util.List;
@@ -40,6 +41,8 @@ public class CustomerSearchTicketPanel extends JPanel{
     //private JPanel resultsPanel;
 
     private List<Flight> flightList;
+
+    private boolean roundTripCheck = false;
 
     //private JPanel avaialbleFlights = null;
 
@@ -90,6 +93,14 @@ public class CustomerSearchTicketPanel extends JPanel{
         JButton searchButton = new JButton("Search Flights");
         searchButton.addActionListener(e -> withGuard(this::searchPressed));
 
+        JCheckBox roundTripBox = new JCheckBox();
+        roundTripBox.addActionListener(e ->
+            {
+                roundTripCheck = !roundTripCheck;//roundTripBox.isBorderPaintedFlat();
+                roundTripClicked();
+            }
+        );
+
         panel.add(new JLabel("Departure:"));
         panel.add(departureField);
 
@@ -99,7 +110,12 @@ public class CustomerSearchTicketPanel extends JPanel{
         panel.add(new JLabel("Date (YYYY-MM-DD):"));
         panel.add(dateField);
 
-        panel.add(new JLabel()); // spacer
+        JPanel rPanel = new JPanel();
+        rPanel.add(new JLabel("round trip"));
+        rPanel.add(roundTripBox);
+
+        panel.add(rPanel);
+        //panel.add(new JLabel()); // spacer
 
         panel.add(searchButton);
 
@@ -163,6 +179,10 @@ public class CustomerSearchTicketPanel extends JPanel{
             bService.removeFlightDates(flights,dateString);
         }
 
+        if(roundTripCheck){
+            bService.removeFlightNotRoundTrip(flights, departureString, arrivalString);
+        }
+
         flightList = flights;
 
         updateTicketsPanel();
@@ -171,6 +191,10 @@ public class CustomerSearchTicketPanel extends JPanel{
     private void seeAllFlights(){
         flightList = bService.getAllFlights();
         updateTicketsPanel();
+    }
+
+    private void roundTripClicked(){
+        searchPressed();
     }
 
     private void updateTicketsPanel(){

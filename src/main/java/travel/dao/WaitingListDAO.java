@@ -131,7 +131,7 @@ public class WaitingListDAO {
     public void insert(WaitingList wl) {
         String sql = """
                     INSERT INTO WaitingList
-                    (requestTIme)
+                    (customerID, flightNumber, lineID, requestTime)
                     VALUES (?, ?, ?, ?)
                 """;
 
@@ -151,7 +151,7 @@ public class WaitingListDAO {
     }
 
     public void delete(int customerID, String flightNumber, String lineID) {
-        String sql = "DELETE FROM WaitingList WHERE customerID = ?, flightNumber = ?, lineID = ?";
+        String sql = "DELETE FROM WaitingList WHERE customerID = ? AND flightNumber = ? AND lineID = ?";
 
         try (Connection conn = DBConnection.get();
 

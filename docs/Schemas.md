@@ -110,3 +110,14 @@ WaitingList(
     Foreign key(customerID) references Customers,
     Foreign key(flightNumber, lineID) references Flights
 )
+
+QnA(
+    questionID: int,
+    customerID: int,
+    employeeID: int,
+    question: varchar(250),
+    answer: varchar(250),
+    Primary key(questionID)
+    Foreign key(customerID) references Customers,
+    Foreign key(employeeID) references Employees
+)

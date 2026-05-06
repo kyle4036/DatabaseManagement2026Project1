@@ -10,7 +10,6 @@ import java.util.List;
 
 import travel.DBConnection;
 import travel.model.WaitingList;
-import travel.model.Customer;
 
 public class WaitingListDAO {
 

@@ -162,6 +162,7 @@ public class CustomerReservationsPanel extends JPanel {
         int ticketNumber = (int) tableModel.getValueAt(row, 0);
         String status = String.valueOf(tableModel.getValueAt(row, 14));
         String departureDateText = String.valueOf(tableModel.getValueAt(row, 6));
+        String ticketClass = String.valueOf(tableModel.getValueAt(row, 10));
 
         if ("Cancelled".equalsIgnoreCase(status)) {
             throw new IllegalArgumentException("That reservation is already cancelled.");
@@ -169,6 +170,12 @@ public class CustomerReservationsPanel extends JPanel {
 
         if (departureDateText.isBlank() || LocalDate.parse(departureDateText).isBefore(LocalDate.now())) {
             throw new IllegalArgumentException("Only future reservations can be cancelled.");
+        }
+
+        String normalizedTicketClass = ReservationService.normalizeTicketClass(ticketClass);
+        if (!ReservationService.TICKET_CLASS_BUSINESS.equals(normalizedTicketClass)
+                && !ReservationService.TICKET_CLASS_FIRST.equals(normalizedTicketClass)) {
+            throw new IllegalArgumentException("Only business or first class reservations can be cancelled.");
         }
 
         int choice = JOptionPane.showConfirmDialog(

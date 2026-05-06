@@ -56,6 +56,21 @@ public class BookingService {
                 "");
 
         ftDao.insert(ft);
+        
+        if(roundTripCheck){
+            Flight iFlight = getInverseFlights(f).get(0);
+            FlightTicket ft2 = new FlightTicket(
+                lastTicket,
+                iFlight.getFlightNumber(),
+                iFlight.getLineID(),
+                2,
+                LocalDate.parse(date).plusWeeks(1),
+                "",
+                "",
+                ""
+            );
+            ftDao.insert(ft2);
+        }
 
         fDao.updateSeatsTaken(f.getFlightNumber(), f.getLineID(), f.getSeatsTaken()-1);
     }
@@ -107,10 +122,15 @@ public class BookingService {
     public void removeFlightNotRoundTrip(List<Flight> flights, String fromPortID, String toPortID){
         /*List<Flight> tempFlights = findByRoute(toPortID, fromPortID);
         flights.removeAll(tempFlights);*/
-        List<Flight> tempFlights = getAllFlights();
+        //List<Flight> tempFlights = getAllFlights();
         flights.removeIf((Flight f) ->
-                !findByRoute(f.getDestinationPortID(), f.getDeparturePortID()).isEmpty()
+                !(getInverseFlights(f).isEmpty())
         );
+    }
+
+    public List<Flight> getInverseFlights(Flight f){
+        //List<Flight> tempFlights = getAllFlights();
+        return findByRoute(f.getDestinationPortID(), f.getDeparturePortID());
     }
 
 

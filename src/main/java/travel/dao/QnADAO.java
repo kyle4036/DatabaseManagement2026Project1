@@ -85,6 +85,13 @@ public class QnADAO {
             ps.setInt(1, q.getCustomerID());
             ps.setString(2, q.getQuestion());
             ps.executeUpdate();
+
+            try (ResultSet rs = ps.getGeneratedKeys()){
+                if (rs.next()){
+                    q.setQuestionID(rs.getInt(1));
+                }
+            }
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

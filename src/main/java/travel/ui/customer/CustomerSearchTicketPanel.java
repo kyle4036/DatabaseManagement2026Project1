@@ -221,7 +221,7 @@ public class CustomerSearchTicketPanel extends JPanel{
     }
 
     private void bookSelectedFlight() {
-         int selectedRow = resultsTable.getSelectedRow();
+        int selectedRow = resultsTable.getSelectedRow();
         String dateString = dateField.getText().trim();
 
         if (selectedRow == -1) {
@@ -237,7 +237,7 @@ public class CustomerSearchTicketPanel extends JPanel{
         //String flightNumber = (String) tableModel.getValueAt(selectedRow, 0);
 
         Customer c = mainFrame.getCurrentCustomer();
-        bService.bookByFlight(flightList.get(selectedRow), c, dateString);
+        bService.bookByFlight(flightList.get(selectedRow), c, dateString, roundTripCheck);
 
         JOptionPane.showMessageDialog(this, "Flight booked successfully.");
     }

@@ -10,6 +10,7 @@ import java.util.List;
 
 import travel.DBConnection;
 import travel.model.WaitingList;
+import travel.model.Customer;
 
 public class WaitingListDAO {
 
@@ -116,6 +117,9 @@ public class WaitingListDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+    public boolean checkSeatOpen(Customer c){
+
     }
 
     public void insert(WaitingList wl) {

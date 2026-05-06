@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 
 import travel.model.*;
@@ -85,6 +86,37 @@ public class BookingService {
 
     public List<Flight> findByAirport(String portID){
         return fDao.findByAirport(portID);
+    }
+
+    public void sortFlights(List<Flight> flights, String sortCriteria) {
+        if (flights == null || flights.size() < 2 || sortCriteria == null) {
+            return;
+        }
+
+        Comparator<Flight> comparator = switch (sortCriteria.trim().toLowerCase()) {
+            case "price" -> Comparator.comparing(this::estimateBaseFare);
+            case "take-off time" -> Comparator.comparing(
+                Flight::getDepartureTime,
+                Comparator.nullsLast(Comparator.naturalOrder())
+            );
+            case "landing time" -> Comparator.comparing(
+                Flight::getArrivalTime,
+                Comparator.nullsLast(Comparator.naturalOrder())
+            );
+            default -> null;
+        };
+
+        if (comparator != null) {
+            flights.sort(comparator
+                .thenComparing(Flight::getFlightNumber, Comparator.nullsLast(Comparator.naturalOrder()))
+                .thenComparing(Flight::getLineID, Comparator.nullsLast(Comparator.naturalOrder())));
+        }
+    }
+
+    public BigDecimal estimateBaseFare(Flight flight) {
+        // Current booking flow uses a flat fare for new tickets, so search sorting
+        // keeps "price" aligned with that behavior until flights store real fares.
+        return new BigDecimal("100.00");
     }
 
     public void removeFlightArrivals(List<Flight> flights, String portID){

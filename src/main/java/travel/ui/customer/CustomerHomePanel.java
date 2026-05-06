@@ -72,7 +72,7 @@ public class CustomerHomePanel extends JPanel {
         if (c != null) {
             welcomeLabel.setText("Welcome, " + c.getFirstName() + " " + c.getLastName());
         }
-        if(wDao.checkSeatOpen(c))
+        
     }
 
     private void onLogout() {

@@ -10,7 +10,6 @@ import travel.dao.FlightDAO;
 import travel.dao.FlightTicketDAO;
 import travel.dao.TicketDAO;
 import travel.dao.CustomerDAO;
-import travel.model.Aircraft;
 import travel.model.Customer;
 import travel.model.Flight;
 import travel.model.FlightTicket;
@@ -18,6 +17,14 @@ import travel.model.ReservationReportRow;
 import travel.model.Ticket;
 
 public class ReservationService {
+    public static final String TICKET_CLASS_ECONOMY = "Economy";
+    public static final String TICKET_CLASS_BUSINESS = "Business";
+    public static final String TICKET_CLASS_FIRST = "First";
+    public static final String[] TICKET_CLASS_OPTIONS = {
+        TICKET_CLASS_ECONOMY,
+        TICKET_CLASS_BUSINESS,
+        TICKET_CLASS_FIRST
+    };
     /*
     Cancel reservation
     View all past or future reservations & details
@@ -76,7 +83,7 @@ public class ReservationService {
         int ticketNumber = flightTicket.getTicketNumber();
         int legOrder = flightTicket.getLegOrder();
         String seatNumber = flightTicket.getSeatNumber();
-        String ticketClass = flightTicket.getTicketClass();
+        String ticketClass = normalizeTicketClass(flightTicket.getTicketClass());
         String mealOrder =flightTicket.getMealOrder();
         
         if (ticketNumber <= 0) {
@@ -88,12 +95,14 @@ public class ReservationService {
         if (seatNumber == null || seatNumber.isEmpty()) {
             throw new IllegalArgumentException("Seat number cannot be null or empty.");
         }
-        if (ticketClass == null || ticketClass.isEmpty() || ((!ticketClass.equalsIgnoreCase("Economy")) && (!ticketClass.equalsIgnoreCase("Business")) && (!ticketClass.equalsIgnoreCase("First")))) {
+        if (ticketClass == null) {
             throw new IllegalArgumentException("Ticket class cannot be null or empty. It must either be 'Economy', 'Business' or 'First'.");
         }
         if (mealOrder == null || mealOrder.isEmpty()) {
             throw new IllegalArgumentException("Meal order cannot be null or empty. Anyone opting out of meal orders should have it listed as 'None'.");
         }
+
+        flightTicket.setTicketClass(ticketClass);
     }
 
     public void cancelReservation(int ticketNumber) {
@@ -106,6 +115,9 @@ public class ReservationService {
         }
         if (!hasFutureTravel(ticketNumber)) {
             throw new IllegalArgumentException("Only future reservations can be cancelled.");
+        }
+        if (!hasCancelableTicketClass(ticketNumber)) {
+            throw new IllegalArgumentException("Only business or first class reservations can be cancelled.");
         }
 
         ticket.setStatus("Cancelled");
@@ -158,7 +170,10 @@ public class ReservationService {
 
     public boolean canCancel(int ticketNumber) {
         Ticket ticket = ticketDAO.findByKey(ticketNumber);
-        return ticket != null && !isCancelled(ticket.getStatus()) && hasFutureTravel(ticketNumber);
+        return ticket != null
+            && !isCancelled(ticket.getStatus())
+            && hasFutureTravel(ticketNumber)
+            && hasCancelableTicketClass(ticketNumber);
     }
 
     private boolean hasFutureTravel(int ticketNumber) {
@@ -168,8 +183,39 @@ public class ReservationService {
             .anyMatch(date -> date != null && !date.isBefore(today));
     }
 
+    private boolean hasCancelableTicketClass(int ticketNumber) {
+        List<FlightTicket> flightTickets = flightTicketDAO.findByTicket(ticketNumber);
+        return !flightTickets.isEmpty() && flightTickets.stream()
+            .map(FlightTicket::getTicketClass)
+            .map(ReservationService::normalizeTicketClass)
+            .allMatch(ticketClass ->
+                TICKET_CLASS_BUSINESS.equals(ticketClass) || TICKET_CLASS_FIRST.equals(ticketClass)
+            );
+    }
+
     private boolean isCancelled(String status) {
         return status != null && "cancelled".equalsIgnoreCase(status);
+    }
+
+    public static String normalizeTicketClass(String ticketClass) {
+        if (ticketClass == null) {
+            return null;
+        }
+
+        String trimmed = ticketClass.trim();
+        if (trimmed.isEmpty()) {
+            return null;
+        }
+        if (TICKET_CLASS_ECONOMY.equalsIgnoreCase(trimmed)) {
+            return TICKET_CLASS_ECONOMY;
+        }
+        if (TICKET_CLASS_BUSINESS.equalsIgnoreCase(trimmed)) {
+            return TICKET_CLASS_BUSINESS;
+        }
+        if (TICKET_CLASS_FIRST.equalsIgnoreCase(trimmed)) {
+            return TICKET_CLASS_FIRST;
+        }
+        return null;
     }
 
     private ReservationReportRow buildReservationRow(Ticket ticket, FlightTicket flightTicket, Flight flight) {

@@ -59,7 +59,7 @@ public class MainFrame extends JFrame {
 
         add(container);
         setTitle("Travel Reservation System");
-        setSize(800, 600);
+        setSize(900, 600);
         setMinimumSize(new Dimension(500, 400));
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);

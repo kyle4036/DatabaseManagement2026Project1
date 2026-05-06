@@ -6,6 +6,7 @@ import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -62,7 +63,7 @@ public class RepReservationPanel extends JPanel {
         JTextField ticketNumber = new JTextField();
         JTextField legOrder = new JTextField();
         JTextField seatNumber = new JTextField();
-        JTextField ticketClass = new JTextField();        
+        JComboBox<String> ticketClass = new JComboBox<>(ReservationService.TICKET_CLASS_OPTIONS);
         JTextField mealOrder = new JTextField();
 
         JPanel panel = new JPanel(new GridLayout(0, 2, 8, 8));
@@ -86,7 +87,7 @@ public class RepReservationPanel extends JPanel {
         flightTicket.setTicketNumber(parseRequiredInt(ticketNumber.getText(), "Ticket Number"));
         flightTicket.setLegOrder(parseRequiredInt(legOrder.getText(), "Leg Order"));
         flightTicket.setSeatNumber(seatNumber.getText().trim());
-        flightTicket.setTicketClass(ticketClass.getText().trim());
+        flightTicket.setTicketClass(String.valueOf(ticketClass.getSelectedItem()));
         flightTicket.setMealOrder(mealOrder.getText().trim());
         return flightTicket;
     }

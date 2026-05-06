@@ -31,7 +31,11 @@ public class BookingService {
         tDao.insert(t);
     }
 
-    public void bookByFlight(Flight f, Customer customer, String date, boolean roundTripCheck){
+    public void bookByFlight(Flight f, Customer customer, String date, boolean roundTripCheck, String ticketClass){
+        String normalizedTicketClass = ReservationService.normalizeTicketClass(ticketClass);
+        if (normalizedTicketClass == null) {
+            throw new IllegalArgumentException("Select a valid ticket class: Economy, Business, or First.");
+        }
 
         String tripType = roundTripCheck ? "Round trip" : "One way";
 
@@ -52,7 +56,7 @@ public class BookingService {
                 1,
                 LocalDate.parse(date),
                 "",
-                "",
+                normalizedTicketClass,
                 "");
 
         ftDao.insert(ft);

@@ -15,6 +15,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 
 import java.time.format.DateTimeFormatter; 
 import java.util.List;
@@ -22,6 +23,7 @@ import java.util.List;
 import travel.dao.AircraftDAO;
 import travel.dao.WaitingListDAO;
 import travel.services.BookingService;
+import travel.services.ReservationService;
 import travel.ui.MainFrame;
 import travel.model.*;
 import travel.ui.Screen;
@@ -287,9 +289,36 @@ public class CustomerSearchTicketPanel extends JPanel{
         }
 
         Customer c = mainFrame.getCurrentCustomer();
-        bService.bookByFlight(selectedFlight, c, dateString, roundTripCheck);
+        String ticketClass = promptTicketClass();
+        if (ticketClass == null) {
+            return;
+        }
+
+        bService.bookByFlight(selectedFlight, c, dateString, roundTripCheck, ticketClass);
 
         JOptionPane.showMessageDialog(this, "Flight booked successfully.");
+    }
+
+    private String promptTicketClass() {
+        JComboBox<String> ticketClassBox = new JComboBox<>(ReservationService.TICKET_CLASS_OPTIONS);
+        ticketClassBox.setSelectedItem(ReservationService.TICKET_CLASS_ECONOMY);
+
+        JPanel panel = new JPanel(new GridLayout(0, 1, 8, 8));
+        panel.add(new JLabel("Select ticket class"));
+        panel.add(ticketClassBox);
+
+        int choice = JOptionPane.showConfirmDialog(
+            this,
+            panel,
+            "Book Flight",
+            JOptionPane.OK_CANCEL_OPTION,
+            JOptionPane.QUESTION_MESSAGE
+        );
+        if (choice != JOptionPane.OK_OPTION) {
+            return null;
+        }
+
+        return String.valueOf(ticketClassBox.getSelectedItem());
     }
 
     /*

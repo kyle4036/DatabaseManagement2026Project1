@@ -124,13 +124,15 @@ public class BookingService {
         flights.removeAll(tempFlights);*/
         //List<Flight> tempFlights = getAllFlights();
         flights.removeIf((Flight f) ->
-                !(getInverseFlights(f).isEmpty())
+                (getInverseFlights(f).isEmpty())
         );
     }
 
     public List<Flight> getInverseFlights(Flight f){
-        //List<Flight> tempFlights = getAllFlights();
+        //List<Flight> tempFlights = findByRoute(f.getDestinationPortID(), f.getDeparturePortID());
+        //System.out.println(tempFlights);
         return findByRoute(f.getDestinationPortID(), f.getDeparturePortID());
+
     }
 
 

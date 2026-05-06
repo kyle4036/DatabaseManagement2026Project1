@@ -109,7 +109,7 @@ public class WaitingListDAO {
     public WaitingList checkWaitingList(int customerID, String flightNumber, String lineID) { // Urgent: Should I keep
                                                                                               // this method or change
                                                                                               // it to return boolean?
-        String sql = "SELECT * FROM WaitingList WHERE customerID = ?, flightNumber = ?, lineID = ?";
+        String sql = "SELECT * FROM WaitingList WHERE customerID = ? AND flightNumber = ? AND lineID = ?";
 
         try (Connection conn = DBConnection.get();
 
@@ -118,8 +118,6 @@ public class WaitingListDAO {
             ps.setInt(1, customerID);
             ps.setString(2, flightNumber);
             ps.setString(3, lineID);
-
-            ps.executeUpdate();
 
             try (ResultSet rs = ps.executeQuery()) {
                 return rs.next() ? mapRow(rs) : null;
@@ -133,7 +131,7 @@ public class WaitingListDAO {
     public void insert(WaitingList wl) {
         String sql = """
                     INSERT INTO WaitingList
-                    (requestTIme)
+                    (customerID, flightNumber, lineID, requestTime)
                     VALUES (?, ?, ?, ?)
                 """;
 
@@ -153,7 +151,7 @@ public class WaitingListDAO {
     }
 
     public void delete(int customerID, String flightNumber, String lineID) {
-        String sql = "DELETE FROM WaitingList WHERE customerID = ?, flightNumber = ?, lineID = ?";
+        String sql = "DELETE FROM WaitingList WHERE customerID = ? AND flightNumber = ? AND lineID = ?";
 
         try (Connection conn = DBConnection.get();
 

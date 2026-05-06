@@ -19,6 +19,8 @@ import javax.swing.JCheckBox;
 import java.time.format.DateTimeFormatter; 
 import java.util.List;
 
+import travel.dao.AircraftDAO;
+import travel.dao.WaitingListDAO;
 import travel.services.BookingService;
 import travel.ui.MainFrame;
 import travel.model.*;
@@ -30,6 +32,8 @@ public class CustomerSearchTicketPanel extends JPanel{
 
     private final MainFrame mainFrame;
     private final BookingService bService = new BookingService();
+    private final AircraftDAO aircraftDAO = new AircraftDAO();
+    private final WaitingListDAO waitingListDAO = new WaitingListDAO();
     private JTextField dateField;
     private JTextField departureField;
     private JTextField arrivalField;
@@ -236,8 +240,54 @@ public class CustomerSearchTicketPanel extends JPanel{
 
         //String flightNumber = (String) tableModel.getValueAt(selectedRow, 0);
 
+        Flight selectedFlight = flightList.get(selectedRow);
+        Aircraft aircraft = aircraftDAO.findByKey(selectedFlight.getCraftID());
+
+        if (selectedFlight.getSeatsTaken() >= aircraft.getCapacity()) {
+            Customer customer = mainFrame.getCurrentCustomer();
+            JCheckBox waitlistBox = new JCheckBox("Add me to this flight's waitlist");
+
+            int choice = JOptionPane.showConfirmDialog(
+                this,
+                waitlistBox,
+                "Flight Is Full",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE
+            );
+
+            if (choice != JOptionPane.OK_OPTION) {
+                return;
+            }
+
+            if (!waitlistBox.isSelected()) {
+                JOptionPane.showMessageDialog(this, "Flight was not booked.");
+                return;
+            }
+
+            WaitingList existingEntry = waitingListDAO.checkWaitingList(
+                customer.getCustomerID(),
+                selectedFlight.getFlightNumber(),
+                selectedFlight.getLineID()
+            );
+
+            if (existingEntry != null) {
+                JOptionPane.showMessageDialog(this, "You are already on this flight's waitlist.");
+                return;
+            }
+
+            waitingListDAO.insert(new WaitingList(
+                customer.getCustomerID(),
+                selectedFlight.getFlightNumber(),
+                selectedFlight.getLineID(),
+                java.time.LocalDateTime.now()
+            ));
+
+            JOptionPane.showMessageDialog(this, "You were added to the waitlist.");
+            return;
+        }
+
         Customer c = mainFrame.getCurrentCustomer();
-        bService.bookByFlight(flightList.get(selectedRow), c, dateString, roundTripCheck);
+        bService.bookByFlight(selectedFlight, c, dateString, roundTripCheck);
 
         JOptionPane.showMessageDialog(this, "Flight booked successfully.");
     }

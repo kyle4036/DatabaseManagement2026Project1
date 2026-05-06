@@ -48,6 +48,23 @@ public class AircraftDAO {
         }
     }
 
+    public Aircraft findByKey(int craftID) {
+        String sql = "SELECT * FROM Aircrafts WHERE craftID = ?";
+
+        try (Connection conn = DBConnection.get();
+            PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, craftID);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next() ? mapRow(rs) : null;
+            }
+
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
     public void delete(int craftID){
         String sql = "DELETE FROM Aircrafts WHERE craftID = ?";
 

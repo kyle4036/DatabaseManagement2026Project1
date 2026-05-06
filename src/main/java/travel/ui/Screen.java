@@ -22,6 +22,7 @@ public final class Screen {
     public static final String CUSTOMER_WAITLIST    = "customerWait";
     public static final String CUSTOMER_QNA         = "customerQNA";
     
+    public static final String REP_BOOKING          = "repBooking";
     public static final String REP_MANAGEMENT       = "repManagement";
     public static final String REP_QNA              = "repQNA";
     public static final String REP_WAITLIST         = "repWAITLIST";

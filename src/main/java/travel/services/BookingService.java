@@ -77,7 +77,7 @@ public class BookingService {
             ftDao.insert(ft2);
         }
 
-        fDao.updateSeatsTaken(f.getFlightNumber(), f.getLineID(), f.getSeatsTaken()-1);
+        fDao.updateSeatsTaken(f.getFlightNumber(), f.getLineID(), f.getSeatsTaken()+1);
     }
 
     public List<Flight> findByRoute(String fromPortID, String toPortID){

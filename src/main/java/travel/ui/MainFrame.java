@@ -24,6 +24,7 @@ import travel.ui.rep.RepWaitlistPanel;
 import travel.ui.rep.RepQnAPanel;
 import travel.ui.rep.RepManagementPanel;
 import travel.ui.rep.RepReservationPanel;
+import travel.ui.rep.RepBookingPanel;
 
 /**
  * The single window for the entire app. Holds a CardLayout container with
@@ -107,6 +108,7 @@ public class MainFrame extends JFrame {
 
         RepHomePanel rhp = new RepHomePanel(this);
         RepManagementPanel rmp = new RepManagementPanel(this);
+        RepBookingPanel rbp = new RepBookingPanel(this);
         RepQnAPanel rqp = new RepQnAPanel(this); 
         RepWaitlistPanel rwp = new RepWaitlistPanel(this);
         RepReservationPanel rrp = new RepReservationPanel(this);
@@ -116,6 +118,7 @@ public class MainFrame extends JFrame {
         container.add(rwp, Screen.REP_WAITLIST);
         container.add(rqp, Screen.REP_QNA);
         container.add(rrp, Screen.REP_EDIT_RESERVATION);
+        container.add(rbp, Screen.REP_BOOKING);
     }
 
     private void addAdminPanels() {

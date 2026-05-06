@@ -39,8 +39,7 @@ public class RepHomePanel extends JPanel {
         JButton qnaBtn = new JButton("Questions & Answers");
         JButton logoutBtn = new JButton("Logout");
 
-        // TODO: Complete the below actions 
-        bookForCustomer.addActionListener(e -> System.out.println("TODO: book for customer"));
+        bookForCustomer.addActionListener(e -> mainFrame.showScreen(Screen.REP_BOOKING));
         editReservation.addActionListener(e -> onEditReservationPress());
         manageFlights.addActionListener(e -> onManagementPress());
         viewWaitlist.addActionListener(e -> onWaitlistPress());

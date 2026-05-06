@@ -1,6 +1,7 @@
 package travel.ui.rep;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.time.LocalTime;
@@ -8,6 +9,8 @@ import java.time.format.DateTimeParseException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -255,59 +258,105 @@ public class RepManagementPanel extends JPanel {
     }
 
     private Flight promptFlight(boolean includeId) {
-        JTextField flightNumberField = new JTextField();
-        JTextField lineIdField = new JTextField();
-        JTextField aircraftIdField = new JTextField();
-        JTextField departureAirportField = new JTextField();
-        JTextField arrivalAirportField = new JTextField();
-        JTextField departureTimeField = new JTextField();
-        JTextField arrivalTimeField = new JTextField();
-        JTextField flightTypeField = new JTextField();        // NEW
-        JTextField daysRunningField = new JTextField("1111111"); // NEW, default daily
+    JTextField flightNumberField = new JTextField();
+    JTextField lineIdField = new JTextField();
+    JTextField aircraftIdField = new JTextField();
+    JTextField departureAirportField = new JTextField();
+    JTextField arrivalAirportField = new JTextField();
 
-        JPanel panel = new JPanel(new GridLayout(0, 2, 8, 8));
+    // Time pickers — hour and minute dropdowns
+    String[] hours = new String[24];
+    for (int i = 0; i < 24; i++) hours[i] = String.format("%02d", i);
+    String[] minutes = {"00", "15", "30", "45"};
 
-        panel.add(new JLabel("Flight Number"));
-        panel.add(flightNumberField);
-        panel.add(new JLabel("Line ID"));
-        panel.add(lineIdField);
-        panel.add(new JLabel("Aircraft ID"));
-        panel.add(aircraftIdField);
-        panel.add(new JLabel("Departure Airport ID"));
-        panel.add(departureAirportField);
-        panel.add(new JLabel("Arrival Airport ID"));
-        panel.add(arrivalAirportField);
-        panel.add(new JLabel("Departure Time (HH:mm)"));
-        panel.add(departureTimeField);
-        panel.add(new JLabel("Arrival Time (HH:mm)"));
-        panel.add(arrivalTimeField);
-        panel.add(new JLabel("Type (domestic/international)"));  // NEW
-        panel.add(flightTypeField);                               // NEW
-        panel.add(new JLabel("Days Running (SMTWTFS, e.g. 0111110)"));  // NEW
-        panel.add(daysRunningField);                              // NEW
+    JComboBox<String> depHour = new JComboBox<>(hours);
+    JComboBox<String> depMin  = new JComboBox<>(minutes);
+    JComboBox<String> arrHour = new JComboBox<>(hours);
+    JComboBox<String> arrMin  = new JComboBox<>(minutes);
 
-        int choice = JOptionPane.showConfirmDialog(
+    JPanel depTimePanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 2, 0));
+    depTimePanel.add(depHour); depTimePanel.add(new JLabel(":")); depTimePanel.add(depMin);
+
+    JPanel arrTimePanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 2, 0));
+    arrTimePanel.add(arrHour); arrTimePanel.add(new JLabel(":")); arrTimePanel.add(arrMin);
+
+    // Flight type dropdown
+    JComboBox<String> flightTypeDropdown = new JComboBox<>(new String[]{"domestic", "international"});
+
+    // Days checkboxes
+    JCheckBox sun = new JCheckBox("S");
+    JCheckBox mon = new JCheckBox("M", true);
+    JCheckBox tue = new JCheckBox("T", true);
+    JCheckBox wed = new JCheckBox("W", true);
+    JCheckBox thu = new JCheckBox("T", true);
+    JCheckBox fri = new JCheckBox("F", true);
+    JCheckBox sat = new JCheckBox("S");
+
+    JPanel daysPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 2, 0));
+    daysPanel.add(sun); daysPanel.add(mon); daysPanel.add(tue);
+    daysPanel.add(wed); daysPanel.add(thu); daysPanel.add(fri); daysPanel.add(sat);
+
+    // Build the form
+    JPanel panel = new JPanel(new GridLayout(0, 2, 8, 8));
+
+    panel.add(new JLabel("Flight Number"));
+    panel.add(flightNumberField);
+    panel.add(new JLabel("Airline ID"));
+    panel.add(lineIdField);
+    panel.add(new JLabel("Aircraft ID"));
+    panel.add(aircraftIdField);
+    panel.add(new JLabel("Departure Airport"));
+    panel.add(departureAirportField);
+    panel.add(new JLabel("Arrival Airport"));
+    panel.add(arrivalAirportField);
+    panel.add(new JLabel("Departure Time"));
+    panel.add(depTimePanel);
+    panel.add(new JLabel("Arrival Time"));
+    panel.add(arrTimePanel);
+    panel.add(new JLabel("Flight Type"));
+    panel.add(flightTypeDropdown);
+    panel.add(new JLabel("Days (SMTWTFS)"));
+    panel.add(daysPanel);
+
+    int choice = JOptionPane.showConfirmDialog(
             this, panel,
             includeId ? "Update Flight" : "Add Flight",
             JOptionPane.OK_CANCEL_OPTION);
 
-        if (choice != JOptionPane.OK_OPTION) return null;
+    if (choice != JOptionPane.OK_OPTION) return null;
 
-        Flight flight = new Flight();
-        flight.setFlightNumber(parseRequiredString(flightNumberField.getText(), "Flight Number"));
-        flight.setLineID(parseRequiredString(lineIdField.getText(), "Line ID"));
-        flight.setCraftID(parseRequiredInt(aircraftIdField.getText(), "Aircraft ID"));
-        flight.setDeparturePortID(parseRequiredString(departureAirportField.getText(), "Departure Airport"));
-        flight.setDestinationPortID(parseRequiredString(arrivalAirportField.getText(), "Arrival Airport"));
-        flight.setDepartureTime(parseRequiredTime(departureTimeField.getText(), "Departure Time"));
-        flight.setArrivalTime(parseRequiredTime(arrivalTimeField.getText(), "Arrival Time"));
-        flight.setFlightType(parseRequiredString(flightTypeField.getText(), "Flight Type"));       // NEW
-        flight.setDaysRunning(parseRequiredString(daysRunningField.getText(), "Days Running"));    // NEW
-        flight.setSeatsTaken(0);  // new flights start with 0 seats taken
+    // Build bitmask from checkboxes
+    String daysRunning = ""
+        + (sun.isSelected() ? "1" : "0")
+        + (mon.isSelected() ? "1" : "0")
+        + (tue.isSelected() ? "1" : "0")
+        + (wed.isSelected() ? "1" : "0")
+        + (thu.isSelected() ? "1" : "0")
+        + (fri.isSelected() ? "1" : "0")
+        + (sat.isSelected() ? "1" : "0");
 
-        return flight;
-    }
-    private Integer promptIntId(String label) {
+    // Build LocalTime from dropdowns
+    LocalTime depTime = LocalTime.of(
+        Integer.parseInt((String) depHour.getSelectedItem()),
+        Integer.parseInt((String) depMin.getSelectedItem()));
+    LocalTime arrTime = LocalTime.of(
+        Integer.parseInt((String) arrHour.getSelectedItem()),
+        Integer.parseInt((String) arrMin.getSelectedItem()));
+
+    Flight flight = new Flight();
+    flight.setFlightNumber(parseRequiredString(flightNumberField.getText(), "Flight Number"));
+    flight.setLineID(parseRequiredString(lineIdField.getText(), "Airline ID"));
+    flight.setCraftID(parseRequiredInt(aircraftIdField.getText(), "Aircraft ID"));
+    flight.setDeparturePortID(parseRequiredString(departureAirportField.getText(), "Departure Airport"));
+    flight.setDestinationPortID(parseRequiredString(arrivalAirportField.getText(), "Arrival Airport"));
+    flight.setDepartureTime(depTime);
+    flight.setArrivalTime(arrTime);
+    flight.setFlightType((String) flightTypeDropdown.getSelectedItem());
+    flight.setDaysRunning(daysRunning);
+    flight.setSeatsTaken(0);
+
+    return flight;
+}    private Integer promptIntId(String label) {
         String raw = JOptionPane.showInputDialog(this, label);
         if (raw == null) return null;
 
